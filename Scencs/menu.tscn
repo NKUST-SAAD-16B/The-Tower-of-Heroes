@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cevrqtmjmec53"]
+[gd_scene load_steps=6 format=3 uid="uid://cevrqtmjmec53"]
 
 [ext_resource type="StyleBox" uid="uid://cmssk3r1yfqax" path="res://Rescources/Theme & Stylebox/normal_button.tres" id="1_jc4ue"]
 [ext_resource type="StyleBox" uid="uid://cau816ohnpobk" path="res://Rescources/Theme & Stylebox/hover_button.tres" id="1_tguff"]
-[ext_resource type="Texture2D" uid="uid://cr0se2ltawk67" path="res://Assets/menu_background.jpg" id="1_xwwdr"]
 [ext_resource type="Texture2D" uid="uid://by2vq1rqpjxqv" path="res://Assets/kenney_fantasy-ui-borders/PNG/Double/Border/panel-border-003.png" id="3_jc4ue"]
 [ext_resource type="StyleBox" uid="uid://cco30nl76ilk6" path="res://Rescources/Theme & Stylebox/pressed_button.tres" id="3_vhbbr"]
 
@@ -12,7 +11,7 @@ Button/styles/hover = ExtResource("1_tguff")
 Button/styles/normal = ExtResource("1_jc4ue")
 Button/styles/pressed = ExtResource("3_vhbbr")
 
-[node name="Menu" type="Control"]
+[node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -36,22 +35,22 @@ offset_right = 960.0
 offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_xwwdr")
 
 [node name="Title" type="Label" parent="."]
+modulate = Color(1, 0.2, 0.168627, 1)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -321.0
-offset_top = -281.0
-offset_right = 321.0
-offset_bottom = -221.0
+offset_left = -535.0
+offset_top = -320.0
+offset_right = 535.0
+offset_bottom = -220.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.967596, 0.95927, 0.950318, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 100
 text = "The Tower of Heroes"
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
