@@ -1,15 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://cevrqtmjmec53"]
+[gd_scene load_steps=7 format=3 uid="uid://cevrqtmjmec53"]
 
-[ext_resource type="StyleBox" uid="uid://cmssk3r1yfqax" path="res://Rescources/Theme & Stylebox/normal_button.tres" id="1_jc4ue"]
-[ext_resource type="StyleBox" uid="uid://cau816ohnpobk" path="res://Rescources/Theme & Stylebox/hover_button.tres" id="1_tguff"]
-[ext_resource type="Texture2D" uid="uid://by2vq1rqpjxqv" path="res://Assets/kenney_fantasy-ui-borders/PNG/Double/Border/panel-border-003.png" id="3_jc4ue"]
-[ext_resource type="StyleBox" uid="uid://cco30nl76ilk6" path="res://Rescources/Theme & Stylebox/pressed_button.tres" id="3_vhbbr"]
+[ext_resource type="StyleBox" uid="uid://cau816ohnpobk" path="res://Rescources/Theme & Stylebox/hover_button.tres" id="1_ma218"]
+[ext_resource type="StyleBox" uid="uid://cmssk3r1yfqax" path="res://Rescources/Theme & Stylebox/normal_button.tres" id="2_idohh"]
+[ext_resource type="StyleBox" uid="uid://cco30nl76ilk6" path="res://Rescources/Theme & Stylebox/pressed_button.tres" id="3_wfhf6"]
+[ext_resource type="Script" uid="uid://bqkmk6yxiev34" path="res://Scripts/MainMenu.gd" id="4_3jcrr"]
+[ext_resource type="Texture2D" uid="uid://by2vq1rqpjxqv" path="res://Assets/kenney_fantasy-ui-borders/PNG/Double/Border/panel-border-003.png" id="5_aobxe"]
 
 [sub_resource type="Theme" id="Theme_xwwdr"]
 Button/font_sizes/font_size = 30
-Button/styles/hover = ExtResource("1_tguff")
-Button/styles/normal = ExtResource("1_jc4ue")
-Button/styles/pressed = ExtResource("3_vhbbr")
+Button/styles/hover = ExtResource("1_ma218")
+Button/styles/normal = ExtResource("2_idohh")
+Button/styles/pressed = ExtResource("3_wfhf6")
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -21,6 +22,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_xwwdr")
+script = ExtResource("4_3jcrr")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -50,6 +52,8 @@ grow_horizontal = 2
 theme_override_colors/font_color = Color(0.967596, 0.95927, 0.950318, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 15
 theme_override_font_sizes/font_size = 100
 text = "The Tower of Heroes"
 
@@ -67,7 +71,7 @@ offset_right = 169.0
 offset_bottom = 198.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_jc4ue")
+texture = ExtResource("5_aobxe")
 region_rect = Rect2(0, 0, 96, 96)
 patch_margin_left = 25
 patch_margin_top = 23
@@ -117,3 +121,5 @@ text = "Settings"
 [node name="Quit" type="Button" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
+
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
