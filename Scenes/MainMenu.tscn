@@ -1,0 +1,139 @@
+[gd_scene load_steps=8 format=3 uid="uid://cevrqtmjmec53"]
+
+[ext_resource type="StyleBox" uid="uid://cau816ohnpobk" path="res://Rescources/Theme & Stylebox/hover_button.tres" id="1_8um5k"]
+[ext_resource type="StyleBox" uid="uid://cmssk3r1yfqax" path="res://Rescources/Theme & Stylebox/normal_button.tres" id="2_xim88"]
+[ext_resource type="StyleBox" uid="uid://cco30nl76ilk6" path="res://Rescources/Theme & Stylebox/pressed_button.tres" id="3_koqhg"]
+[ext_resource type="Script" uid="uid://bqkmk6yxiev34" path="res://Scripts/main_menu.gd" id="4_cmrfp"]
+[ext_resource type="Texture2D" uid="uid://by2vq1rqpjxqv" path="res://Assets/kenney_fantasy-ui-borders/PNG/Double/Border/panel-border-003.png" id="5_loo7a"]
+[ext_resource type="PackedScene" uid="uid://cwe3pgvfrop4v" path="res://Scenes/SettingsMenu.tscn" id="6_if7li"]
+
+[sub_resource type="Theme" id="Theme_xwwdr"]
+Button/font_sizes/font_size = 30
+Button/styles/hover = ExtResource("1_8um5k")
+Button/styles/normal = ExtResource("2_xim88")
+Button/styles/pressed = ExtResource("3_koqhg")
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_cmrfp")
+
+[node name="Settings_background" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.403922)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+self_modulate = Color(0.637843, 0.637843, 0.637843, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -169.0
+offset_top = -198.0
+offset_right = 169.0
+offset_bottom = 198.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_loo7a")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 25
+patch_margin_top = 23
+patch_margin_right = 25
+patch_margin_bottom = 23
+
+[node name="Title" type="Label" parent="NinePatchRect"]
+modulate = Color(1, 0.2, 0.168627, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -535.0
+offset_top = -122.0
+offset_right = 535.0
+offset_bottom = -22.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.967596, 0.95927, 0.950318, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 15
+theme_override_font_sizes/font_size = 100
+text = "The Tower of Heroes"
+
+[node name="ColorRect" type="ColorRect" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.403922)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -138.0
+offset_top = -122.5
+offset_right = 138.0
+offset_bottom = 122.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_xwwdr")
+theme_override_constants/separation = 19
+
+[node name="GameStart" type="Button" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+text = "Game Start"
+
+[node name="Continue" type="Button" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="Settings" type="Button" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Quit" type="Button" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="SettingsMenu" parent="." instance=ExtResource("6_if7li")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

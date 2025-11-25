@@ -1,20 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwe3pgvfrop4v"]
+[gd_scene load_steps=6 format=3 uid="uid://cwe3pgvfrop4v"]
 
 [ext_resource type="Script" uid="uid://ov2p7i867n3m" path="res://Scripts/settings_menu.gd" id="1_4hfd5"]
 [ext_resource type="Texture2D" uid="uid://by2vq1rqpjxqv" path="res://Assets/kenney_fantasy-ui-borders/PNG/Double/Border/panel-border-003.png" id="1_bxjf0"]
-[ext_resource type="StyleBox" uid="uid://c8fiu6tucv8ow" path="res://Rescources/Theme & Stylebox/setting_normal_button.tres" id="2_4hfd5"]
+[ext_resource type="Texture2D" uid="uid://c6jmaqj5acjj8" path="res://Assets/kenney_fantasy-ui-borders/PNG/Double/Border/panel-border-015.png" id="3_4hfd5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rr0xh"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+texture = ExtResource("3_4hfd5")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
 [sub_resource type="Theme" id="Theme_ppsuk"]
 Button/font_sizes/font_size = 30
-Button/styles/normal = ExtResource("2_4hfd5")
+Button/styles/normal = SubResource("StyleBoxTexture_rr0xh")
 
-[node name="SettingMenu" type="Control"]
+[node name="SettingsMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4hfd5")
@@ -56,15 +67,6 @@ patch_margin_left = 20
 patch_margin_top = 21
 patch_margin_right = 20
 patch_margin_bottom = 20
-
-[node name="ColorRect" type="ColorRect" parent="NinePatchRect"]
-show_behind_parent = true
-layout_mode = 0
-offset_left = 26.5
-offset_top = 21.0
-offset_right = 751.5
-offset_bottom = 355.0
-color = Color(0, 0, 0, 0.403922)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
 layout_mode = 1
@@ -193,9 +195,10 @@ text = "Vsync"
 
 [node name="Vsync_CheckBox" type="CheckBox" parent="NinePatchRect/DisplaySettings"]
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Audio" to="." method="_on_audio_pressed"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Display" to="." method="_on_display_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="NinePatchRect/DisplaySettings/WindowsMode_Button" to="." method="_on_windows_mode_button_pressed"]

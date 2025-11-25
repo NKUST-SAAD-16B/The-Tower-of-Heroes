@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=3 uid="uid://bqrble3t3qhvh"]
+
+[ext_resource type="Script" uid="uid://nwhc8kgwi6dm" path="res://Scripts/pause_menu.gd" id="1_5w4ur"]
+[ext_resource type="Texture2D" uid="uid://mtbyokl13mxk" path="res://Assets/kenney_fantasy-ui-borders/PNG/Double/Border/panel-border-005.png" id="2_ey1tb"]
+[ext_resource type="PackedScene" uid="uid://cwe3pgvfrop4v" path="res://Scenes/SettingsMenu.tscn" id="3_siy43"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nov15"]
+texture = ExtResource("2_ey1tb")
+texture_margin_left = 24.0
+texture_margin_top = 25.0
+texture_margin_right = 24.0
+texture_margin_bottom = 25.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_etnfi"]
+texture = ExtResource("2_ey1tb")
+texture_margin_left = 24.0
+texture_margin_top = 25.0
+texture_margin_right = 25.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q775a"]
+texture = ExtResource("2_ey1tb")
+texture_margin_left = 24.0
+texture_margin_top = 25.0
+texture_margin_right = 24.0
+texture_margin_bottom = 25.0
+modulate_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_8y7ot"]
+Button/font_sizes/font_size = 50
+Button/styles/hover = SubResource("StyleBoxTexture_nov15")
+Button/styles/normal = SubResource("StyleBoxTexture_etnfi")
+Button/styles/pressed = SubResource("StyleBoxTexture_q775a")
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5w4ur")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.352941)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -124.5
+offset_top = -255.0
+offset_right = 124.5
+offset_bottom = 255.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 38
+
+[node name="PauseMenu_Tittle" type="Label" parent="VBoxContainer"]
+modulate = Color(0.666667, 0.988235, 0.439216, 1)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 15
+theme_override_font_sizes/font_size = 100
+text = "Pause Menu"
+
+[node name="Resume" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_8y7ot")
+text = "Resume"
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_8y7ot")
+text = "Settings"
+
+[node name="Save" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_8y7ot")
+text = "Save"
+
+[node name="Title" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_8y7ot")
+text = "Title
+"
+
+[node name="SettingsMenu" parent="." instance=ExtResource("3_siy43")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/Title" to="." method="_on_title_pressed"]
