@@ -16,6 +16,11 @@ func _ready():
 	#載入視窗切換的選單選項
 	var window_mode_popup = window_mode_button.get_popup()
 	window_mode_popup.id_pressed.connect(_on_window_mode_item_pressed)
+	
+	#載入fps設定選單
+	var fps_popup = fps_button.get_popup()
+	fps_popup.id_pressed.connect(_on_fps_item_pressed)
+	#vsync_checkbox.toggled.connect(_on_vsync_check_box_toggled)
 	# 遊戲開始時，預設顯示 Audio，隱藏 Display
 	show_audio_settings()
 
@@ -47,6 +52,16 @@ func _on_back_pressed() -> void:
 	finished_settings.emit()
 	pass
 
+#Vsync按鈕
+func _on_vsync_check_box_toggled(toggled_on: bool) -> void:
+	if toggled_on :
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+		print("垂直同步開啟")
+	else:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+		print("垂直同步關閉")
+	pass
+
 # 處理視窗模式切換
 func _on_window_mode_item_pressed(id: int):
 	print("收到按鈕訊號，ID 是: ", id)
@@ -57,4 +72,21 @@ func _on_window_mode_item_pressed(id: int):
 		1: # Full Screen
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			window_mode_button.text = "Full Screen" # 更新按鈕文字
+	pass
+
+#處理fps切換
+func _on_fps_item_pressed(id: int):
+	match id:
+		0: # fps30
+			Engine.max_fps = 30
+			fps_button.text = "30"
+		1: # fps60
+			Engine.max_fps = 60
+			fps_button.text = "60"
+		2: # fps120
+			Engine.max_fps = 120
+			fps_button.text = "120"
+		3:
+			Engine.max_fps = 240
+			fps_button.text = "240"
 	pass

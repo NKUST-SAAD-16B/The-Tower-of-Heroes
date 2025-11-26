@@ -37,9 +37,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -173.0
-offset_top = -295.0
+offset_top = 186.0
 offset_right = 173.0
-offset_bottom = -195.0
+offset_bottom = 286.0
 grow_horizontal = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -197,8 +197,10 @@ text = "Vsync"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+button_pressed = true
 
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Audio" to="." method="_on_audio_pressed"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Display" to="." method="_on_display_pressed"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="NinePatchRect/DisplaySettings/WindowsMode_Button" to="." method="_on_windows_mode_button_pressed"]
+[connection signal="toggled" from="NinePatchRect/DisplaySettings/Vsync_CheckBox" to="." method="_on_vsync_check_box_toggled"]
