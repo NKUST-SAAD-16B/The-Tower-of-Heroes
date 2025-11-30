@@ -1,0 +1,237 @@
+[gd_scene load_steps=17 format=3 uid="uid://5a4qhls3gksu"]
+
+[ext_resource type="Texture2D" uid="uid://by2vq1rqpjxqv" path="res://Assets/kenney_fantasy-ui-borders/PNG/Double/Border/panel-border-003.png" id="1_sfkt0"]
+[ext_resource type="StyleBox" uid="uid://b3g4g3ra31s10" path="res://Rescources/Theme & Stylebox/shop_hover_button.tres" id="2_sphw8"]
+[ext_resource type="StyleBox" uid="uid://bx7hwhvcos2k4" path="res://Rescources/Theme & Stylebox/shop_normal_button.tres" id="3_o7hi2"]
+[ext_resource type="Texture2D" uid="uid://dqmyb0q6xkxka" path="res://Assets/Icons/icon20.png" id="3_q5r2m"]
+[ext_resource type="StyleBox" uid="uid://b32mwrfxooe7o" path="res://Rescources/Theme & Stylebox/shop_pressed_button.tres" id="4_q5r2m"]
+[ext_resource type="Texture2D" uid="uid://dwt07ohl8n50n" path="res://Assets/Icons/icon1.png" id="6_640yi"]
+[ext_resource type="Texture2D" uid="uid://dwrrpabqovc8f" path="res://Assets/kenney_fantasy-ui-borders/PNG/Default/Border/panel-border-015.png" id="6_o7hi2"]
+
+[sub_resource type="Theme" id="Theme_o7hi2"]
+Label/colors/font_color = Color(0.976471, 0, 0, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/shadow_offset_y = 10
+Label/font_sizes/font_size = 45
+
+[sub_resource type="Theme" id="Theme_640yi"]
+Button/constants/h_separation = 0
+Button/font_sizes/font_size = 20
+Button/styles/hover = ExtResource("2_sphw8")
+Button/styles/normal = ExtResource("3_o7hi2")
+Button/styles/pressed = ExtResource("4_q5r2m")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q5r2m"]
+
+[sub_resource type="Theme" id="Theme_qk2bj"]
+Label/styles/normal = SubResource("StyleBoxTexture_q5r2m")
+
+[sub_resource type="LabelSettings" id="LabelSettings_aknit"]
+font_size = 30
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qk2bj"]
+font_size = 27
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_640yi"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = ExtResource("6_o7hi2")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+modulate_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qk2bj"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = ExtResource("6_o7hi2")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="Theme" id="Theme_q5r2m"]
+Button/font_sizes/font_size = 20
+Button/styles/hover = SubResource("StyleBoxTexture_640yi")
+Button/styles/normal = SubResource("StyleBoxTexture_qk2bj")
+Button/styles/pressed = ExtResource("4_q5r2m")
+
+[node name="ShopMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -417.5
+offset_top = -225.5
+offset_right = 417.5
+offset_bottom = 225.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_sfkt0")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 24
+
+[node name="ColorRect" type="ColorRect" parent="NinePatchRect"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -16.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.243137)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.148
+anchor_right = 0.516
+anchor_bottom = 0.148
+offset_left = -358.5
+offset_top = 0.134998
+offset_right = 363.5
+offset_bottom = 97.135
+grow_horizontal = 2
+
+[node name="Event_Label" type="Label" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_o7hi2")
+text = "Random event"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Event_Button" type="Button" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_640yi")
+text = "Cost  1"
+icon = ExtResource("3_q5r2m")
+icon_alignment = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.5
+offset_top = 60.0
+offset_right = 152.5
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="HPLevel_Label" type="Label" parent="NinePatchRect/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_qk2bj")
+text = "HP Level : 1"
+label_settings = SubResource("LabelSettings_aknit")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HPLevel_Button" type="Button" parent="NinePatchRect/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_640yi")
+text = "Cost  1"
+icon = ExtResource("3_q5r2m")
+icon_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="NinePatchRect/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="AttLevel_Label" type="Label" parent="NinePatchRect/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_qk2bj")
+text = "Att Level : 1"
+label_settings = SubResource("LabelSettings_aknit")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AttLevel_Button" type="Button" parent="NinePatchRect/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_640yi")
+text = "Cost  1"
+icon = ExtResource("3_q5r2m")
+icon_alignment = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="NinePatchRect/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("6_640yi")
+
+[node name="HPPotion_Label" type="Label" parent="NinePatchRect/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_qk2bj")
+text = "HP Potion"
+label_settings = SubResource("LabelSettings_qk2bj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HPPotion_Button" type="Button" parent="NinePatchRect/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_640yi")
+text = "Cost  1"
+icon = ExtResource("3_q5r2m")
+icon_alignment = 2
+
+[node name="NextLevel_Button" type="Button" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.934
+anchor_right = 1.0
+anchor_bottom = 0.934
+offset_right = -30.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = SubResource("Theme_q5r2m")
+text = "Next Level"

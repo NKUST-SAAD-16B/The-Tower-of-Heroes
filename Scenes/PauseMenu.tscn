@@ -1,24 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqrble3t3qhvh"]
+[gd_scene load_steps=7 format=3 uid="uid://bqrble3t3qhvh"]
 
 [ext_resource type="Script" uid="uid://nwhc8kgwi6dm" path="res://Scripts/pause_menu.gd" id="1_5w4ur"]
 [ext_resource type="Texture2D" uid="uid://mtbyokl13mxk" path="res://Assets/kenney_fantasy-ui-borders/PNG/Double/Border/panel-border-005.png" id="2_ey1tb"]
 [ext_resource type="PackedScene" uid="uid://cwe3pgvfrop4v" path="res://Scenes/SettingsMenu.tscn" id="3_siy43"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nov15"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5w4ur"]
 texture = ExtResource("2_ey1tb")
 texture_margin_left = 24.0
 texture_margin_top = 25.0
 texture_margin_right = 24.0
 texture_margin_bottom = 25.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_etnfi"]
-texture = ExtResource("2_ey1tb")
-texture_margin_left = 24.0
-texture_margin_top = 25.0
-texture_margin_right = 25.0
-texture_margin_bottom = 24.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q775a"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ey1tb"]
 texture = ExtResource("2_ey1tb")
 texture_margin_left = 24.0
 texture_margin_top = 25.0
@@ -28,9 +21,9 @@ modulate_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Theme" id="Theme_8y7ot"]
 Button/font_sizes/font_size = 50
-Button/styles/hover = SubResource("StyleBoxTexture_nov15")
-Button/styles/normal = SubResource("StyleBoxTexture_etnfi")
-Button/styles/pressed = SubResource("StyleBoxTexture_q775a")
+Button/styles/hover = SubResource("StyleBoxTexture_5w4ur")
+Button/styles/normal = SubResource("StyleBoxTexture_5w4ur")
+Button/styles/pressed = SubResource("StyleBoxTexture_ey1tb")
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
@@ -57,10 +50,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -124.5
-offset_top = -255.0
-offset_right = 124.5
-offset_bottom = 255.0
+offset_left = -290.0
+offset_top = -326.0
+offset_right = 290.0
+offset_bottom = 326.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 38

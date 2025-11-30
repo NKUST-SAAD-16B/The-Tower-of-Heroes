@@ -1,0 +1,109 @@
+[gd_scene load_steps=8 format=3 uid="uid://brxmwu21helno"]
+
+[ext_resource type="Script" uid="uid://dq6w1l4cdp0fv" path="res://Scripts/end_menu.gd" id="1_2gc5c"]
+[ext_resource type="Texture2D" uid="uid://2xeesee3ndk0" path="res://Assets/kenney_fantasy-ui-borders/PNG/Default/Border/panel-border-003.png" id="2_rkyve"]
+[ext_resource type="Texture2D" uid="uid://dwrrpabqovc8f" path="res://Assets/kenney_fantasy-ui-borders/PNG/Default/Border/panel-border-015.png" id="3_134jk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_266kf"]
+font_size = 30
+font_color = Color(1, 0.717647, 0, 1)
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nkglw"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+texture = ExtResource("3_134jk")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+modulate_color = Color(1, 0.717647, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ny72n"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+texture = ExtResource("3_134jk")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(0, 0, 48, 48)
+
+[sub_resource type="Theme" id="Theme_ww1lq"]
+Button/font_sizes/font_size = 25
+Button/styles/hover = SubResource("StyleBoxTexture_nkglw")
+Button/styles/normal = SubResource("StyleBoxTexture_ny72n")
+
+[node name="GameOverMenu_Win" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2gc5c")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -330.5
+offset_top = -198.0
+offset_right = 332.5
+offset_bottom = 197.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.243137)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -340.5
+offset_top = -207.0
+offset_right = 340.5
+offset_bottom = 207.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rkyve")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -156.0
+offset_top = -42.5
+offset_right = 156.0
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Game Over_Label" type="Label" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+text = "Game Over (You Win)!"
+label_settings = SubResource("LabelSettings_266kf")
+
+[node name="Game Over_Button" type="Button" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_ww1lq")
+text = "Back To Title"
