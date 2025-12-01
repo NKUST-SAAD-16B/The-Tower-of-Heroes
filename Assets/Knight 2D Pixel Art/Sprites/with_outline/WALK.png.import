@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://doc4faxuaemxs"
-path="res://.godot/imported/menu_background.png-afc13b1fdd1075e44d8b87b5a71a861c.ctex"
+uid="uid://c6y2jjsg7x1be"
+path="res://.godot/imported/WALK.png-b5ff4f216ee4201c59b9f6e2b9332058.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/menu_background.png"
-dest_files=["res://.godot/imported/menu_background.png-afc13b1fdd1075e44d8b87b5a71a861c.ctex"]
+source_file="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/WALK.png"
+dest_files=["res://.godot/imported/WALK.png-b5ff4f216ee4201c59b9f6e2b9332058.ctex"]
 
 [params]
 
