@@ -1,6 +1,7 @@
-[gd_scene load_steps=62 format=3 uid="uid://mwaydr1lq63u"]
+[gd_scene load_steps=68 format=3 uid="uid://mwaydr1lq63u"]
 
 [ext_resource type="Texture2D" uid="uid://dc1qar7b84y4y" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/ATTACK 1.png" id="1_bhhdu"]
+[ext_resource type="Script" uid="uid://erlctxddyik4" path="res://Scripts/player.gd" id="1_glx4g"]
 [ext_resource type="Texture2D" uid="uid://dx2wu6ifqnota" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/ATTACK 2.png" id="2_megsn"]
 [ext_resource type="Texture2D" uid="uid://d0bnf7vynp1au" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/ATTACK 3.png" id="3_yoq75"]
 [ext_resource type="Texture2D" uid="uid://ktm632g2u60p" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/DEFEND.png" id="4_ksbbd"]
@@ -8,6 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://d1mf6a1jbgv7r" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/JUMP.png" id="6_miouo"]
 [ext_resource type="Texture2D" uid="uid://jd1jsawf2d4c" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/RUN.png" id="7_o3h8g"]
 [ext_resource type="Texture2D" uid="uid://c6y2jjsg7x1be" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/WALK.png" id="8_1e7my"]
+[ext_resource type="Script" uid="uid://qjpuf4at0vpg" path="res://Scripts/state_machine.gd" id="9_yoq75"]
+[ext_resource type="Script" uid="uid://crrfbfkpj0x62" path="res://Scripts/idle.gd" id="10_ksbbd"]
+[ext_resource type="Script" uid="uid://bph3vmp7x75op" path="res://Scripts/walk.gd" id="11_ksbbd"]
+[ext_resource type="Script" uid="uid://c1pf33l0m26ht" path="res://Scripts/run.gd" id="13_miouo"]
+[ext_resource type="Script" uid="uid://cue12147nf7om" path="res://Scripts/jump.gd" id="14_o3h8g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_arntx"]
 atlas = ExtResource("1_bhhdu")
@@ -413,13 +419,36 @@ animations = [{
 size = Vector2(20, 37)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 5
+script = ExtResource("1_glx4g")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -18)
+zoom = Vector2(4, 4)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_rocfp")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.615561
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -18.5)
 shape = SubResource("RectangleShape2D_uytvf")
+
+[node name="State_Machine" type="Node2D" parent="." node_paths=PackedStringArray("inital_state")]
+script = ExtResource("9_yoq75")
+inital_state = NodePath("idle")
+
+[node name="idle" type="Node2D" parent="State_Machine"]
+script = ExtResource("10_ksbbd")
+
+[node name="walk" type="Node2D" parent="State_Machine"]
+script = ExtResource("11_ksbbd")
+
+[node name="run" type="Node2D" parent="State_Machine"]
+script = ExtResource("13_miouo")
+
+[node name="jump" type="Node2D" parent="State_Machine"]
+script = ExtResource("14_o3h8g")
