@@ -16,7 +16,7 @@ func Physics_process(delta: float) -> void :
 	if Input.is_action_just_pressed("space"):
 		Transitioned.emit(self,"jump")
 	
-	if not Input.is_action_pressed("shift"):
+	if Input.is_action_just_released("shift"):
 		Transitioned.emit(self, "walk")
 		return
 		
@@ -26,7 +26,6 @@ func Physics_process(delta: float) -> void :
 		animated_sprite.flip_h = false
 		player.velocity.x = player.RUN_SPEED * direction
 	elif direction == 0:
-		player.velocity.x = move_toward(player.velocity.x, 0, player.RUN_SPEED)
 		Transitioned.emit(self,"idle")
 	else:
 		animated_sprite.flip_h = true

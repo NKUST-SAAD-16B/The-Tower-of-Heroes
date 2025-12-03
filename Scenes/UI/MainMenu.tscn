@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://dbikrsrmjdafj" path="res://Assets/Background/menu_background_daytime.png" id="2_koqhg"]
 [ext_resource type="StyleBox" uid="uid://cmssk3r1yfqax" path="res://Rescources/Theme & Stylebox/normal_button.tres" id="2_xim88"]
 [ext_resource type="StyleBox" uid="uid://cco30nl76ilk6" path="res://Rescources/Theme & Stylebox/pressed_button.tres" id="3_koqhg"]
-[ext_resource type="Script" uid="uid://bqkmk6yxiev34" path="res://Scripts/main_menu.gd" id="4_cmrfp"]
+[ext_resource type="Script" uid="uid://bqkmk6yxiev34" path="res://Scripts/UI/main_menu.gd" id="4_cmrfp"]
 [ext_resource type="Texture2D" uid="uid://by2vq1rqpjxqv" path="res://Assets/kenney_fantasy-ui-borders/PNG/Double/Border/panel-border-003.png" id="5_loo7a"]
-[ext_resource type="PackedScene" uid="uid://cwe3pgvfrop4v" path="res://Scenes/SettingsMenu.tscn" id="6_if7li"]
+[ext_resource type="PackedScene" uid="uid://cwe3pgvfrop4v" path="res://Scenes/UI/SettingsMenu.tscn" id="6_if7li"]
 
 [sub_resource type="Theme" id="Theme_xwwdr"]
 Button/font_sizes/font_size = 30

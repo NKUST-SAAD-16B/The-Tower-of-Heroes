@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://bqrble3t3qhvh"]
 
-[ext_resource type="Script" uid="uid://nwhc8kgwi6dm" path="res://Scripts/pause_menu.gd" id="1_5w4ur"]
+[ext_resource type="Script" uid="uid://nwhc8kgwi6dm" path="res://Scripts/UI/pause_menu.gd" id="1_5w4ur"]
 [ext_resource type="Texture2D" uid="uid://mtbyokl13mxk" path="res://Assets/kenney_fantasy-ui-borders/PNG/Double/Border/panel-border-005.png" id="2_ey1tb"]
-[ext_resource type="PackedScene" uid="uid://cwe3pgvfrop4v" path="res://Scenes/SettingsMenu.tscn" id="3_siy43"]
+[ext_resource type="PackedScene" uid="uid://cwe3pgvfrop4v" path="res://Scenes/UI/SettingsMenu.tscn" id="3_siy43"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5w4ur"]
 texture = ExtResource("2_ey1tb")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cwe3pgvfrop4v"]
 
-[ext_resource type="Script" uid="uid://ov2p7i867n3m" path="res://Scripts/settings_menu.gd" id="1_4hfd5"]
+[ext_resource type="Script" uid="uid://ov2p7i867n3m" path="res://Scripts/UI/settings_menu.gd" id="1_4hfd5"]
 [ext_resource type="Texture2D" uid="uid://by2vq1rqpjxqv" path="res://Assets/kenney_fantasy-ui-borders/PNG/Double/Border/panel-border-003.png" id="1_bxjf0"]
 [ext_resource type="Texture2D" uid="uid://c6jmaqj5acjj8" path="res://Assets/kenney_fantasy-ui-borders/PNG/Double/Border/panel-border-015.png" id="3_4hfd5"]
 

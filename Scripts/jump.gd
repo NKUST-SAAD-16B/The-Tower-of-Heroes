@@ -31,7 +31,7 @@ func Physics_process(delta: float) -> void :
 	else:
 		
 		if direction != 0:
-			Transitioned.emit(self,"run")
+			Transitioned.emit(self,"walk")
 		else:
 			Transitioned.emit(self,"idle")
 	

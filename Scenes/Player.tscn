@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://mwaydr1lq63u"]
+[gd_scene load_steps=69 format=3 uid="uid://mwaydr1lq63u"]
 
 [ext_resource type="Texture2D" uid="uid://dc1qar7b84y4y" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/ATTACK 1.png" id="1_bhhdu"]
 [ext_resource type="Script" uid="uid://erlctxddyik4" path="res://Scripts/player.gd" id="1_glx4g"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bph3vmp7x75op" path="res://Scripts/walk.gd" id="11_ksbbd"]
 [ext_resource type="Script" uid="uid://c1pf33l0m26ht" path="res://Scripts/run.gd" id="13_miouo"]
 [ext_resource type="Script" uid="uid://cue12147nf7om" path="res://Scripts/jump.gd" id="14_o3h8g"]
+[ext_resource type="Script" uid="uid://cl26lyj4lq7eu" path="res://Scripts/attack.gd" id="15_1e7my"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_arntx"]
 atlas = ExtResource("1_bhhdu")
@@ -240,7 +241,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5v66d")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_1",
 "speed": 8.0
 }, {
@@ -260,7 +261,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8flut")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_2",
 "speed": 7.0
 }, {
@@ -283,7 +284,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_avx33")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_3",
 "speed": 8.0
 }, {
@@ -306,7 +307,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wpo1r")
 }],
-"loop": true,
+"loop": false,
 "name": &"defend",
 "speed": 8.0
 }, {
@@ -352,7 +353,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_awd2i")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
 "speed": 7.0
 }, {
@@ -415,8 +416,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uytvf"]
-size = Vector2(20, 37)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o3h8g"]
+height = 37.0
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
@@ -425,17 +426,20 @@ script = ExtResource("1_glx4g")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -18)
 zoom = Vector2(4, 4)
+process_callback = 0
+position_smoothing_enabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_rocfp")
-animation = &"idle"
+animation = &"jump"
 autoplay = "idle"
-frame_progress = 0.615561
+frame = 4
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -18.5)
-shape = SubResource("RectangleShape2D_uytvf")
+shape = SubResource("CapsuleShape2D_o3h8g")
 
 [node name="State_Machine" type="Node2D" parent="." node_paths=PackedStringArray("inital_state")]
 script = ExtResource("9_yoq75")
@@ -452,3 +456,6 @@ script = ExtResource("13_miouo")
 
 [node name="jump" type="Node2D" parent="State_Machine"]
 script = ExtResource("14_o3h8g")
+
+[node name="attack" type="Node2D" parent="State_Machine"]
+script = ExtResource("15_1e7my")
