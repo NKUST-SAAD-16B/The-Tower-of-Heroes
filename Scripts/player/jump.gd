@@ -1,9 +1,9 @@
 extends State
-
+class_name JumpState
 #進入狀態時執行
 func  Enter():
 	animated_sprite.play("jump")
-	player.velocity.y = -300
+	actor.velocity.y = -300
 	pass
 
 #離開狀態時執行
@@ -17,17 +17,17 @@ func Update(delta: float) -> void :
 	pass
 
 func Physics_process(delta: float) -> void :
-	var direction = Input.get_axis("ui_left","ui_right")
-	if not player.is_on_floor():
+	var direction = Input.get_axis("left","right")
+	if not actor.is_on_floor():
 		
 		if direction >= 1:
 			animated_sprite.flip_h = false
-			player.velocity.x = player.RUN_SPEED * direction
+			actor.velocity.x = actor.RUN_SPEED * direction
 		elif direction == 0:
-			player.velocity.x = move_toward(player.velocity.x, 0, player.RUN_SPEED)
+			actor.velocity.x = move_toward(actor.velocity.x, 0, actor.RUN_SPEED)
 		else:
 			animated_sprite.flip_h =true
-			player.velocity.x = player.RUN_SPEED * direction
+			actor.velocity.x = actor.RUN_SPEED * direction
 	else:
 		
 		if direction != 0:

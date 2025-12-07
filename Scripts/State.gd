@@ -2,8 +2,10 @@ extends Node
 
 class_name State
 
-@onready var player: CharacterBody2D = $"../.."
+@onready var actor: CharacterBody2D = $"../.."
 @onready var animated_sprite : AnimatedSprite2D = $"../../AnimatedSprite2D"
+
+
 
 #當要離開狀態時就觸發這個訊號
 signal Transitioned

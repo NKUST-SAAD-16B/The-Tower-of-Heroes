@@ -1,11 +1,10 @@
 extends Node
-
+#初始狀態
 @export var inital_state : State
-
+#當前狀態
 var current_state : State
+#把所有狀態放入字典
 var states : Dictionary = {}
-
-
 
 func _ready():
 
