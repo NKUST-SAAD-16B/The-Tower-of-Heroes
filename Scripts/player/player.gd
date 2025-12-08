@@ -7,9 +7,9 @@ var RUN_SPEED = 100
 @onready var health_component = $HealthComponent
 @onready var state_machine = $State_Machine
 
-@onready var attack_1: CollisionShape2D = $HitboxComponent/Attack_1
-@onready var attack_2: CollisionShape2D = $HitboxComponent/Attack_2
-@onready var attack_3: CollisionShape2D = $HitboxComponent/Attack_3
+@onready var hitbox_1: CollisionShape2D = $HitboxComponent/Attack_1
+@onready var hitbox_2: CollisionShape2D = $HitboxComponent/Attack_2
+@onready var hitbox_3: CollisionShape2D = $HitboxComponent/Attack_3
 
 
 func _ready() -> void:

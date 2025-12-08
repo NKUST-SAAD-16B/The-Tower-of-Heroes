@@ -21,8 +21,8 @@ func Update(delta: float) -> void :
 	pass
 
 func Physics_process(delta: float) -> void :
+	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.WALK_SPEED)
 	timer += delta
-	print(timer)
 	if timer >= idle_time :
 		Transitioned.emit(self,"walk")
 	pass

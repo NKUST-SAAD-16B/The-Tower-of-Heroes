@@ -1,26 +1,33 @@
 extends State
 
 var walk_time = 5.0
-var direction = 1
+
+var timer = 0.0
 func Enter():
 	animated_sprite.play("walk")
 func Exit():
 	animated_sprite.stop()
-	
+	timer = 0.0
 	pass
 
 func Physics_process(delta: float) -> void :
+	timer += delta
+	if timer >= walk_time:
+		Transitioned.emit(self,"idle")
 	if not actor.floor_check.is_colliding() or  actor.wall_check.is_colliding():
 		print("turn")
 		_turn_around()
 		
-	actor.velocity.x = 0
-	actor.velocity.x = actor.WALK_SPEED * direction
+	actor.velocity.x = actor.WALK_SPEED * actor.direction
 	pass
 	
 func _turn_around():
-	if animated_sprite.flip_h == false:
-		direction = -1
-		animated_sprite.flip_h = true
+	actor.direction *= -1
+	if actor.scale.y == -1:
+		actor.scale.y = 1
+		actor.rotation = 0
+	else:
+		actor.scale.y = -1
+		actor.rotation = PI
 
 		

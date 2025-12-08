@@ -21,12 +21,14 @@ func Physics_process(delta: float) -> void :
 	if not actor.is_on_floor():
 		
 		if direction >= 1:
-			animated_sprite.flip_h = false
+			actor.scale.y = 1
+			actor.rotation = 0
 			actor.velocity.x = actor.RUN_SPEED * direction
 		elif direction == 0:
 			actor.velocity.x = move_toward(actor.velocity.x, 0, actor.RUN_SPEED)
 		else:
-			animated_sprite.flip_h =true
+			actor.scale.y = -1
+			actor.rotation = PI
 			actor.velocity.x = actor.RUN_SPEED * direction
 	else:
 		

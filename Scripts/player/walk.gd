@@ -3,6 +3,7 @@ class_name WalkState
 #進入狀態時執行
 func  Enter():
 	animated_sprite.play("walk")
+	
 	pass
 
 #離開狀態時執行
@@ -31,12 +32,15 @@ func Physics_process(delta: float) -> void :
 	var direction = Input.get_axis("left","right")
 	
 	if direction >= 1:
-		animated_sprite.flip_h = false
+		actor.scale.y = 1
+		actor.rotation = 0
 		actor.velocity.x = actor.WALK_SPEED * direction
 	elif direction == 0:
 		Transitioned.emit(self,"idle")
 	else:
-		animated_sprite.flip_h = true
+		#向左走翻轉角色的y軸(顛倒)，並旋轉180度達成翻轉的效果
+		actor.scale.y = -1
+		actor.rotation = PI
 		actor.velocity.x = actor.WALK_SPEED * direction
 	
 

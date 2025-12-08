@@ -23,12 +23,14 @@ func Physics_process(delta: float) -> void :
 	#處理玩家方向及移動輸入
 	var direction = Input.get_axis("left","right")
 	if direction >= 1:
-		animated_sprite.flip_h = false
+		actor.scale.y = 1
+		actor.rotation = 0
 		actor.velocity.x = actor.RUN_SPEED * direction
 	elif direction == 0:
 		Transitioned.emit(self,"idle")
 	else:
-		animated_sprite.flip_h = true
+		actor.scale.y = -1
+		actor.rotation = PI
 		actor.velocity.x = actor.RUN_SPEED * direction
 
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=3 uid="uid://mwaydr1lq63u"]
+[gd_scene load_steps=90 format=3 uid="uid://mwaydr1lq63u"]
 
 [ext_resource type="Texture2D" uid="uid://dc1qar7b84y4y" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/ATTACK 1.png" id="1_bhhdu"]
 [ext_resource type="Script" uid="uid://erlctxddyik4" path="res://Scripts/player/player.gd" id="1_glx4g"]
@@ -20,7 +20,17 @@
 [ext_resource type="Script" uid="uid://cue12147nf7om" path="res://Scripts/player/jump.gd" id="14_o3h8g"]
 [ext_resource type="Script" uid="uid://cl26lyj4lq7eu" path="res://Scripts/player/attack.gd" id="15_1e7my"]
 [ext_resource type="Script" uid="uid://c50jbwm008si7" path="res://Scripts/player/died.gd" id="17_ulo2v"]
-[ext_resource type="Script" uid="uid://ba3wjwx6fxriq" path="res://Scenes/timer.gd" id="19_1iu4k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x63xi"]
+size = Vector2(20, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i2e8t"]
+size = Vector2(22, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qidb7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5v66d"]
+size = Vector2(23.5, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_arntx"]
 atlas = ExtResource("1_bhhdu")
@@ -514,39 +524,10 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o3h8g"]
 height = 37.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x63xi"]
-size = Vector2(20, 33)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i2e8t"]
-size = Vector2(22, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qidb7"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5v66d"]
-size = Vector2(23.5, 34)
-
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
 collision_layer = 64
 script = ExtResource("1_glx4g")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -18)
-zoom = Vector2(4, 4)
-process_callback = 0
-position_smoothing_enabled = true
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -20)
-sprite_frames = SubResource("SpriteFrames_rocfp")
-animation = &"attack_1"
-autoplay = "idle"
-frame = 5
-frame_progress = 1.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -18.5)
-shape = SubResource("CapsuleShape2D_o3h8g")
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("11_5v66d")]
 collision_layer = 8
@@ -579,6 +560,24 @@ shape = SubResource("RectangleShape2D_5v66d")
 disabled = true
 debug_color = Color(9.14484e-07, 0.648665, 0.173094, 0.42)
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -18)
+zoom = Vector2(4, 4)
+process_callback = 0
+position_smoothing_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -20)
+sprite_frames = SubResource("SpriteFrames_rocfp")
+animation = &"attack_1"
+autoplay = "idle"
+frame = 5
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -18.5)
+shape = SubResource("CapsuleShape2D_o3h8g")
+
 [node name="HealthComponent" parent="." instance=ExtResource("10_lslt6")]
 
 [node name="State_Machine" type="Node2D" parent="." node_paths=PackedStringArray("inital_state")]
@@ -602,9 +601,3 @@ script = ExtResource("15_1e7my")
 
 [node name="died" type="Node2D" parent="State_Machine"]
 script = ExtResource("17_ulo2v")
-
-[node name="test_died" type="Timer" parent="."]
-wait_time = 4.031
-script = ExtResource("19_1iu4k")
-
-[connection signal="timeout" from="test_died" to="test_died" method="_on_timeout"]
