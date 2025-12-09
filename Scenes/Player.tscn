@@ -601,3 +601,7 @@ script = ExtResource("15_1e7my")
 
 [node name="died" type="Node2D" parent="State_Machine"]
 script = ExtResource("17_ulo2v")
+
+[node name="FloorCheck" type="RayCast2D" parent="."]
+position = Vector2(14, -26)
+target_position = Vector2(0, 31)

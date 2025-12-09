@@ -7,6 +7,8 @@ var direction = 1
 @onready var health_component = $HealthComponent
 @onready var state_machine = $State_Machine
 
+@onready var hurtbox_component: HurtBox = $HurtboxComponent
+
 @onready var wall_check: RayCast2D = $WallCheck
 @onready var player_check: RayCast2D = $PlayerCheck
 @onready var floor_check: RayCast2D = $FloorCheck

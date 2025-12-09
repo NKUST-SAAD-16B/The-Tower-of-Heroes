@@ -3,7 +3,7 @@ extends CharacterBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var WALK_SPEED = 50
 var RUN_SPEED = 100
-
+var damage = 50
 @onready var health_component = $HealthComponent
 @onready var state_machine = $State_Machine
 

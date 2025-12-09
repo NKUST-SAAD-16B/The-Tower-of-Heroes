@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://qhw1a3h18kka"]
+[gd_scene load_steps=86 format=3 uid="uid://qhw1a3h18kka"]
 
 [ext_resource type="Script" uid="uid://cva7l81i87bfy" path="res://Scripts/Skeleton/skeleton.gd" id="1_87cwn"]
 [ext_resource type="Texture2D" uid="uid://dfn8msvbsnxpk" path="res://Assets/Skeleton/Sprite Sheets/Skeleton Attack.png" id="1_yek4v"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://qjpuf4at0vpg" path="res://Scripts/state_machine.gd" id="9_lxoki"]
 [ext_resource type="Script" uid="uid://cye574t655ptj" path="res://Scripts/Skeleton/skeleton_idle.gd" id="10_xneb1"]
 [ext_resource type="Script" uid="uid://ck38oc1dia1ot" path="res://Scripts/Skeleton/skeleton_walk.gd" id="12_xneb1"]
+[ext_resource type="Script" uid="uid://dkcmn3up5nwg7" path="res://Scenes/skeleton_died.gd" id="13_ci2ge"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xneb1"]
 radius = 9.0
@@ -401,7 +402,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_klam7")
 }],
 "loop": false,
-"name": &"dead",
+"name": &"died",
 "speed": 10.0
 }, {
 "frames": [{
@@ -537,6 +538,7 @@ animations = [{
 size = Vector2(16, 28.5)
 
 [node name="Skeleton" type="CharacterBody2D"]
+z_index = 5
 position = Vector2(0, -16)
 collision_layer = 128
 script = ExtResource("1_87cwn")
@@ -546,7 +548,7 @@ shape = SubResource("CapsuleShape2D_xneb1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ci2ge")
-animation = &"idle"
+animation = &"died"
 autoplay = "idle"
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_lxoki")]
@@ -570,13 +572,16 @@ script = ExtResource("10_xneb1")
 [node name="walk" type="Node2D" parent="State_Machine"]
 script = ExtResource("12_xneb1")
 
+[node name="died" type="Node2D" parent="State_Machine"]
+script = ExtResource("13_ci2ge")
+
 [node name="WallCheck" type="RayCast2D" parent="."]
 position = Vector2(9, 1)
-target_position = Vector2(10, 0)
+target_position = Vector2(2, 0)
 
 [node name="FloorCheck" type="RayCast2D" parent="."]
-position = Vector2(11, 13)
-target_position = Vector2(0, 6)
+position = Vector2(9, 15)
+target_position = Vector2(0, 17)
 
 [node name="PlayerCheck" type="RayCast2D" parent="."]
 target_position = Vector2(75, 0)

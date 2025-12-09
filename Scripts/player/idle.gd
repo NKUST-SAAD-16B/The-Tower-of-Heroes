@@ -17,8 +17,7 @@ func Update(delta: float) -> void :
 
 func Physics_process(delta: float) -> void :
 	
-	
-	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.WALK_SPEED)
+	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.RUN_SPEED)
 	if Input.is_action_just_pressed("space"):
 		Transitioned.emit(self,"jump")
 	
