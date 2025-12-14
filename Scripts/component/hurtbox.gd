@@ -11,5 +11,8 @@ func _ready() -> void:
 
 func _on_hurt(hitbox:HitBox):
 	print("痛")
-	health_component.take_damage(hitbox.owner.damage)
+	var knockback_froce = hitbox.owner.knockback_froce
+	var knockback_direction = (owner.global_position - hitbox.owner.global_position).normalized()
+	var knockback_vector = knockback_direction * knockback_froce
+	health_component.take_damage(hitbox.owner.damage,knockback_vector)
 	

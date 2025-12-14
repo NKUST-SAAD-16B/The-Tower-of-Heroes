@@ -3,7 +3,10 @@ extends CharacterBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var WALK_SPEED = 50
 var RUN_SPEED = 100
-var damage = 50
+var damage = 10
+#擊退力量
+var knockback_froce = 20
+
 @onready var health_component = $HealthComponent
 @onready var state_machine = $State_Machine
 
@@ -15,6 +18,7 @@ var damage = 50
 func _ready() -> void:
 	#連接死亡訊號
 	health_component.died.connect(_on_died)
+	
 
 func _physics_process(delta: float) -> void:
 	
