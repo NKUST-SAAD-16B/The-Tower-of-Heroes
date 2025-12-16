@@ -25,12 +25,13 @@
 size = Vector2(20, 33)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i2e8t"]
-size = Vector2(22, 20)
+size = Vector2(17, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qidb7"]
+size = Vector2(16, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5v66d"]
-size = Vector2(23.5, 34)
+size = Vector2(18, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_arntx"]
 atlas = ExtResource("1_bhhdu")
@@ -287,13 +288,13 @@ region = Rect2(672, 0, 96, 84)
 [sub_resource type="SpriteFrames" id="SpriteFrames_rocfp"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 0.01,
 "texture": SubResource("AtlasTexture_arntx")
 }, {
-"duration": 1.0,
+"duration": 0.01,
 "texture": SubResource("AtlasTexture_lslt6")
 }, {
-"duration": 1.0,
+"duration": 0.01,
 "texture": SubResource("AtlasTexture_ulo2v")
 }, {
 "duration": 1.0,
@@ -310,7 +311,7 @@ animations = [{
 "speed": 8.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.01,
 "texture": SubResource("AtlasTexture_x63xi")
 }, {
 "duration": 1.0,
@@ -330,10 +331,10 @@ animations = [{
 "speed": 7.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.01,
 "texture": SubResource("AtlasTexture_u7x0b")
 }, {
-"duration": 1.0,
+"duration": 0.01,
 "texture": SubResource("AtlasTexture_utwlt")
 }, {
 "duration": 1.0,
@@ -543,19 +544,19 @@ collision_layer = 0
 collision_mask = 32
 
 [node name="Attack_1" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(17, -12)
+position = Vector2(19.5, -12)
 shape = SubResource("RectangleShape2D_i2e8t")
 disabled = true
 debug_color = Color(0, 0.647059, 0.172549, 0.419608)
 
 [node name="Attack_2" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(16, -12)
+position = Vector2(18, -12)
 shape = SubResource("RectangleShape2D_qidb7")
 disabled = true
 debug_color = Color(0, 0.647059, 0.172549, 0.419608)
 
 [node name="Attack_3" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(18.25, -17)
+position = Vector2(21, -17)
 shape = SubResource("RectangleShape2D_5v66d")
 disabled = true
 debug_color = Color(9.14484e-07, 0.648665, 0.173094, 0.42)
@@ -569,10 +570,8 @@ position_smoothing_enabled = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_rocfp")
-animation = &"attack_1"
+animation = &"attack_3"
 autoplay = "idle"
-frame = 5
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -18.5)

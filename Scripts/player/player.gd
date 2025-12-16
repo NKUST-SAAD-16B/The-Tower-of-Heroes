@@ -5,7 +5,7 @@ var WALK_SPEED = 50
 var RUN_SPEED = 100
 var damage = 10
 #擊退力量
-var knockback_froce = 20
+var knockback_froce = 100
 
 @onready var health_component = $HealthComponent
 @onready var state_machine = $State_Machine

@@ -3,7 +3,7 @@ extends CharacterBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var WALK_SPEED = 50
 var direction = 1
-var knockback_resist = 1.0
+var knockback_resist = 0.9
 var knockback_vector:Vector2
 @onready var health_component = $HealthComponent
 @onready var state_machine = $State_Machine
