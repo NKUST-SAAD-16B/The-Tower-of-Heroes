@@ -14,11 +14,13 @@ func Physics_process(delta: float) -> void :
 	timer += delta
 	if timer >= walk_time:
 		Transitioned.emit(self,"idle")
+	#牆壁和地板偵測
 	if not actor.floor_check.is_colliding() or  actor.wall_check.is_colliding():
 		print(actor.floor_check.is_colliding())
 		print("turn")
 		_turn_around()
-		
+	
+	
 	actor.velocity.x = actor.WALK_SPEED * actor.direction
 	pass
 	

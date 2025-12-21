@@ -1,5 +1,5 @@
 extends State
-
+class_name AttackState
 var is_combo = false
 var combo_count = 1
 
@@ -43,17 +43,20 @@ func _on_animation_finished():
 		#根據攻擊開啟對應的hitbox碰撞框
 		match combo_count:
 			1:
-				actor.hitbox_1.disabled = false
+				actor.hitbox_1.set_deferred("disabled", false)
 			2:
-				actor.hitbox_2.disabled = false
+				actor.hitbox_2.set_deferred("disabled", false)
 			3:
-				actor.hitbox_3.disabled = false
+				actor.hitbox_3.set_deferred("disabled", false)
 	else:
 		Transitioned.emit(self,"idle")
 	
 	pass
 
 func _hitbox_disabled():
-	actor.hitbox_1.disabled = true
-	actor.hitbox_2.disabled = true
-	actor.hitbox_3.disabled = true
+	actor.hitbox_1.set_deferred("disabled", true)
+	actor.hitbox_2.set_deferred("disabled", true)
+	actor.hitbox_3.set_deferred("disabled", true)
+	#actor.hitbox_1.disabled = true
+	#actor.hitbox_2.disabled = true
+	#actor.hitbox_3.disabled = true

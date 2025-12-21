@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://mwaydr1lq63u"]
+[gd_scene load_steps=96 format=3 uid="uid://mwaydr1lq63u"]
 
 [ext_resource type="Texture2D" uid="uid://dc1qar7b84y4y" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/ATTACK 1.png" id="1_bhhdu"]
 [ext_resource type="Script" uid="uid://erlctxddyik4" path="res://Scripts/player/player.gd" id="1_glx4g"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bqj56f3us1mh6" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/DEATH.png" id="6_ulo2v"]
 [ext_resource type="Texture2D" uid="uid://jd1jsawf2d4c" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/RUN.png" id="7_o3h8g"]
 [ext_resource type="Texture2D" uid="uid://c6y2jjsg7x1be" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/WALK.png" id="8_1e7my"]
+[ext_resource type="Texture2D" uid="uid://c7c4cs77nokgq" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/HURT.png" id="9_x63xi"]
 [ext_resource type="Script" uid="uid://qjpuf4at0vpg" path="res://Scripts/state_machine.gd" id="9_yoq75"]
 [ext_resource type="Script" uid="uid://crrfbfkpj0x62" path="res://Scripts/player/idle.gd" id="10_ksbbd"]
 [ext_resource type="PackedScene" uid="uid://du865cdf310h1" path="res://Scenes/Component/health_component.tscn" id="10_lslt6"]
@@ -20,6 +21,7 @@
 [ext_resource type="Script" uid="uid://cue12147nf7om" path="res://Scripts/player/jump.gd" id="14_o3h8g"]
 [ext_resource type="Script" uid="uid://cl26lyj4lq7eu" path="res://Scripts/player/attack.gd" id="15_1e7my"]
 [ext_resource type="Script" uid="uid://c50jbwm008si7" path="res://Scripts/player/died.gd" id="17_ulo2v"]
+[ext_resource type="Script" uid="uid://do6wlnieejfs7" path="res://Scripts/player/hurt.gd" id="21_5v66d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x63xi"]
 size = Vector2(20, 33)
@@ -172,6 +174,22 @@ region = Rect2(960, 0, 96, 84)
 [sub_resource type="AtlasTexture" id="AtlasTexture_01r87"]
 atlas = ExtResource("6_ulo2v")
 region = Rect2(1056, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhxql"]
+atlas = ExtResource("9_x63xi")
+region = Rect2(0, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilb4b"]
+atlas = ExtResource("9_x63xi")
+region = Rect2(96, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlew5"]
+atlas = ExtResource("9_x63xi")
+region = Rect2(192, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h55a1"]
+atlas = ExtResource("9_x63xi")
+region = Rect2(288, 0, 96, 84)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pqity"]
 atlas = ExtResource("5_glx4g")
@@ -419,6 +437,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_jhxql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilb4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlew5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h55a1")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_pqity")
 }, {
 "duration": 1.0,
@@ -544,7 +579,7 @@ collision_layer = 0
 collision_mask = 32
 
 [node name="Attack_1" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(19.5, -12)
+position = Vector2(20.5, -13)
 shape = SubResource("RectangleShape2D_i2e8t")
 disabled = true
 debug_color = Color(0, 0.647059, 0.172549, 0.419608)
@@ -570,7 +605,7 @@ position_smoothing_enabled = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_rocfp")
-animation = &"attack_3"
+animation = &"hurt"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -601,6 +636,5 @@ script = ExtResource("15_1e7my")
 [node name="died" type="Node2D" parent="State_Machine"]
 script = ExtResource("17_ulo2v")
 
-[node name="FloorCheck" type="RayCast2D" parent="."]
-position = Vector2(14, -26)
-target_position = Vector2(0, 31)
+[node name="hurt" type="Node2D" parent="State_Machine"]
+script = ExtResource("21_5v66d")

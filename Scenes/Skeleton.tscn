@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://qhw1a3h18kka"]
+[gd_scene load_steps=92 format=3 uid="uid://qhw1a3h18kka"]
 
 [ext_resource type="Script" uid="uid://cva7l81i87bfy" path="res://Scripts/Skeleton/skeleton.gd" id="1_87cwn"]
 [ext_resource type="Texture2D" uid="uid://dfn8msvbsnxpk" path="res://Assets/Skeleton/Sprite Sheets/Skeleton Attack.png" id="1_yek4v"]
@@ -9,11 +9,14 @@
 [ext_resource type="Texture2D" uid="uid://ckjkqq7kiur4m" path="res://Assets/Skeleton/Sprite Sheets/Skeleton Walk.png" id="6_lxoki"]
 [ext_resource type="PackedScene" uid="uid://ocrkyfhmvdn8" path="res://Scenes/hurtbox_component.tscn" id="7_2bjux"]
 [ext_resource type="PackedScene" uid="uid://du865cdf310h1" path="res://Scenes/Component/health_component.tscn" id="8_lxoki"]
+[ext_resource type="PackedScene" uid="uid://d1uw4ehlyvxac" path="res://Scenes/hitbox_component.tscn" id="9_lii7c"]
 [ext_resource type="Script" uid="uid://qjpuf4at0vpg" path="res://Scripts/state_machine.gd" id="9_lxoki"]
 [ext_resource type="Script" uid="uid://cye574t655ptj" path="res://Scripts/Skeleton/skeleton_idle.gd" id="10_xneb1"]
 [ext_resource type="Script" uid="uid://ck38oc1dia1ot" path="res://Scripts/Skeleton/skeleton_walk.gd" id="12_xneb1"]
 [ext_resource type="Script" uid="uid://dkcmn3up5nwg7" path="res://Scripts/Skeleton/skeleton_died.gd" id="13_ci2ge"]
 [ext_resource type="Script" uid="uid://dujivm15oax81" path="res://Scripts/Skeleton/skeleton_hurt.gd" id="14_ma653"]
+[ext_resource type="Script" uid="uid://b0vvuyywsq5d2" path="res://Scripts/Skeleton/skeleton_chase.gd" id="15_ecs23"]
+[ext_resource type="Script" uid="uid://b2jj7n33x83a1" path="res://Scripts/Skeleton/skeleton_attack.gd" id="17_10q1y"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xneb1"]
 radius = 9.0
@@ -535,8 +538,14 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lii7c"]
+size = Vector2(23, 28)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rtppx"]
-size = Vector2(16, 28.5)
+size = Vector2(16.5, 28.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ecs23"]
+size = Vector2(140, 56)
 
 [node name="Skeleton" type="CharacterBody2D"]
 z_index = 5
@@ -548,18 +557,30 @@ script = ExtResource("1_87cwn")
 shape = SubResource("CapsuleShape2D_xneb1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(9, -2.5)
 sprite_frames = SubResource("SpriteFrames_ci2ge")
-animation = &"hurt"
+animation = &"attack"
 autoplay = "idle"
+frame = 17
+frame_progress = 1.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_lxoki")]
+
+[node name="HitboxComponent" parent="." instance=ExtResource("9_lii7c")]
+collision_layer = 0
+collision_mask = 8
+
+[node name="Attack" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(17.5, 2)
+shape = SubResource("RectangleShape2D_lii7c")
+disabled = true
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("7_2bjux")]
 collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
-position = Vector2(-4, 1.75)
+position = Vector2(-1.25, 2)
 shape = SubResource("RectangleShape2D_rtppx")
 debug_color = Color(0.992157, 0, 0.262745, 0.419608)
 
@@ -579,6 +600,12 @@ script = ExtResource("13_ci2ge")
 [node name="hurt" type="Node2D" parent="State_Machine"]
 script = ExtResource("14_ma653")
 
+[node name="chase" type="Node2D" parent="State_Machine"]
+script = ExtResource("15_ecs23")
+
+[node name="attack" type="Node2D" parent="State_Machine"]
+script = ExtResource("17_10q1y")
+
 [node name="WallCheck" type="RayCast2D" parent="."]
 position = Vector2(9, 1)
 target_position = Vector2(2, 0)
@@ -587,6 +614,14 @@ target_position = Vector2(2, 0)
 position = Vector2(9, 15)
 target_position = Vector2(0, 17)
 
-[node name="PlayerCheck" type="RayCast2D" parent="."]
-target_position = Vector2(75, 0)
+[node name="PlayerChecker" type="Area2D" parent="."]
+collision_layer = 0
 collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerChecker"]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_ecs23")
+debug_color = Color(0.750836, 0.459077, 0, 0.42)
+
+[connection signal="body_entered" from="PlayerChecker" to="." method="_on_player_checker_body_entered"]
+[connection signal="body_exited" from="PlayerChecker" to="." method="_on_player_checker_body_exited"]

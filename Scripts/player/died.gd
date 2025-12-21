@@ -1,5 +1,5 @@
 extends State
-class_name Died
+class_name DiedState
 
 #進入狀態時執行
 func  Enter():

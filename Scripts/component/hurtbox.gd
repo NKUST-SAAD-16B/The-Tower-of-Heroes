@@ -11,8 +11,10 @@ func _ready() -> void:
 
 func _on_hurt(hitbox:HitBox):
 	print("痛")
+	
 	var knockback_froce = hitbox.owner.knockback_froce
 	#var knockback_direction = (owner.global_position - hitbox.owner.global_position).normalized() 有bug所以註解換一種方法
+	
 	
 	#擊退方向
 	var knockback_direction = Vector2(1,1) if global_position > hitbox.owner.global_position else Vector2(-1,-1)

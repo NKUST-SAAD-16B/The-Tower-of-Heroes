@@ -17,7 +17,6 @@ func Exit():
 
 
 func Update(delta: float) -> void :
-	
 	pass
 
 func Physics_process(delta: float) -> void :
@@ -25,5 +24,7 @@ func Physics_process(delta: float) -> void :
 	timer += delta
 	if timer >= idle_time :
 		Transitioned.emit(self,"walk")
+	
+
 	pass
 	
