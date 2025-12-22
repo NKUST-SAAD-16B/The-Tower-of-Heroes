@@ -3,6 +3,7 @@ class_name SkeletonAttack
 
 func Enter():
 	animated_sprite.play("attack")
+	#避免重複連接訊號
 	if not animated_sprite.frame_changed.is_connected(_on_animated_sprite_2d_frame_changed):
 		animated_sprite.frame_changed.connect(_on_animated_sprite_2d_frame_changed)
 	if not animated_sprite.animation_finished.is_connected(_on_animation_sprite_2d_animation_finished):
@@ -18,24 +19,30 @@ func Exit():
 
 func Physics_process(delta: float) -> void :
 	actor.velocity.x = 0
+	#在攻擊狀態不斷偵測玩家方向，以便攻擊動畫完成後知道該往哪轉
+	if actor.target is Player:
+		actor.direction = 1 if actor.target.global_position.x > actor.global_position.x else -1
+	
 	pass
 
 
 
 
 func _on_animation_sprite_2d_animation_finished() -> void:
-	if actor.target is Player and abs(actor.target.global_position.x - actor.global_position.x) <= 25:
-		#處理攻擊轉向
-		actor.direction = 1 if actor.target.global_position.x > actor.global_position.x else -1
-		if actor.direction == 1:
-			actor.scale.y = 1
-			actor.rotation = 0
-		else:
-			actor.scale.y = -1
-			actor.rotation = PI
+	#攻擊動畫完成後會先轉向
+	if actor.direction == 1:
+		actor.scale.y = 1
+		actor.rotation = 0
+	else:
+		actor.scale.y = -1
+		actor.rotation = PI
+	#如果玩家還在攻擊範圍內就再次攻擊
+	if actor.target is Player and actor.global_position.distance_to(actor.target.global_position) <= 30:
 		Transitioned.emit(self,"attack")
+	#玩家還在範圍內就回到chase狀態
 	elif actor.target is Player:
 		Transitioned.emit(self,"chase")
+	#如果沒有偵測到玩家就回到walk狀態
 	else:
 		Transitioned.emit(self,"walk")
 

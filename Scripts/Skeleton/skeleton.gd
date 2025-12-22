@@ -9,6 +9,7 @@ var knockback_vector:Vector2
 var knockback_froce = 50
 #偵測對象
 var target:CharacterBody2D = null
+
 @onready var health_component = $HealthComponent
 @onready var state_machine = $State_Machine
 
