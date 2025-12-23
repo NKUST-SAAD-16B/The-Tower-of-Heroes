@@ -7,9 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://btv7lxw5yx8hy" path="res://Assets/Skeleton/Sprite Sheets/Skeleton Idle.png" id="4_k2wj7"]
 [ext_resource type="Texture2D" uid="uid://bv3k35gsgylhs" path="res://Assets/Skeleton/Sprite Sheets/Skeleton React.png" id="5_87cwn"]
 [ext_resource type="Texture2D" uid="uid://ckjkqq7kiur4m" path="res://Assets/Skeleton/Sprite Sheets/Skeleton Walk.png" id="6_lxoki"]
-[ext_resource type="PackedScene" uid="uid://ocrkyfhmvdn8" path="res://Scenes/hurtbox_component.tscn" id="7_2bjux"]
+[ext_resource type="PackedScene" uid="uid://ocrkyfhmvdn8" path="res://Scenes/Component/hurtbox_component.tscn" id="7_2bjux"]
 [ext_resource type="PackedScene" uid="uid://du865cdf310h1" path="res://Scenes/Component/health_component.tscn" id="8_lxoki"]
-[ext_resource type="PackedScene" uid="uid://d1uw4ehlyvxac" path="res://Scenes/hitbox_component.tscn" id="9_lii7c"]
+[ext_resource type="PackedScene" uid="uid://d1uw4ehlyvxac" path="res://Scenes/Component/hitbox_component.tscn" id="9_lii7c"]
 [ext_resource type="Script" uid="uid://qjpuf4at0vpg" path="res://Scripts/state_machine.gd" id="9_lxoki"]
 [ext_resource type="Script" uid="uid://cye574t655ptj" path="res://Scripts/Skeleton/skeleton_idle.gd" id="10_xneb1"]
 [ext_resource type="Script" uid="uid://ck38oc1dia1ot" path="res://Scripts/Skeleton/skeleton_walk.gd" id="12_xneb1"]
@@ -539,7 +539,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lii7c"]
-size = Vector2(23, 28)
+size = Vector2(16, 28)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rtppx"]
 size = Vector2(16.5, 28.5)
@@ -557,12 +557,9 @@ script = ExtResource("1_87cwn")
 shape = SubResource("CapsuleShape2D_xneb1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(9, -2.5)
 sprite_frames = SubResource("SpriteFrames_ci2ge")
 animation = &"attack"
 autoplay = "idle"
-frame = 17
-frame_progress = 1.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_lxoki")]
 
@@ -571,7 +568,7 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="Attack" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(17.5, 2)
+position = Vector2(14, 2)
 shape = SubResource("RectangleShape2D_lii7c")
 disabled = true
 

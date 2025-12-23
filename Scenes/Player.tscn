@@ -14,9 +14,9 @@
 [ext_resource type="Script" uid="uid://qjpuf4at0vpg" path="res://Scripts/state_machine.gd" id="9_yoq75"]
 [ext_resource type="Script" uid="uid://crrfbfkpj0x62" path="res://Scripts/player/idle.gd" id="10_ksbbd"]
 [ext_resource type="PackedScene" uid="uid://du865cdf310h1" path="res://Scenes/Component/health_component.tscn" id="10_lslt6"]
-[ext_resource type="PackedScene" uid="uid://ocrkyfhmvdn8" path="res://Scenes/hurtbox_component.tscn" id="11_5v66d"]
+[ext_resource type="PackedScene" uid="uid://ocrkyfhmvdn8" path="res://Scenes/Component/hurtbox_component.tscn" id="11_5v66d"]
 [ext_resource type="Script" uid="uid://bph3vmp7x75op" path="res://Scripts/player/walk.gd" id="11_ksbbd"]
-[ext_resource type="PackedScene" uid="uid://d1uw4ehlyvxac" path="res://Scenes/hitbox_component.tscn" id="11_m0x7a"]
+[ext_resource type="PackedScene" uid="uid://d1uw4ehlyvxac" path="res://Scenes/Component/hitbox_component.tscn" id="11_m0x7a"]
 [ext_resource type="Script" uid="uid://c1pf33l0m26ht" path="res://Scripts/player/run.gd" id="13_miouo"]
 [ext_resource type="Script" uid="uid://cue12147nf7om" path="res://Scripts/player/jump.gd" id="14_o3h8g"]
 [ext_resource type="Script" uid="uid://cl26lyj4lq7eu" path="res://Scripts/player/attack.gd" id="15_1e7my"]
@@ -605,7 +605,7 @@ position_smoothing_enabled = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_rocfp")
-animation = &"hurt"
+animation = &"attack_3"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

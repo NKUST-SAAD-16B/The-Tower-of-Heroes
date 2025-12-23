@@ -13,19 +13,18 @@ func Enter():
 func Exit():
 	animated_sprite.stop()
 	actor.attack.set_deferred("disabled", true)
+	#斷開訊號
 	if animated_sprite.frame_changed.is_connected(_on_animated_sprite_2d_frame_changed):
 		animated_sprite.frame_changed.disconnect(_on_animated_sprite_2d_frame_changed)
 	pass
 
 func Physics_process(delta: float) -> void :
 	actor.velocity.x = 0
-	#在攻擊狀態不斷偵測玩家方向，以便攻擊動畫完成後知道該往哪轉
+	#在攻擊狀態不斷偵測玩家方向，以便攻擊動畫完成後知道玩家的方向決定該往哪轉
 	if actor.target is Player:
 		actor.direction = 1 if actor.target.global_position.x > actor.global_position.x else -1
 	
 	pass
-
-
 
 
 func _on_animation_sprite_2d_animation_finished() -> void:
@@ -46,6 +45,7 @@ func _on_animation_sprite_2d_animation_finished() -> void:
 	else:
 		Transitioned.emit(self,"walk")
 
+#當攻擊動畫到特定frame時開啟hitbox
 func _on_animated_sprite_2d_frame_changed() -> void:
 	#print("1")
 	if animated_sprite.animation == "attack" and animated_sprite.frame == 7:

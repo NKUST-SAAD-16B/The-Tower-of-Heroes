@@ -23,6 +23,13 @@ func Physics_process(delta: float) -> void :
 	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.WALK_SPEED)
 	timer += delta
 	if timer >= idle_time :
+		actor.direction = [-1, 1].pick_random()
+		if actor.direction == 1:
+			actor.scale.y = 1
+			actor.rotation = 0
+		else:
+			actor.scale.y = -1
+			actor.rotation = PI
 		Transitioned.emit(self,"walk")
 	
 

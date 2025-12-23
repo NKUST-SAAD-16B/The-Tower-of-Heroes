@@ -19,6 +19,8 @@ func _process(delta: float) -> void:
 		
 	pass
 
+
+#受傷函數，用於血量計算及傳入攻擊者的擊退向量
 func take_damage(damage: int ,knockback_vector: Vector2 = Vector2.ZERO):
 	current_health -= damage
 	if current_health <= 0 :
