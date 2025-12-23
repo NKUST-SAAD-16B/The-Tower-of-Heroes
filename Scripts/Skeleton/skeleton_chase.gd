@@ -42,7 +42,7 @@ func Physics_process(delta: float) -> void :
 		Transitioned.emit(self,"idle")
 	
 	#如果偵測到懸空或牆壁就停止追蹤
-	if not actor.is_on_floor() or actor.wall_check.is_colliding():
+	if not actor.floor_check.is_colliding() or actor.wall_check.is_colliding():
 		Transitioned.emit(self,"idle") 
 	pass
 

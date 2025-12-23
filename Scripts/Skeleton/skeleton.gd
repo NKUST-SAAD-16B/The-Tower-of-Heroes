@@ -31,6 +31,9 @@ func _ready() -> void:
 	health_component.took_damage.connect(_hurt)
 	#底下這幾行主要是讓玩家如果和骷髏一起出生時可以使玩家被偵測到
 	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
 	for body in player_checker.get_overlapping_bodies():
 		if body is Player:
 			target = body
