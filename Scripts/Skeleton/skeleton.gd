@@ -29,15 +29,6 @@ func _ready() -> void:
 	health_component.died.connect(_died)
 	#連接受傷訊號
 	health_component.took_damage.connect(_hurt)
-	#底下這幾行主要是讓玩家如果和骷髏一起出生時可以使玩家被偵測到
-	await get_tree().process_frame
-	await get_tree().process_frame
-	await get_tree().process_frame
-	await get_tree().process_frame
-	for body in player_checker.get_overlapping_bodies():
-		if body is Player:
-			target = body
-			state_machine.current_state.Transitioned.emit(state_machine.current_state,"chase")
 	
 func _physics_process(delta: float) -> void:
 	
@@ -58,6 +49,7 @@ func _hurt(knockback):
 
 #當目標進入偵測區域時，target賦值並切換到chase狀態
 func _on_player_checker_body_entered(body: Node2D) -> void:
+	print("偵測到玩家")
 	if body is Player:
 		target = body
 		state_machine.current_state.Transitioned.emit(state_machine.current_state,"chase")

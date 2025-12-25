@@ -18,9 +18,8 @@
 [ext_resource type="Script" uid="uid://b0vvuyywsq5d2" path="res://Scripts/Skeleton/skeleton_chase.gd" id="15_ecs23"]
 [ext_resource type="Script" uid="uid://b2jj7n33x83a1" path="res://Scripts/Skeleton/skeleton_attack.gd" id="17_10q1y"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xneb1"]
-radius = 9.0
-height = 32.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lii7c"]
+height = 26.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qy5o"]
 atlas = ExtResource("1_yek4v")
@@ -545,7 +544,7 @@ size = Vector2(16, 28)
 size = Vector2(16.5, 28.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ecs23"]
-size = Vector2(140, 56)
+size = Vector2(140, 69)
 
 [node name="Skeleton" type="CharacterBody2D"]
 z_index = 5
@@ -554,11 +553,12 @@ collision_layer = 128
 script = ExtResource("1_87cwn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_xneb1")
+position = Vector2(-3, 3)
+shape = SubResource("CapsuleShape2D_lii7c")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ci2ge")
-animation = &"idle"
+animation = &"died"
 autoplay = "idle"
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_lxoki")]
@@ -609,14 +609,14 @@ target_position = Vector2(2, 0)
 
 [node name="FloorCheck" type="RayCast2D" parent="."]
 position = Vector2(3, 11)
-target_position = Vector2(0, 12)
+target_position = Vector2(0, 16)
 
 [node name="PlayerChecker" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerChecker"]
-position = Vector2(0, -12)
+position = Vector2(0, -18.5)
 shape = SubResource("RectangleShape2D_ecs23")
 debug_color = Color(0.750836, 0.459077, 0, 0.42)
 

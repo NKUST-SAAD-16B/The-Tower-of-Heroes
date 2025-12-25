@@ -5,6 +5,7 @@ class_name SkeletonIdle
 var timer : float
 #進入狀態時執行
 func  Enter():
+	print("idle")
 	animated_sprite.play("idle")
 	timer = 0.0
 	pass
@@ -18,10 +19,12 @@ func Exit():
 
 func Update(delta: float) -> void :
 	pass
-
+	
 func Physics_process(delta: float) -> void :
 	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.WALK_SPEED)
 	timer += delta
+	
+	
 	if timer >= idle_time :
 		actor.direction = [-1, 1].pick_random()
 		if actor.direction == 1:
@@ -31,7 +34,5 @@ func Physics_process(delta: float) -> void :
 			actor.scale.y = -1
 			actor.rotation = PI
 		Transitioned.emit(self,"walk")
-	
-
 	pass
 	
