@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://bxnoeghiqun20"]
+
+[ext_resource type="Texture2D" uid="uid://botpkvy7nymvy" path="res://Assets/Health Bar Asset Pack 2 by Adwit Rahman/redblue (3).png" id="1_qyqjh"]
+[ext_resource type="Texture2D" uid="uid://dvhlww7d278de" path="res://Assets/Health Bar Asset Pack 2 by Adwit Rahman/redblue (2)-white.png.png" id="2_1s5oa"]
+[ext_resource type="Texture2D" uid="uid://bnfeoxu3mn7pm" path="res://Assets/Health Bar Asset Pack 2 by Adwit Rahman/redblue (2).png" id="3_mfw7x"]
+
+[sub_resource type="GDScript" id="GDScript_avra4"]
+script/source = "extends CanvasLayer
+class_name PlayerUI
+
+#緩衝條和血條的變數
+@onready var catchup_bar: TextureProgressBar = $Health/CatchupBar
+@onready var health_bar: TextureProgressBar = $Health/HealthBar
+#透過expect取得HealthComponent
+@export var health_component: HealthComponent
+
+
+func _ready() -> void:
+	# 初始化血條數值
+	health_bar.max_value = 100
+	catchup_bar.max_value = 100
+	# 訂閱血量變化信號(傳入當前血量)
+	health_component.health_bar_changed.connect(_update_bar)
+	pass
+
+#更新血條
+func _update_bar(current_health):
+	#用傳入的當前血量計算當前血條百分比
+	var percentage = (current_health / float(health_component.max_health)) * 100
+	
+	#設置血條到當前百分比
+	health_bar.value = percentage
+	#這個是用於緩衝條的動畫
+	var tween = create_tween()
+	tween.tween_property(catchup_bar, \"value\", percentage, 0.2).set_trans(Tween.TRANS_SINE)
+	pass
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ah7g7"]
+atlas = ExtResource("1_qyqjh")
+region = Rect2(13, 47, 111, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6po05"]
+atlas = ExtResource("2_1s5oa")
+region = Rect2(13, 22, 111, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdhhh"]
+atlas = ExtResource("3_mfw7x")
+region = Rect2(13, 22, 111, 8)
+
+[node name="Player_UI" type="CanvasLayer"]
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+script = SubResource("GDScript_avra4")
+
+[node name="Health" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 5.0
+offset_bottom = 5.0
+
+[node name="CatchupBar" type="TextureProgressBar" parent="Health"]
+layout_mode = 0
+offset_right = 145.0
+offset_bottom = 145.0
+value = 100.0
+texture_under = SubResource("AtlasTexture_ah7g7")
+texture_progress = SubResource("AtlasTexture_6po05")
+
+[node name="HealthBar" type="TextureProgressBar" parent="Health"]
+layout_mode = 0
+offset_right = 145.0
+offset_bottom = 145.0
+value = 100.0
+texture_progress = SubResource("AtlasTexture_hdhhh")

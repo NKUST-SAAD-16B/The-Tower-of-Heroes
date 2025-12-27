@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var WALK_SPEED = 30
-var damage = 20
+var damage = 30
 var direction = 1
 var knockback_resist = 0.9
 var knockback_vector:Vector2

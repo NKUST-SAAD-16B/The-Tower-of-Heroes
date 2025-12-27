@@ -5,6 +5,7 @@ class_name HealthComponent
 signal died
 #受傷時發送的訊號
 signal took_damage(knockback_vector)
+signal health_bar_changed(current_health)
 @export var max_health: int = 100
 var current_health: int
 
@@ -14,15 +15,14 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-		
-	pass
-
-
 #受傷函數，用於血量計算及傳入攻擊者的擊退向量
 func take_damage(damage: int ,knockback_vector: Vector2 = Vector2.ZERO):
 	current_health -= damage
+	
+	#訊號通知血量條有變化
+	health_bar_changed.emit(current_health)
+	
+	#如果血量小於0就發出死亡訊號，沒有就發出受傷訊號並傳遞擊退速度
 	if current_health <= 0 :
 		died.emit()
 	else:
