@@ -2,6 +2,7 @@ extends State
 class_name WalkState
 #進入狀態時執行
 func  Enter():
+	print("玩家狀態：行走")
 	animated_sprite.play("walk")
 	
 	pass

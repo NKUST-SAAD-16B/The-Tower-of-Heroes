@@ -30,7 +30,7 @@ func _physics_process(delta: float) -> void:
 
 #死亡訊號觸發會執行_on_died()
 func _on_died():
-	print("you died")
+	print("玩家狀態：死亡")
 	state_machine.current_state.Transitioned.emit(state_machine.current_state,"died")
 
 #受傷訊號觸發會執行_hurt()

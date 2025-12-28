@@ -17,7 +17,7 @@ func Physics_process(delta: float) -> void :
 		Transitioned.emit(self,"idle")
 	#牆壁和地板偵測
 	if not actor.floor_check.is_colliding() or  actor.wall_check.is_colliding():
-		print("turn")
+		#print("turn")
 		
 		_turn_around()
 	

@@ -6,7 +6,7 @@ var combo_count = 1
 
 
 func  Enter():
-	
+	print("玩家狀態：攻擊")
 	animated_sprite.play("attack_1")
 	actor.hitbox_1.disabled = false
 	#當attack動畫播放完成會呼叫_on_animation_finished這個function

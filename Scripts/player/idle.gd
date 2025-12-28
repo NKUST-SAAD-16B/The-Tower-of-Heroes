@@ -2,6 +2,7 @@ extends State
 class_name IdleState
 #進入狀態時執行
 func  Enter():
+	print("玩家狀態：閒置")
 	animated_sprite.play("idle")
 	pass
 

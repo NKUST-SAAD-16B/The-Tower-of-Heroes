@@ -2,6 +2,7 @@ extends State
 class_name RunState
 #進入狀態時執行
 func  Enter():
+	print("玩家狀態：奔跑")
 	animated_sprite.play("run")
 	pass
 

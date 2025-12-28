@@ -1,4 +1,5 @@
 extends Node
+class_name StateMachine
 #初始狀態
 @export var inital_state : State
 #當前狀態

@@ -2,6 +2,7 @@ extends State
 class_name JumpState
 #進入狀態時執行
 func  Enter():
+	print("玩家狀態：跳躍")
 	animated_sprite.play("jump")
 	actor.velocity.y = -300
 	pass
@@ -31,10 +32,10 @@ func Physics_process(delta: float) -> void :
 			actor.rotation = PI
 			actor.velocity.x = actor.RUN_SPEED * direction
 	else:
-		
-		if direction != 0:
-			Transitioned.emit(self,"walk")
-		else:
-			Transitioned.emit(self,"idle")
+		Transitioned.emit(self,"idle")
+		#if direction != 0:
+			#Transitioned.emit(self,"walk")
+		#else:
+			#Transitioned.emit(self,"idle")
 	
 	pass

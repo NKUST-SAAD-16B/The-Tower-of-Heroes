@@ -14,7 +14,6 @@ func Exit():
 	pass
 
 func Physics_process(delta: float) -> void :
-	print(actor.target)
 	#目標存在就根據目標的X軸設定direction
 	if actor.target != null:
 		actor.direction = 1 if actor.target.global_position.x > actor.global_position.x else -1
@@ -37,7 +36,7 @@ func Physics_process(delta: float) -> void :
 	#如果目標離開偵測區域，開始計時
 	if actor.target == null:
 		timer += delta
-		print(timer)
+		#ㄊprint(timer)
 	
 	#時間到就會回到idle狀態
 	if timer >= chase_time:

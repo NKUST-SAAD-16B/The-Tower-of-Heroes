@@ -20,7 +20,6 @@ func Exit():
 	pass
 
 func Physics_process(delta: float) -> void :
-	print("att")
 	actor.velocity.x = 0
 	#在攻擊狀態不斷偵測玩家方向，以便攻擊動畫完成後知道玩家的方向決定該往哪轉
 	if actor.target is Player:
