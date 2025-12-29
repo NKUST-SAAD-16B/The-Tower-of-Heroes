@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	move_and_slide()
-	if  state_machine.current_state.name != "attack":
+	if  state_machine.current_state.name not in ["attack" ,"hurt" ,"died"] :
 		#切換攻擊狀態
 		if Input.is_action_just_pressed("attack"):
 			state_machine.current_state.Transitioned.emit(state_machine.current_state,"attack")

@@ -2,7 +2,7 @@ extends State
 class_name AttackState
 var is_combo = false
 var combo_count = 1
-
+var first_frame_passed = false
 func  Enter():
 	print("玩家狀態：攻擊")
 	animated_sprite.play("attack_1")
@@ -13,7 +13,8 @@ func  Enter():
 		animated_sprite.animation_finished.connect(_on_animation_finished)
 	combo_count = 1      # 重置計數
 	is_combo = false  # 重置預約
-
+	#避免吃到同一桢的滑鼠點擊導致combo
+	first_frame_passed = false
 	pass
 
 
@@ -26,14 +27,13 @@ func Exit():
 	pass
 
 func Physics_process(delta: float) -> void :
-	# 取得當前動畫播放進度 (0.0 到 1.0)
-	var progress = animated_sprite.frame / float(animated_sprite.sprite_frames.get_frame_count(animated_sprite.animation))
-	# 只有當動畫播放超過 60% 時，才開始偵測連擊輸入
-	if progress > 0.6:
-		#攻擊時按下左鍵會計入連擊
-		if Input.is_action_just_pressed("attack"):
-			#print("test")
-			is_combo = true
+	if !first_frame_passed:
+		first_frame_passed = true
+		return
+	#攻擊時按下左鍵會計入連擊
+	if Input.is_action_just_pressed("attack"):
+		#print("test")
+		is_combo = true
 	pass
 
 
