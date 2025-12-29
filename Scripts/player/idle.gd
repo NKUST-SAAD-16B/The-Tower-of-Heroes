@@ -29,7 +29,7 @@ func Physics_process(delta: float) -> void :
 			Transitioned.emit(self,"walk")
 	
 	#切換攻擊狀態
-	if Input.is_action_just_pressed("attack"):
-		Transitioned.emit(self,"attack")
+	#if Input.is_action_just_pressed("attack"):
+		#Transitioned.emit(self,"attack")
 	
 	pass

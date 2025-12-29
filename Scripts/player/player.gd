@@ -27,6 +27,10 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	move_and_slide()
+	if  state_machine.current_state.name != "attack":
+		#切換攻擊狀態
+		if Input.is_action_just_pressed("attack"):
+			state_machine.current_state.Transitioned.emit(state_machine.current_state,"attack")
 
 #死亡訊號觸發會執行_on_died()
 func _on_died():
@@ -38,3 +42,5 @@ func _hurt(knockback):
 	self.knockback_vector = knockback
 	state_machine.current_state.Transitioned.emit(state_machine.current_state,"hurt")
 	pass
+
+	
