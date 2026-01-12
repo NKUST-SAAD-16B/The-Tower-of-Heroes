@@ -8,14 +8,12 @@ func Enter():
 	#當hurt動畫播放完成會呼叫_on_animation_finished這個function
 	if not animated_sprite.animation_finished.is_connected(_on_animation_finished):
 		animated_sprite.animation_finished.connect(_on_animation_finished)
-	pass
 
 func Exit():
 	# 離開狀態時，斷開訊號，以免干擾其他狀態
 	if animated_sprite.animation_finished.is_connected(_on_animation_finished):
 		animated_sprite.animation_finished.disconnect(_on_animation_finished)
 	animated_sprite.stop()
-	pass
 
 func Physics_process(delta: float) -> void :
 	if actor.velocity != Vector2.ZERO:
@@ -26,4 +24,3 @@ func Physics_process(delta: float) -> void :
 
 func _on_animation_finished():
 	Transitioned.emit(self,"idle")
-	pass

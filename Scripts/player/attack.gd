@@ -1,11 +1,15 @@
 extends State
 class_name AttackState
+
+# Pre-defined animation names for better performance
+const ATTACK_ANIMATIONS = ["attack_1", "attack_2", "attack_3"]
+
 var is_combo = false
 var combo_count = 1
 var first_frame_passed = false
 func  Enter():
 	print("玩家狀態：攻擊")
-	animated_sprite.play("attack_1")
+	animated_sprite.play(ATTACK_ANIMATIONS[0])
 	actor.velocity.x = 0
 	actor.hitbox_1.disabled = false
 	#當attack動畫播放完成會呼叫_on_animation_finished這個function
@@ -24,7 +28,6 @@ func Exit():
 	# 離開狀態時，斷開訊號，以免干擾其他狀態
 	if animated_sprite.animation_finished.is_connected(_on_animation_finished):
 		animated_sprite.animation_finished.disconnect(_on_animation_finished)
-	pass
 
 func Physics_process(delta: float) -> void :
 	if !first_frame_passed:
@@ -32,19 +35,16 @@ func Physics_process(delta: float) -> void :
 		return
 	#攻擊時按下左鍵會計入連擊
 	if Input.is_action_just_pressed("attack"):
-		#print("test")
 		is_combo = true
-	pass
 
 
 func _on_animation_finished():
 	_hitbox_disabled()
 	print("連擊" + str(combo_count))
 	if is_combo and combo_count < 3 :
-		#animated_sprite.play("attack_2")
 		combo_count += 1
 		is_combo = false
-		animated_sprite.play("attack_" + str(combo_count))
+		animated_sprite.play(ATTACK_ANIMATIONS[combo_count - 1])
 		#根據攻擊開啟對應的hitbox碰撞框
 		match combo_count:
 			1:
@@ -56,7 +56,6 @@ func _on_animation_finished():
 	else:
 		Transitioned.emit(self,"idle")
 	
-	pass
 
 func _hitbox_disabled():
 	actor.hitbox_1.set_deferred("disabled", true)

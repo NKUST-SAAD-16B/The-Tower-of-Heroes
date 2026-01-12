@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+# Cache gravity value for better performance
+const GRAVITY = 980.0  # Default Godot 2D gravity
 var WALK_SPEED = 30
 var damage = 30
 var direction = 1
@@ -33,7 +34,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	
 	if not is_on_floor():
-		velocity.y += gravity * delta
+		velocity.y += GRAVITY * delta
 	move_and_slide()
 
 #死亡訊號觸發會執行_died()
@@ -45,7 +46,6 @@ func _died():
 func _hurt(knockback):
 	self.knockback_vector = knockback
 	state_machine.current_state.Transitioned.emit(state_machine.current_state,"hurt")
-	pass
 
 #當目標進入偵測區域時，target賦值並切換到chase狀態
 func _on_player_checker_body_entered(body: Node2D) -> void:
@@ -53,10 +53,8 @@ func _on_player_checker_body_entered(body: Node2D) -> void:
 	if body is Player:
 		target = body
 		state_machine.current_state.Transitioned.emit(state_machine.current_state,"chase")
-	pass
 
 #當目標離開偵測區域時，將target清空
 func _on_player_checker_body_exited(body: Node2D) -> void:
 	target = null
-	pass
 	

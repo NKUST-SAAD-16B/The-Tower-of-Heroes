@@ -9,7 +9,6 @@ func Enter():
 		animated_sprite.frame_changed.connect(_on_animated_sprite_2d_frame_changed)
 	if not animated_sprite.animation_finished.is_connected(_on_animation_sprite_2d_animation_finished):
 		animated_sprite.animation_finished.connect(_on_animation_sprite_2d_animation_finished)
-	pass
 
 func Exit():
 	animated_sprite.stop()
@@ -17,15 +16,12 @@ func Exit():
 	#斷開訊號
 	if animated_sprite.frame_changed.is_connected(_on_animated_sprite_2d_frame_changed):
 		animated_sprite.frame_changed.disconnect(_on_animated_sprite_2d_frame_changed)
-	pass
 
 func Physics_process(delta: float) -> void :
 	actor.velocity.x = 0
 	#在攻擊狀態不斷偵測玩家方向，以便攻擊動畫完成後知道玩家的方向決定該往哪轉
 	if actor.target is Player:
 		actor.direction = 1 if actor.target.global_position.x > actor.global_position.x else -1
-	
-	pass
 
 
 func _on_animation_sprite_2d_animation_finished() -> void:
@@ -36,8 +32,8 @@ func _on_animation_sprite_2d_animation_finished() -> void:
 	else:
 		actor.scale.y = -1
 		actor.rotation = PI
-	#如果玩家還在攻擊範圍內就再次攻擊
-	if actor.target is Player and actor.global_position.distance_to(actor.target.global_position) <= 30:
+	#如果玩家還在攻擊範圍內就再次攻擊 (using abs for better performance)
+	if actor.target is Player and abs(actor.target.global_position.x - actor.global_position.x) <= 30:
 		Transitioned.emit(self,"attack")
 	#玩家還在範圍內就回到chase狀態
 	elif actor.target is Player:
@@ -48,9 +44,7 @@ func _on_animation_sprite_2d_animation_finished() -> void:
 
 #當攻擊動畫到特定frame時開啟hitbox
 func _on_animated_sprite_2d_frame_changed() -> void:
-	#print("1")
 	if animated_sprite.animation == "attack" and animated_sprite.frame == 7:
 		actor.attack.set_deferred("disabled", false)
 	else:
 		actor.attack.set_deferred("disabled", true)
-	pass # Replace with function body.

@@ -5,16 +5,13 @@ func  Enter():
 	print("玩家狀態：跳躍")
 	animated_sprite.play("jump")
 	actor.velocity.y = -300
-	pass
 
 #離開狀態時執行
 func Exit():
 	animated_sprite.stop()
-	pass
 
 
 func Update(delta: float) -> void :
-	
 	pass
 
 func Physics_process(delta: float) -> void :
@@ -37,5 +34,3 @@ func Physics_process(delta: float) -> void :
 			#Transitioned.emit(self,"walk")
 		#else:
 			#Transitioned.emit(self,"idle")
-	
-	pass

@@ -12,17 +12,14 @@ signal Transitioned
 
 #進入狀態時執行
 func  Enter():
-	
 	pass
 
 #離開狀態時執行
 func Exit():
-	
 	pass
 
 
 func Update(delta: float) -> void :
-	
 	pass
 
 func Physics_process(delta: float) -> void :

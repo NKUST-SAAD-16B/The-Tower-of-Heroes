@@ -8,13 +8,11 @@ func  Enter():
 	print("idle")
 	animated_sprite.play("idle")
 	timer = 0.0
-	pass
 
 #離開狀態時執行
 func Exit():
 	animated_sprite.stop()
 	timer = 0.0
-	pass
 
 
 func Update(delta: float) -> void :
@@ -34,5 +32,4 @@ func Physics_process(delta: float) -> void :
 			actor.scale.y = -1
 			actor.rotation = PI
 		Transitioned.emit(self,"walk")
-	pass
 	

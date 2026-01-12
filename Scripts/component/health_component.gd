@@ -12,7 +12,6 @@ var current_health: int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	current_health = max_health
-	pass # Replace with function body.
 
 
 #受傷函數，用於血量計算及傳入攻擊者的擊退向量

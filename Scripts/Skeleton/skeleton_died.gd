@@ -9,15 +9,11 @@ func Enter():
 	actor.hurtbox_component.set_deferred("monitoring", false)
 	actor.hurtbox_component.set_deferred("monitorable", false)
 	animated_sprite.play("died")
-	
-	pass
 
 func Exit():
 	actor.queue_free()
-	pass
 
 func Update(delta: float) -> void :
-	
 	pass
 
 func Physics_process(delta: float) -> void :

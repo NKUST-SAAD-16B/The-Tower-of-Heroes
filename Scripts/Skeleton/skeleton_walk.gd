@@ -9,7 +9,6 @@ func Enter():
 func Exit():
 	animated_sprite.stop()
 	timer = 0.0
-	pass
 
 func Physics_process(delta: float) -> void :
 	timer += delta
@@ -17,13 +16,9 @@ func Physics_process(delta: float) -> void :
 		Transitioned.emit(self,"idle")
 	#牆壁和地板偵測
 	if not actor.floor_check.is_colliding() or  actor.wall_check.is_colliding():
-		#print("turn")
-		
 		_turn_around()
 	
-	
 	actor.velocity.x = actor.WALK_SPEED * actor.direction
-	pass
 	
 func _turn_around():
 	actor.direction *= -1

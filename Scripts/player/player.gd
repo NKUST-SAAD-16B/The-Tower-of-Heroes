@@ -1,7 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+# Cache gravity value for better performance
+const GRAVITY = 980.0  # Default Godot 2D gravity
 var WALK_SPEED = 50
 var RUN_SPEED = 100
 var damage = 10
@@ -25,7 +26,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	
 	if not is_on_floor():
-		velocity.y += gravity * delta
+		velocity.y += GRAVITY * delta
 	move_and_slide()
 	if  state_machine.current_state.name not in ["attack" ,"hurt" ,"died"] :
 		#切換攻擊狀態
@@ -41,6 +42,5 @@ func _on_died():
 func _hurt(knockback):
 	self.knockback_vector = knockback
 	state_machine.current_state.Transitioned.emit(state_machine.current_state,"hurt")
-	pass
 
 	

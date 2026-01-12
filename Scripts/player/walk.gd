@@ -4,17 +4,13 @@ class_name WalkState
 func  Enter():
 	print("玩家狀態：行走")
 	animated_sprite.play("walk")
-	
-	pass
 
 #離開狀態時執行
 func Exit():
 	animated_sprite.stop()
-	pass
 
 
 func Update(delta: float) -> void :
-	
 	pass
 
 func Physics_process(delta: float) -> void :
@@ -43,6 +39,3 @@ func Physics_process(delta: float) -> void :
 		actor.scale.y = -1
 		actor.rotation = PI
 		actor.velocity.x = actor.WALK_SPEED * direction
-	
-
-	pass

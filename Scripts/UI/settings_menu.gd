@@ -50,7 +50,6 @@ func _on_back_pressed() -> void:
 	self.hide()
 	#發出訊號，告知監聽中的節點
 	finished_settings.emit()
-	pass
 
 #Vsync按鈕
 func _on_vsync_check_box_toggled(toggled_on: bool) -> void:
@@ -60,7 +59,6 @@ func _on_vsync_check_box_toggled(toggled_on: bool) -> void:
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 		print("垂直同步關閉")
-	pass
 
 # 處理視窗模式切換
 func _on_window_mode_item_pressed(id: int):
@@ -72,7 +70,6 @@ func _on_window_mode_item_pressed(id: int):
 		1: # Full Screen
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			window_mode_button.text = "Full Screen" # 更新按鈕文字
-	pass
 
 #處理fps切換
 func _on_fps_item_pressed(id: int):
@@ -89,4 +86,3 @@ func _on_fps_item_pressed(id: int):
 		3:
 			Engine.max_fps = 240
 			fps_button.text = "240"
-	pass

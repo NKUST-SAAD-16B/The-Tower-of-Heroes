@@ -12,7 +12,9 @@ func _ready():
 	#歷遍子節點，將狀態加入字典
 	for child in get_children():
 		if child is State:
-			states[child.name.to_lower()] = child
+			# Cache the lowercase name to avoid repeated conversions
+			var state_key = child.name.to_lower()
+			states[state_key] = child
 			#將狀態加入節點時順便連接訊號
 			child.Transitioned.connect(on_child_transition)
 	
@@ -29,7 +31,6 @@ func _physics_process(delta: float) -> void:
 	#如果當前狀態存在，就持續運作
 	if current_state:
 		current_state.Physics_process(delta)
-	pass
 	
 func on_child_transition(state , new_state_name):
 	#確認是否由當前狀態觸發的

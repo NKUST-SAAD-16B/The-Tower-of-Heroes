@@ -4,16 +4,13 @@ class_name IdleState
 func  Enter():
 	print("玩家狀態：閒置")
 	animated_sprite.play("idle")
-	pass
 
 #離開狀態時執行
 func Exit():
 	animated_sprite.stop()
-	pass
 
 
 func Update(delta: float) -> void :
-
 	pass
 
 func Physics_process(delta: float) -> void :
@@ -31,5 +28,3 @@ func Physics_process(delta: float) -> void :
 	#切換攻擊狀態
 	#if Input.is_action_just_pressed("attack"):
 		#Transitioned.emit(self,"attack")
-	
-	pass

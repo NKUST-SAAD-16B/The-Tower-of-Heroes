@@ -6,12 +6,10 @@ func Enter():
 	print("chase")
 	animated_sprite.play("walk")
 	timer = 0.0
-	pass
 
 func Exit():
 	animated_sprite.stop()
 	timer = 0.0
-	pass
 
 func Physics_process(delta: float) -> void :
 	#目標存在就根據目標的X軸設定direction
@@ -45,16 +43,11 @@ func Physics_process(delta: float) -> void :
 	
 	#如果偵測到懸空或牆壁就切換閒置動畫
 	if not actor.floor_check.is_colliding() or actor.wall_check.is_colliding():
-		if animated_sprite.animation != "idle":
-			animated_sprite.play("idle")
+		animated_sprite.play("idle")
 		actor.velocity.x = 0
 	else:
-		if animated_sprite.animation == "idle":
-			animated_sprite.stop()
-			animated_sprite.play("walk")
+		animated_sprite.play("walk")
 		#追擊狀態速度
 		actor.velocity.x = actor.WALK_SPEED * actor.direction
-	
-	pass
 
 		
