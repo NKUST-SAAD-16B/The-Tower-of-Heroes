@@ -2,10 +2,13 @@ extends State
 class_name SkeletonChase
 var chase_time = 3.0
 var timer = 0.0
+var is_walking = true  # Track animation state to avoid redundant play() calls
+
 func Enter():
 	print("chase")
 	animated_sprite.play("walk")
 	timer = 0.0
+	is_walking = true
 
 func Exit():
 	animated_sprite.stop()
@@ -43,10 +46,14 @@ func Physics_process(delta: float) -> void :
 	
 	#如果偵測到懸空或牆壁就切換閒置動畫
 	if not actor.floor_check.is_colliding() or actor.wall_check.is_colliding():
-		animated_sprite.play("idle")
+		if is_walking:
+			animated_sprite.play("idle")
+			is_walking = false
 		actor.velocity.x = 0
 	else:
-		animated_sprite.play("walk")
+		if not is_walking:
+			animated_sprite.play("walk")
+			is_walking = true
 		#追擊狀態速度
 		actor.velocity.x = actor.WALK_SPEED * actor.direction
 
