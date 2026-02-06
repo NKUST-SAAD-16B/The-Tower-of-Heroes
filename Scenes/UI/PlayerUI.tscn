@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://bxnoeghiqun20"]
 
-[ext_resource type="Texture2D" uid="uid://botpkvy7nymvy" path="res://Assets/Health Bar Asset Pack 2 by Adwit Rahman/redblue (3).png" id="1_qyqjh"]
-[ext_resource type="Texture2D" uid="uid://dvhlww7d278de" path="res://Assets/Health Bar Asset Pack 2 by Adwit Rahman/redblue (2)-white.png.png" id="2_1s5oa"]
-[ext_resource type="Texture2D" uid="uid://bnfeoxu3mn7pm" path="res://Assets/Health Bar Asset Pack 2 by Adwit Rahman/redblue (2).png" id="3_mfw7x"]
+[ext_resource type="Texture2D" uid="uid://botpkvy7nymvy" path="res://Assets/Health Bar Asset Pack 2 by Adwit Rahman/redblue (3).png" id="1_d3utd"]
+[ext_resource type="Texture2D" uid="uid://dvhlww7d278de" path="res://Assets/Health Bar Asset Pack 2 by Adwit Rahman/redblue (2)-white.png.png" id="2_4ctxi"]
+[ext_resource type="Texture2D" uid="uid://bnfeoxu3mn7pm" path="res://Assets/Health Bar Asset Pack 2 by Adwit Rahman/redblue (2).png" id="3_0ay8j"]
 
 [sub_resource type="GDScript" id="GDScript_avra4"]
 script/source = "extends CanvasLayer
@@ -37,20 +37,20 @@ func _update_bar(current_health):
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ah7g7"]
-atlas = ExtResource("1_qyqjh")
+atlas = ExtResource("1_d3utd")
 region = Rect2(13, 47, 111, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6po05"]
-atlas = ExtResource("2_1s5oa")
+atlas = ExtResource("2_4ctxi")
 region = Rect2(13, 22, 111, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hdhhh"]
-atlas = ExtResource("3_mfw7x")
+atlas = ExtResource("3_0ay8j")
 region = Rect2(13, 22, 111, 8)
 
 [node name="Player_UI" type="CanvasLayer"]
-scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 0, 0)
+scale = Vector2(6, 6)
+transform = Transform2D(6, 0, 0, 6, 0, 0)
 script = SubResource("GDScript_avra4")
 
 [node name="Health" type="Control" parent="."]

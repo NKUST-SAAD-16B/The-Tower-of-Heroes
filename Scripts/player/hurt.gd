@@ -2,6 +2,7 @@ extends State
 class_name HurtState
 
 func Enter():
+	print("玩家狀態：受傷")
 	animated_sprite.play("hurt")
 	#進入受傷狀態時給腳色擊退速度
 	actor.velocity = actor.knockback_vector

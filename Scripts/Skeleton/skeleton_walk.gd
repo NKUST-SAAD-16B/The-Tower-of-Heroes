@@ -4,7 +4,7 @@ var walk_time = 5.0
 
 var timer = 0.0
 func Enter():
-	print("walk")
+	print("骷髏狀態：行走")
 	animated_sprite.play("walk")
 func Exit():
 	animated_sprite.stop()

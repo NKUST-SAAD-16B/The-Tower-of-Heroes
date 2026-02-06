@@ -5,7 +5,7 @@ class_name SkeletonIdle
 var timer : float
 #進入狀態時執行
 func  Enter():
-	print("idle")
+	print("骷髏狀態：閒置")
 	animated_sprite.play("idle")
 	timer = 0.0
 	pass

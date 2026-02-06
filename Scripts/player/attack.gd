@@ -1,8 +1,10 @@
 extends State
 class_name AttackState
+
 var is_combo = false
 var combo_count = 1
 var first_frame_passed = false
+
 func  Enter():
 	print("玩家狀態：攻擊")
 	animated_sprite.play("attack_1")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://qhw1a3h18kka"]
+[gd_scene load_steps=92 format=3 uid="uid://cnn1vuuyv3oki"]
 
 [ext_resource type="Script" uid="uid://cva7l81i87bfy" path="res://Scripts/Skeleton/skeleton.gd" id="1_87cwn"]
 [ext_resource type="Texture2D" uid="uid://dfn8msvbsnxpk" path="res://Assets/Skeleton/Sprite Sheets/Skeleton Attack.png" id="1_yek4v"]
@@ -544,7 +544,7 @@ size = Vector2(16, 28)
 size = Vector2(16.5, 28.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ecs23"]
-size = Vector2(140, 69)
+size = Vector2(140, 42)
 
 [node name="Skeleton" type="CharacterBody2D"]
 z_index = 5
@@ -616,7 +616,7 @@ collision_layer = 0
 collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerChecker"]
-position = Vector2(0, -18.5)
+position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_ecs23")
 debug_color = Color(0.750836, 0.459077, 0, 0.42)
 

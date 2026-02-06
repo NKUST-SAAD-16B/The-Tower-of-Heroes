@@ -2,7 +2,7 @@ extends State
 class_name SkeletonAttack
 
 func Enter():
-	print("attack")
+	print("骷髏：攻擊")
 	animated_sprite.play("attack")
 	#避免重複連接訊號
 	if not animated_sprite.frame_changed.is_connected(_on_animated_sprite_2d_frame_changed):
@@ -37,7 +37,7 @@ func _on_animation_sprite_2d_animation_finished() -> void:
 		actor.scale.y = -1
 		actor.rotation = PI
 	#如果玩家還在攻擊範圍內就再次攻擊
-	if actor.target is Player and actor.global_position.distance_to(actor.target.global_position) <= 30:
+	if actor.target is Player and actor.global_position.distance_to(actor.target.global_position) <= 25:
 		Transitioned.emit(self,"attack")
 	#玩家還在範圍內就回到chase狀態
 	elif actor.target is Player:

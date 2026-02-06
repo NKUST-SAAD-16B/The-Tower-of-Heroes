@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var WALK_SPEED = 30
-var damage = 30
+var damage = 20
 var direction = 1
 var knockback_resist = 0.9
 var knockback_vector:Vector2
@@ -38,18 +38,18 @@ func _physics_process(delta: float) -> void:
 
 #死亡訊號觸發會執行_died()
 func _died():
-	print("you died")
 	state_machine.current_state.Transitioned.emit(state_machine.current_state,"died")
 
 #受傷訊號觸發會執行_hurt()
 func _hurt(knockback):
+	
 	self.knockback_vector = knockback
 	state_machine.current_state.Transitioned.emit(state_machine.current_state,"hurt")
 	pass
 
 #當目標進入偵測區域時，target賦值並切換到chase狀態
 func _on_player_checker_body_entered(body: Node2D) -> void:
-	print("偵測到玩家")
+	print("骷髏：偵測到玩家")
 	if body is Player:
 		target = body
 		state_machine.current_state.Transitioned.emit(state_machine.current_state,"chase")

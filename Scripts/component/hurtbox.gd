@@ -10,7 +10,7 @@ func _ready() -> void:
 	hurt.connect(_on_hurt)
 
 func _on_hurt(hitbox:HitBox):
-	print("痛")
+	
 	
 	var knockback_froce = hitbox.owner.knockback_froce
 	#var knockback_direction = (owner.global_position - hitbox.owner.global_position).normalized() 有bug所以註解換一種方法

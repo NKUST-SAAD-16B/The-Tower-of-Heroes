@@ -563,6 +563,7 @@ height = 37.0
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
+scale = Vector2(0.6, 0.6)
 collision_layer = 64
 script = ExtResource("1_glx4g")
 
@@ -599,23 +600,22 @@ debug_color = Color(9.14484e-07, 0.648665, 0.173094, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -18)
-zoom = Vector2(4, 4)
+zoom = Vector2(10, 10)
 process_callback = 0
 position_smoothing_enabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_rocfp")
-animation = &"attack_1"
+animation = &"idle"
 autoplay = "idle"
-frame = 5
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -18.5)
 shape = SubResource("CapsuleShape2D_o3h8g")
 
 [node name="HealthComponent" parent="." instance=ExtResource("10_lslt6")]
+max_health = 300
 
 [node name="State_Machine" type="Node2D" parent="." node_paths=PackedStringArray("inital_state")]
 script = ExtResource("9_yoq75")

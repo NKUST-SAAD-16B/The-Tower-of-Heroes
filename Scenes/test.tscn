@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=4 uid="uid://cyqjpnvcnhr4w"]
 
 [ext_resource type="TileSet" uid="uid://bq7i4e4n1dl7c" path="res://tileset/map.tres" id="1_8od7v"]
-[ext_resource type="PackedScene" uid="uid://mwaydr1lq63u" path="res://Scenes/Player.tscn" id="2_qc4db"]
-[ext_resource type="PackedScene" uid="uid://qhw1a3h18kka" path="res://Scenes/Skeleton.tscn" id="3_qc4db"]
+[ext_resource type="PackedScene" uid="uid://mwaydr1lq63u" path="res://Scenes/Character/Player.tscn" id="2_qc4db"]
+[ext_resource type="PackedScene" uid="uid://qhw1a3h18kka" path="res://Scenes/Character/Skeleton.tscn" id="3_qc4db"]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(1, 96)
@@ -19,10 +19,4 @@ tile_set = ExtResource("1_8od7v")
 position = Vector2(308, 128)
 
 [node name="Player" parent="." instance=ExtResource("2_qc4db")]
-position = Vector2(339, 145)
-
-[node name="Skeleton2" parent="." instance=ExtResource("3_qc4db")]
-position = Vector2(301, 117)
-
-[node name="Skeleton3" parent="." instance=ExtResource("3_qc4db")]
-position = Vector2(398, 129)
+position = Vector2(450, 131)

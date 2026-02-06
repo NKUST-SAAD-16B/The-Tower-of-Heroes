@@ -22,15 +22,15 @@ func Physics_process(delta: float) -> void :
 	if not actor.is_on_floor():
 		
 		if direction >= 1:
-			actor.scale.y = 1
+			actor.scale.y = actor.player_scale
 			actor.rotation = 0
-			actor.velocity.x = actor.RUN_SPEED * direction
+			actor.velocity.x = actor.run_speed * direction
 		elif direction == 0:
-			actor.velocity.x = move_toward(actor.velocity.x, 0, actor.RUN_SPEED)
+			actor.velocity.x = move_toward(actor.velocity.x, 0, actor.run_speed)
 		else:
-			actor.scale.y = -1
+			actor.scale.y = -1 * actor.player_scale
 			actor.rotation = PI
-			actor.velocity.x = actor.RUN_SPEED * direction
+			actor.velocity.x = actor.run_speed * direction
 	else:
 		Transitioned.emit(self,"idle")
 		#if direction != 0:

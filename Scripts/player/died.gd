@@ -3,6 +3,7 @@ class_name DiedState
 
 #進入狀態時執行
 func  Enter():
+	print("玩家狀態：死亡")
 	actor.velocity.x = 0
 	animated_sprite.play("died")
 	if not animated_sprite.animation_finished.is_connected(_on_lose):

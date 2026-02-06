@@ -3,7 +3,7 @@ class_name SkeletonChase
 var chase_time = 3.0
 var timer = 0.0
 func Enter():
-	print("chase")
+	print("骷髏：追逐玩家")
 	animated_sprite.play("walk")
 	timer = 0.0
 	pass
@@ -19,7 +19,7 @@ func Physics_process(delta: float) -> void :
 		actor.direction = 1 if actor.target.global_position.x > actor.global_position.x else -1
 	
 	#目標存在且在攻擊範圍內就切換到攻擊狀態
-	if actor.target != null and abs(actor.target.global_position.x - actor.global_position.x) <= 25:
+	if actor.target != null and actor.global_position.distance_to(actor.target.global_position) <= 25:
 		Transitioned.emit(self,"Attack")
 		return
 	

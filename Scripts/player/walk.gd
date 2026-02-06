@@ -33,16 +33,16 @@ func Physics_process(delta: float) -> void :
 	var direction = Input.get_axis("left","right")
 	
 	if direction >= 1:
-		actor.scale.y = 1
+		actor.scale.y = actor.player_scale
 		actor.rotation = 0
-		actor.velocity.x = actor.WALK_SPEED * direction
+		actor.velocity.x = actor.walk_speed * direction
 	elif direction == 0:
 		Transitioned.emit(self,"idle")
 	else:
 		#向左走翻轉角色的y軸(顛倒)，並旋轉180度達成翻轉的效果
-		actor.scale.y = -1
+		actor.scale.y = -1 * actor.player_scale
 		actor.rotation = PI
-		actor.velocity.x = actor.WALK_SPEED * direction
+		actor.velocity.x = actor.walk_speed * direction
 	
 
 	pass

@@ -2,7 +2,7 @@ extends State
 class_name SkeletonHurt
 var test = 0
 func Enter():
-	print("玩家狀態：受傷")
+	print("骷髏：受傷")
 	animated_sprite.play("hurt")
 	#進入受傷狀態時給腳色擊退速度
 	actor.velocity = actor.knockback_vector

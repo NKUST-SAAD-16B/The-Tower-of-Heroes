@@ -2,7 +2,7 @@ extends State
 class_name SkeletonDied
 
 func Enter():
-	print("進入死亡狀態")
+	print("骷髏：死亡")
 	actor.velocity.x = 0
 	animated_sprite.animation_finished.connect(Exit)
 	#停止偵測攻擊

@@ -2,13 +2,16 @@ extends CharacterBody2D
 class_name Player
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var WALK_SPEED = 50
-var RUN_SPEED = 100
+var walk_speed = 50
+var run_speed = 100
 var damage = 10
-#擊退力量
+var player_scale = 0.6
+
+#擊退力量相關
 var knockback_froce = 100
 var knockback_resist = 0.9
 var knockback_vector:Vector2
+
 @onready var health_component = $HealthComponent
 @onready var state_machine = $State_Machine
 
@@ -34,7 +37,7 @@ func _physics_process(delta: float) -> void:
 
 #死亡訊號觸發會執行_on_died()
 func _on_died():
-	print("玩家狀態：死亡")
+	
 	state_machine.current_state.Transitioned.emit(state_machine.current_state,"died")
 
 #受傷訊號觸發會執行_hurt()
@@ -42,5 +45,3 @@ func _hurt(knockback):
 	self.knockback_vector = knockback
 	state_machine.current_state.Transitioned.emit(state_machine.current_state,"hurt")
 	pass
-
-	
