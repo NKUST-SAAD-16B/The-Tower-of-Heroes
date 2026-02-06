@@ -29,7 +29,7 @@ func _on_settings_pressed() -> void:
 	setting_background.show()
 	pass
 
-
+#當開始遊戲按鈕被按下時，切換到遊戲場景
 func _on_game_start_pressed() -> void:
 	GameManager.start_new_game()
-	pass # Replace with function body.
+	pass 

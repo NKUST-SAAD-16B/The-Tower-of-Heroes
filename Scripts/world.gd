@@ -17,7 +17,9 @@ func _ready() -> void:
     spawn_player(room_instance.get_node("PlayerSpawn").global_position)
     pass
 
+#生成玩家角色
 func spawn_player(player_position: Vector2) -> void:
+    #實例化玩家角色並添加到當前房間
     var player_instance = GameManager.player_scene.instantiate()
     get_node("CurrentRoom").add_child(player_instance)
     player_instance.position = player_position

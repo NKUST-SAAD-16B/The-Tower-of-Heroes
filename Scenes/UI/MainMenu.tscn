@@ -56,10 +56,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -169.0
-offset_top = -198.0
-offset_right = 169.0
-offset_bottom = 198.0
+offset_left = -185.0
+offset_top = -234.5
+offset_right = 185.0
+offset_bottom = 234.5
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_loo7a")
@@ -75,10 +75,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -535.0
-offset_top = -122.0
-offset_right = 535.0
-offset_bottom = -22.0
+offset_left = -226.5
+offset_top = -146.0
+offset_right = 226.5
+offset_bottom = -28.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.967596, 0.95927, 0.950318, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -86,7 +86,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/shadow_outline_size = 15
 theme_override_font_sizes/font_size = 100
-text = "The Tower of Heroes"
+text = "勇者之塔"
 
 [node name="ColorRect" type="ColorRect" parent="NinePatchRect"]
 layout_mode = 1
@@ -119,19 +119,19 @@ theme_override_constants/separation = 19
 
 [node name="GameStart" type="Button" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
-text = "Game Start"
+text = "開始遊戲"
 
 [node name="Continue" type="Button" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
-text = "Continue"
+text = "繼續遊戲"
 
 [node name="Settings" type="Button" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
-text = "Settings"
+text = "設定"
 
 [node name="Quit" type="Button" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
-text = "Quit"
+text = "離開遊戲"
 
 [node name="SettingsMenu" parent="." instance=ExtResource("6_if7li")]
 visible = false
