@@ -9,6 +9,7 @@ func _ready() -> void:
 	setting_menu.finished_settings.connect(_on_setting_menu_closed)
 	pass
 
+
 #接收到設定關閉時回到Main_Menu
 func _on_setting_menu_closed() -> void :
 	setting_background.hide()
@@ -27,3 +28,8 @@ func _on_settings_pressed() -> void:
 	setting_menu.show()
 	setting_background.show()
 	pass
+
+
+func _on_game_start_pressed() -> void:
+	GameManager.start_new_game()
+	pass # Replace with function body.

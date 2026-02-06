@@ -137,5 +137,6 @@ text = "Quit"
 visible = false
 layout_mode = 1
 
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/GameStart" to="." method="_on_game_start_pressed"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

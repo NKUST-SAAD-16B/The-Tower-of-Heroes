@@ -58,5 +58,6 @@ func _on_player_checker_body_entered(body: Node2D) -> void:
 #當目標離開偵測區域時，將target清空
 func _on_player_checker_body_exited(body: Node2D) -> void:
 	target = null
+	print("骷髏：玩家離開偵測範圍")
 	pass
 	
