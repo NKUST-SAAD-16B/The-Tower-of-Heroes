@@ -17,9 +17,20 @@ func _ready() -> void:
     spawn_player(room_instance.get_node("PlayerSpawn").global_position)
     pass
 
+func _process(delta: float) -> void:
+    if Input.is_action_just_pressed("Pause"):
+        PauseGame()
+    pass
+
 #生成玩家角色
 func spawn_player(player_position: Vector2) -> void:
     #實例化玩家角色並添加到當前房間
     var player_instance = GameManager.player_scene.instantiate()
     get_node("CurrentRoom").add_child(player_instance)
     player_instance.position = player_position
+
+#暫停遊戲
+func PauseGame():
+    print("遊戲暫停")
+    get_tree().paused = true
+    get_node("CanvasLayer/PauseMenu").show()

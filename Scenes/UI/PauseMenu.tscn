@@ -26,6 +26,7 @@ Button/styles/normal = SubResource("StyleBoxTexture_5w4ur")
 Button/styles/pressed = SubResource("StyleBoxTexture_ey1tb")
 
 [node name="PauseMenu" type="Control"]
+process_mode = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -94,5 +95,6 @@ text = "Title
 visible = false
 layout_mode = 1
 
+[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="VBoxContainer/Title" to="." method="_on_title_pressed"]

@@ -11,3 +11,6 @@ var player_scene = preload("res://Scenes/Character/player.tscn")
 func start_new_game():
 	get_tree().change_scene_to_file("res://Scenes/World.tscn")
 
+
+	
+
