@@ -8,10 +8,11 @@ var damage = 10
 var player_scale = 0.6
 
 #擊退力量相關
-var knockback_froce = 100
+var knockback_force = 100
 var knockback_resist = 0.9
 var knockback_vector:Vector2
 
+@onready var hurtbox_component: HurtBox = $HurtboxComponent
 @onready var health_component = $HealthComponent
 @onready var state_machine = $State_Machine
 
@@ -23,7 +24,7 @@ var knockback_vector:Vector2
 func _ready() -> void:
 	#連接死亡訊號
 	health_component.died.connect(_on_died)
-	health_component.took_damage.connect(_hurt)
+	hurtbox_component.took_damage.connect(_hurt)
 
 func _physics_process(delta: float) -> void:
 	

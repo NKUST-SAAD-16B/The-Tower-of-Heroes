@@ -4,7 +4,7 @@ class_name HealthComponent
 #死亡時發送的訊號
 signal died
 #受傷時發送的訊號
-signal took_damage(knockback_vector)
+
 signal health_bar_changed(current_health)
 @export var max_health: int = 100
 var current_health: int
@@ -25,7 +25,5 @@ func take_damage(damage: int ,knockback_vector: Vector2 = Vector2.ZERO):
 	#如果血量小於0就發出死亡訊號，沒有就發出受傷訊號並傳遞擊退速度
 	if current_health <= 0 :
 		died.emit()
-	else:
-		took_damage.emit(knockback_vector)
 		
 	

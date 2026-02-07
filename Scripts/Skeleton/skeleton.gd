@@ -6,7 +6,7 @@ var damage = 20
 var direction = 1
 var knockback_resist = 0.9
 var knockback_vector:Vector2
-var knockback_froce = 50
+var knockback_force = 50
 #偵測對象
 var target:CharacterBody2D = null
 
@@ -28,7 +28,7 @@ func _ready() -> void:
 	#連接死亡訊號
 	health_component.died.connect(_died)
 	#連接受傷訊號
-	health_component.took_damage.connect(_hurt)
+	hurtbox_component.took_damage.connect(_hurt)
 	
 func _physics_process(delta: float) -> void:
 	
@@ -42,7 +42,6 @@ func _died():
 
 #受傷訊號觸發會執行_hurt()
 func _hurt(knockback):
-	
 	self.knockback_vector = knockback
 	state_machine.current_state.Transitioned.emit(state_machine.current_state,"hurt")
 	pass
