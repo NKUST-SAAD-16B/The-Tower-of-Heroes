@@ -27,7 +27,9 @@ func _on_settings_pressed() -> void:
 
 #當Title按鈕被點選時
 func _on_title_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")
+	get_tree().paused = false
+	print("返回主選單")
+	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")
 	pass
 
 
@@ -35,4 +37,4 @@ func _on_resume_pressed() -> void:
 	print("遊戲繼續")
 	get_tree().paused = false
 	self.hide()
-	pass # Replace with function body.
+	pass 
