@@ -8,13 +8,13 @@ class_name PlayerGameUI
 @export var health_component: HealthComponent
 
 
-func _ready() -> void:
-	# 初始化血條數值
-	health_bar.max_value = 100
-	catchup_bar.max_value = 100
-	# 訂閱血量變化信號(傳入當前血量)
+func setup_ui() -> void:
+	#初始化血條數值
+	health_bar.max_value = health_component.max_health
+	catchup_bar.max_value = health_component.max_health
+	#訂閱血量變化信號(傳入當前血量)
 	health_component.health_bar_changed.connect(_update_bar)
-	pass
+
 
 #更新血條
 func _update_bar(current_health):

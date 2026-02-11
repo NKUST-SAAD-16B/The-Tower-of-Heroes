@@ -1,40 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://bxnoeghiqun20"]
 
 [ext_resource type="Texture2D" uid="uid://botpkvy7nymvy" path="res://Assets/Health Bar Asset Pack 2 by Adwit Rahman/redblue (3).png" id="1_d3utd"]
+[ext_resource type="Script" uid="uid://ddeesypx12kxu" path="res://Scripts/UI/player_ui.gd" id="1_gj5qh"]
 [ext_resource type="Texture2D" uid="uid://dvhlww7d278de" path="res://Assets/Health Bar Asset Pack 2 by Adwit Rahman/redblue (2)-white.png.png" id="2_4ctxi"]
 [ext_resource type="Texture2D" uid="uid://bnfeoxu3mn7pm" path="res://Assets/Health Bar Asset Pack 2 by Adwit Rahman/redblue (2).png" id="3_0ay8j"]
-
-[sub_resource type="GDScript" id="GDScript_avra4"]
-script/source = "extends CanvasLayer
-class_name PlayerUI
-
-#緩衝條和血條的變數
-@onready var catchup_bar: TextureProgressBar = $Health/CatchupBar
-@onready var health_bar: TextureProgressBar = $Health/HealthBar
-#透過expect取得HealthComponent
-@export var health_component: HealthComponent
-
-
-func _ready() -> void:
-	# 初始化血條數值
-	health_bar.max_value = 100
-	catchup_bar.max_value = 100
-	# 訂閱血量變化信號(傳入當前血量)
-	health_component.health_bar_changed.connect(_update_bar)
-	pass
-
-#更新血條
-func _update_bar(current_health):
-	#用傳入的當前血量計算當前血條百分比
-	var percentage = (current_health / float(health_component.max_health)) * 100
-	
-	#設置血條到當前百分比
-	health_bar.value = percentage
-	#這個是用於緩衝條的動畫
-	var tween = create_tween()
-	tween.tween_property(catchup_bar, \"value\", percentage, 0.2).set_trans(Tween.TRANS_SINE)
-	pass
-"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ah7g7"]
 atlas = ExtResource("1_d3utd")
@@ -50,7 +19,7 @@ region = Rect2(13, 22, 111, 8)
 
 [node name="Player_UI" type="CanvasLayer"]
 follow_viewport_scale = 0.001
-script = SubResource("GDScript_avra4")
+script = ExtResource("1_gj5qh")
 
 [node name="Health" type="Control" parent="."]
 layout_mode = 3

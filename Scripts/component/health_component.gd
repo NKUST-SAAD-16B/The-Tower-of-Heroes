@@ -9,16 +9,16 @@ signal health_bar_changed(current_health)
 @export var max_health: int = 100
 var current_health: int
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	current_health = max_health
-	pass # Replace with function body.
+	pass
 
 
-#受傷函數，用於血量計算及傳入攻擊者的擊退向量
-func take_damage(damage: int ,knockback_vector: Vector2 = Vector2.ZERO):
+#受傷函數，用於血量計算
+func take_damage(damage: int ) -> void:
 	current_health -= damage
-	
+	print("%s Current Health: %d" % [get_parent().name, current_health])
 	#訊號通知血量條有變化
 	health_bar_changed.emit(current_health)
 	
@@ -26,4 +26,4 @@ func take_damage(damage: int ,knockback_vector: Vector2 = Vector2.ZERO):
 	if current_health <= 0 :
 		died.emit()
 		
-	
+
