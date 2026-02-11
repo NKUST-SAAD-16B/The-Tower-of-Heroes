@@ -25,6 +25,8 @@ func _ready() -> void:
 	#連接死亡訊號
 	health_component.died.connect(_on_died)
 	hurtbox_component.took_damage.connect(_hurt)
+	#初始化玩家數據
+
 
 func _physics_process(delta: float) -> void:
 	
@@ -46,3 +48,10 @@ func _hurt(knockback):
 	self.knockback_vector = knockback
 	state_machine.current_state.Transitioned.emit(state_machine.current_state,"hurt")
 	pass
+
+#同步玩家數據
+func sync_player_data():
+	self.walk_speed = PlayerData.player_walk_speed
+	self.run_speed = PlayerData.player_run_speed
+	self.damage = PlayerData.player_damage
+	self.player_scale = PlayerData.player_scale

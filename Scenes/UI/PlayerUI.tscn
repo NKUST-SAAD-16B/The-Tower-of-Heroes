@@ -49,29 +49,43 @@ atlas = ExtResource("3_0ay8j")
 region = Rect2(13, 22, 111, 8)
 
 [node name="Player_UI" type="CanvasLayer"]
-scale = Vector2(6, 6)
-transform = Transform2D(6, 0, 0, 6, 0, 0)
+follow_viewport_scale = 0.001
 script = SubResource("GDScript_avra4")
 
 [node name="Health" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 5.0
-offset_bottom = 5.0
 
 [node name="CatchupBar" type="TextureProgressBar" parent="Health"]
 layout_mode = 0
-offset_right = 145.0
-offset_bottom = 145.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 131.0
+offset_bottom = 28.0
+scale = Vector2(6, 6)
 value = 100.0
 texture_under = SubResource("AtlasTexture_ah7g7")
 texture_progress = SubResource("AtlasTexture_6po05")
 
 [node name="HealthBar" type="TextureProgressBar" parent="Health"]
 layout_mode = 0
-offset_right = 145.0
-offset_bottom = 145.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 131.0
+offset_bottom = 28.0
+scale = Vector2(6, 6)
 value = 100.0
 texture_progress = SubResource("AtlasTexture_hdhhh")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -220.0
+offset_top = 20.0
+offset_right = -57.0
+offset_bottom = 79.0
+grow_horizontal = 0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 50
+text = "第一層"
