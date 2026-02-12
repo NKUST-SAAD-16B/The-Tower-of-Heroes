@@ -1,0 +1,83 @@
+[gd_scene load_steps=4 format=3 uid="uid://cybr5dmfs82i2"]
+
+[ext_resource type="Texture2D" uid="uid://05884xgxcw6g" path="res://Assets/Icons/icon27.png" id="1_03uqx"]
+[ext_resource type="Script" uid="uid://detu6whxbtv24" path="res://Scripts/UI/card.gd" id="1_5it3s"]
+[ext_resource type="Texture2D" uid="uid://c6jmaqj5acjj8" path="res://Assets/kenney_fantasy-ui-borders/PNG/Double/Border/panel-border-015.png" id="1_jt28g"]
+
+[node name="TextureButton" type="TextureButton"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -500.0
+offset_right = 250.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5it3s")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = -10
+theme_override_constants/margin_right = -10
+
+[node name="Border" type="NinePatchRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("1_jt28g")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -500.0
+offset_right = 250.0
+offset_bottom = 375.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+texture = ExtResource("1_03uqx")
+expand_mode = 3
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "控制桿"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+vertical_scroll_mode = 3
+
+[node name="Description" type="Label" parent="VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 35
+text = "為了讓你的商店能隨機出現不同的道具，你應該採用**「外殼 + 數據」**的分離做法。你可以想像 Card 場景是一個「相框」，而裡面的照片（圖片）和文字（描述）是根據遊戲進度動態抽換的。"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

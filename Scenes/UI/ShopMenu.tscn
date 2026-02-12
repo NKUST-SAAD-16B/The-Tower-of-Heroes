@@ -91,6 +91,7 @@ patch_margin_left = 24
 patch_margin_top = 24
 patch_margin_right = 24
 patch_margin_bottom = 24
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="NinePatchRect"]
 show_behind_parent = true
@@ -124,7 +125,7 @@ grow_horizontal = 2
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_o7hi2")
-text = "Random event"
+text = "隨機事件"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -234,4 +235,5 @@ offset_right = -30.0
 grow_horizontal = 0
 grow_vertical = 0
 theme = SubResource("Theme_q5r2m")
-text = "Next Level"
+theme_override_font_sizes/font_size = 37
+text = "下一層"
