@@ -1,10 +1,11 @@
 extends State
+class_name EnemyWalk
 
-var walk_time = 5.0
+var walk_time = randf_range(2.0, 5.0) #行走時間，隨機行走2到5秒
 
 var timer = 0.0
 func Enter():
-	print("骷髏狀態：行走")
+	print("%s狀態：行走" % [actor.name])
 	animated_sprite.play("walk")
 func Exit():
 	animated_sprite.stop()
@@ -22,7 +23,7 @@ func Physics_process(delta: float) -> void :
 		_turn_around()
 	
 	
-	actor.velocity.x = actor.WALK_SPEED * actor.direction
+	actor.velocity.x = actor.walk_speed * actor.direction
 	pass
 	
 func _turn_around():
@@ -33,5 +34,3 @@ func _turn_around():
 	else:
 		actor.scale.y = -1
 		actor.rotation = PI
-
-		

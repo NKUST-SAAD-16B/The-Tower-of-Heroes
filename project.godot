@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameManager="*res://Scripts/Global/GameManager.gd"
 PlayerData="*res://Scripts/Global/PlayerData.gd"
+DestinyManager="*res://Scripts/Global/DestinyManager.gd"
 
 [display]
 

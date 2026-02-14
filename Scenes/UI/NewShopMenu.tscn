@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxdgjqya1spxk"]
+[gd_scene load_steps=3 format=3 uid="uid://dxdgjqya1spxk"]
 
+[ext_resource type="Script" uid="uid://3fvm5f6fppi1" path="res://Scripts/UI/new_shop_menu.gd" id="1_8t2x0"]
 [ext_resource type="PackedScene" uid="uid://cybr5dmfs82i2" path="res://Scenes/UI/Card.tscn" id="1_85n6e"]
 
 [node name="NewShopMenu" type="Control"]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_8t2x0")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -31,7 +33,7 @@ offset_bottom = 220.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.938757, 0.822484, 0.379395, 1)
 theme_override_font_sizes/font_size = 120
-text = "請選擇奇物"
+text = "請選擇命運"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -44,14 +46,18 @@ grow_vertical = 2
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="TextureButton" parent="HBoxContainer" instance=ExtResource("1_85n6e")]
+[node name="Card1" parent="HBoxContainer" instance=ExtResource("1_85n6e")]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 
-[node name="TextureButton2" parent="HBoxContainer" instance=ExtResource("1_85n6e")]
+[node name="Card2" parent="HBoxContainer" instance=ExtResource("1_85n6e")]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 
-[node name="TextureButton3" parent="HBoxContainer" instance=ExtResource("1_85n6e")]
+[node name="Card3" parent="HBoxContainer" instance=ExtResource("1_85n6e")]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
+
+[connection signal="pressed" from="HBoxContainer/Card1" to="." method="_on_card_1_pressed"]
+[connection signal="pressed" from="HBoxContainer/Card2" to="." method="_on_card_2_pressed"]
+[connection signal="pressed" from="HBoxContainer/Card3" to="." method="_on_card_3_pressed"]

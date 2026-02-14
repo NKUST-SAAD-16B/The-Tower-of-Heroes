@@ -1,12 +1,17 @@
 extends CharacterBody2D
+class_name Enemy
+# 敵人基底類別
 
+# 基本屬性，可在繼承的子類別中覆寫
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var WALK_SPEED = 30
+var walk_speed = 30
 var damage = 10
 var direction = 1
 var knockback_resist = 0.9
 var knockback_vector:Vector2
 var knockback_force = 50
+
+var attack_range = 25
 #偵測對象
 var target:CharacterBody2D = null
 
@@ -22,8 +27,6 @@ var target:CharacterBody2D = null
 
 @onready var player_checker: Area2D = $PlayerChecker
 
-
-
 func _ready() -> void:
 	#連接死亡訊號
 	health_component.died.connect(_died)
@@ -38,6 +41,7 @@ func _physics_process(delta: float) -> void:
 
 #死亡訊號觸發會執行_died()
 func _died():
+	print("%s：死亡" % [name])
 	state_machine.current_state.Transitioned.emit(state_machine.current_state,"died")
 
 #受傷訊號觸發會執行_hurt()
@@ -48,7 +52,7 @@ func _hurt(knockback):
 
 #當目標進入偵測區域時，target賦值並切換到chase狀態
 func _on_player_checker_body_entered(body: Node2D) -> void:
-	print("骷髏：偵測到玩家")
+	print("%s：偵測到玩家" % [name])
 	if body is Player:
 		target = body
 		state_machine.current_state.Transitioned.emit(state_machine.current_state,"chase")
@@ -57,6 +61,6 @@ func _on_player_checker_body_entered(body: Node2D) -> void:
 #當目標離開偵測區域時，將target清空
 func _on_player_checker_body_exited(body: Node2D) -> void:
 	target = null
-	print("骷髏：玩家離開偵測範圍")
+	print("%s：玩家離開偵測範圍" % [name])
 	pass
 	

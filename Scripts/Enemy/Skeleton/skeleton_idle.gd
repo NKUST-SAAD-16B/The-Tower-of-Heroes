@@ -1,0 +1,2 @@
+extends EnemyIdle
+class_name SkeletonIdle

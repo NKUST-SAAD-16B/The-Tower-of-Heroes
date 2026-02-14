@@ -1,8 +1,8 @@
 extends State
-class_name SkeletonDied
+class_name EnemyDied
 
 func Enter():
-	print("骷髏：死亡")
+	print("%s：死亡" % [actor.name])
 	actor.velocity.x = 0
 	animated_sprite.animation_finished.connect(Exit)
 	#停止偵測攻擊

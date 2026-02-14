@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=4 uid="uid://cyqjpnvcnhr4w"]
 
 [ext_resource type="TileSet" uid="uid://bq7i4e4n1dl7c" path="res://tileset/map.tres" id="1_8od7v"]
-[ext_resource type="PackedScene" uid="uid://mwaydr1lq63u" path="res://Scenes/Character/Player.tscn" id="2_qc4db"]
 [ext_resource type="PackedScene" uid="uid://qhw1a3h18kka" path="res://Scenes/Character/Skeleton.tscn" id="3_qc4db"]
+[ext_resource type="PackedScene" uid="uid://cbf2fv7yjx1k5" path="res://Scenes/Character/Golems.tscn" id="3_ys1qc"]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(1, 96)
@@ -16,7 +16,7 @@ tile_map_data = PackedByteArray("AAAAAAkAAAABAAEAAAABAAkAAAABAAEAAAACAAkAAAABAAE
 tile_set = ExtResource("1_8od7v")
 
 [node name="Skeleton" parent="." instance=ExtResource("3_qc4db")]
-position = Vector2(308, 128)
+position = Vector2(196, 80)
 
-[node name="Player" parent="." instance=ExtResource("2_qc4db")]
-position = Vector2(201, 65)
+[node name="Golems" parent="." instance=ExtResource("3_ys1qc")]
+position = Vector2(189, 64)

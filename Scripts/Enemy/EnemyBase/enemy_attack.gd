@@ -1,8 +1,9 @@
 extends State
-class_name SkeletonAttack
+class_name EnemyAttack
 
+@export var attack_frame : int #攻擊動畫中哪一幀開啟攻擊判定，需自行調整以配合動畫
 func Enter():
-	print("骷髏：攻擊")
+	print("%s：攻擊", actor.name)
 	animated_sprite.play("attack")
 	#避免重複連接訊號
 	if not animated_sprite.frame_changed.is_connected(_on_animated_sprite_2d_frame_changed):
@@ -37,7 +38,7 @@ func _on_animation_sprite_2d_animation_finished() -> void:
 		actor.scale.y = -1
 		actor.rotation = PI
 	#如果玩家還在攻擊範圍內就再次攻擊
-	if actor.target is Player and actor.global_position.distance_to(actor.target.global_position) <= 25:
+	if actor.target is Player and actor.global_position.distance_to(actor.target.global_position) <= actor.attack_range:
 		Transitioned.emit(self,"attack")
 	#玩家還在範圍內就回到chase狀態
 	elif actor.target is Player:
@@ -47,9 +48,10 @@ func _on_animation_sprite_2d_animation_finished() -> void:
 		Transitioned.emit(self,"walk")
 
 #當攻擊動畫到特定frame時開啟hitbox
+#大部分敵人攻擊動畫只有一個frame有攻擊判定，但如果有多個frame需要開啟攻擊判定可以Orrveide這個函數並自行調整
 func _on_animated_sprite_2d_frame_changed() -> void:
 	#print("1")
-	if animated_sprite.animation == "attack" and animated_sprite.frame == 7:
+	if animated_sprite.animation == "attack" and animated_sprite.frame == attack_frame:
 		actor.attack.set_deferred("disabled", false)
 	else:
 		actor.attack.set_deferred("disabled", true)

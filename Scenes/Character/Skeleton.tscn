@@ -1,6 +1,6 @@
 [gd_scene load_steps=92 format=3 uid="uid://qhw1a3h18kka"]
 
-[ext_resource type="Script" uid="uid://cva7l81i87bfy" path="res://Scripts/Skeleton/skeleton.gd" id="1_87cwn"]
+[ext_resource type="Script" uid="uid://cva7l81i87bfy" path="res://Scripts/Enemy/Skeleton/skeleton.gd" id="1_87cwn"]
 [ext_resource type="Texture2D" uid="uid://dfn8msvbsnxpk" path="res://Assets/Skeleton/Sprite Sheets/Skeleton Attack.png" id="1_yek4v"]
 [ext_resource type="Texture2D" uid="uid://caaq50ukolot4" path="res://Assets/Skeleton/Sprite Sheets/Skeleton Dead.png" id="2_2bjux"]
 [ext_resource type="Texture2D" uid="uid://b15ckvnky0vmv" path="res://Assets/Skeleton/Sprite Sheets/Skeleton Hit.png" id="3_rtppx"]
@@ -11,12 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://du865cdf310h1" path="res://Scenes/Component/health_component.tscn" id="8_lxoki"]
 [ext_resource type="PackedScene" uid="uid://d1uw4ehlyvxac" path="res://Scenes/Component/hitbox_component.tscn" id="9_lii7c"]
 [ext_resource type="Script" uid="uid://qjpuf4at0vpg" path="res://Scripts/state_machine.gd" id="9_lxoki"]
-[ext_resource type="Script" uid="uid://cye574t655ptj" path="res://Scripts/Skeleton/skeleton_idle.gd" id="10_xneb1"]
-[ext_resource type="Script" uid="uid://ck38oc1dia1ot" path="res://Scripts/Skeleton/skeleton_walk.gd" id="12_xneb1"]
-[ext_resource type="Script" uid="uid://dkcmn3up5nwg7" path="res://Scripts/Skeleton/skeleton_died.gd" id="13_ci2ge"]
-[ext_resource type="Script" uid="uid://dujivm15oax81" path="res://Scripts/Skeleton/skeleton_hurt.gd" id="14_ma653"]
-[ext_resource type="Script" uid="uid://b0vvuyywsq5d2" path="res://Scripts/Skeleton/skeleton_chase.gd" id="15_ecs23"]
-[ext_resource type="Script" uid="uid://b2jj7n33x83a1" path="res://Scripts/Skeleton/skeleton_attack.gd" id="17_10q1y"]
+[ext_resource type="Script" uid="uid://cye574t655ptj" path="res://Scripts/Enemy/Skeleton/skeleton_idle.gd" id="10_xneb1"]
+[ext_resource type="Script" uid="uid://ck38oc1dia1ot" path="res://Scripts/Enemy/Skeleton/skeleton_walk.gd" id="12_xneb1"]
+[ext_resource type="Script" uid="uid://dkcmn3up5nwg7" path="res://Scripts/Enemy/Skeleton/skeleton_died.gd" id="13_ci2ge"]
+[ext_resource type="Script" uid="uid://dujivm15oax81" path="res://Scripts/Enemy/Skeleton/skeleton_hurt.gd" id="14_ma653"]
+[ext_resource type="Script" uid="uid://b0vvuyywsq5d2" path="res://Scripts/Enemy/Skeleton/skeleton_chase.gd" id="15_ecs23"]
+[ext_resource type="Script" uid="uid://b2jj7n33x83a1" path="res://Scripts/Enemy/Skeleton/skeleton_attack.gd" id="17_10q1y"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lii7c"]
 height = 26.0
@@ -558,7 +558,7 @@ shape = SubResource("CapsuleShape2D_lii7c")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ci2ge")
-animation = &"died"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_lxoki")]
@@ -602,6 +602,7 @@ script = ExtResource("15_ecs23")
 
 [node name="attack" type="Node2D" parent="State_Machine"]
 script = ExtResource("17_10q1y")
+attack_frame = 7
 
 [node name="WallCheck" type="RayCast2D" parent="."]
 position = Vector2(9, 1)

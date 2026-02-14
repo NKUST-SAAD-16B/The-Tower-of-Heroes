@@ -4,11 +4,11 @@ class_name Player
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var walk_speed = 50
 var run_speed = 100
-var damage = 10
+var damage = 50
 var player_scale = 0.6
 
 #擊退力量相關
-var knockback_force = 100
+var knockback_force = 50
 var knockback_resist = 0.9
 var knockback_vector:Vector2
 

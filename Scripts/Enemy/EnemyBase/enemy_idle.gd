@@ -1,11 +1,12 @@
 extends State
-class_name SkeletonIdle
+class_name EnemyIdle
 
-@onready var idle_time = 3.0
+
+@onready var idle_time = randf_range(2.0, 4.0) #閒置時間，隨機閒置2到4秒
 var timer : float
 #進入狀態時執行
 func  Enter():
-	print("骷髏狀態：閒置")
+	print("%s狀態：閒置" % [actor.name])
 	animated_sprite.play("idle")
 	timer = 0.0
 	pass
@@ -21,7 +22,7 @@ func Update(delta: float) -> void :
 	pass
 	
 func Physics_process(delta: float) -> void :
-	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.WALK_SPEED)
+	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.walk_speed)
 	timer += delta
 	
 	
