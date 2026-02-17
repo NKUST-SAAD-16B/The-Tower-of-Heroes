@@ -1,25 +1,40 @@
-[gd_scene load_steps=6 format=3 uid="uid://buf32u47v3orp"]
+[gd_scene load_steps=8 format=3 uid="uid://buf32u47v3orp"]
 
 [ext_resource type="Script" uid="uid://buihj4040lpuu" path="res://Scripts/world.gd" id="1_j0p05"]
+[ext_resource type="PackedScene" uid="uid://gckqsbuxhbkw" path="res://Scenes/Map/room_4.tscn" id="2_45d1s"]
 [ext_resource type="PackedScene" uid="uid://bqrble3t3qhvh" path="res://Scenes/UI/PauseMenu.tscn" id="2_j0p05"]
 [ext_resource type="PackedScene" uid="uid://cbf2fv7yjx1k5" path="res://Scenes/Character/Golems.tscn" id="2_p70al"]
 [ext_resource type="PackedScene" uid="uid://bxnoeghiqun20" path="res://Scenes/UI/PlayerUI.tscn" id="3_5nsto"]
 [ext_resource type="PackedScene" uid="uid://qhw1a3h18kka" path="res://Scenes/Character/Skeleton.tscn" id="3_45d1s"]
+[ext_resource type="PackedScene" uid="uid://dxdgjqya1spxk" path="res://Scenes/UI/NewShopMenu.tscn" id="6_y7y61"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_j0p05")
+room_paths = Array[PackedScene]([ExtResource("2_45d1s")])
 enemy_scene = Array[PackedScene]([ExtResource("2_p70al"), ExtResource("3_45d1s")])
 
-[node name="CurrentRoom" type="Node2D" parent="."]
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Player_UI" parent="CanvasLayer" instance=ExtResource("3_5nsto")]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("2_j0p05")]
 visible = false
 
-[node name="Player_UI" parent="." instance=ExtResource("3_5nsto")]
+[node name="NewShopMenu" parent="CanvasLayer" instance=ExtResource("6_y7y61")]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CurrentRoom" type="Node2D" parent="."]
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
-autostart = true
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]

@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 class_name PlayerGameUI
 
 #緩衝條和血條的變數
@@ -7,6 +7,10 @@ class_name PlayerGameUI
 #透過expect取得HealthComponent
 @export var health_component: HealthComponent
 
+@onready var current_floor : Label = $CurrentFloor
+
+
+
 
 func setup_ui() -> void:
 	#初始化血條數值
@@ -14,7 +18,7 @@ func setup_ui() -> void:
 	catchup_bar.max_value = health_component.max_health
 	#訂閱血量變化信號(傳入當前血量)
 	health_component.health_bar_changed.connect(_update_bar)
-
+	current_floor.text = "第 " + str(GameManager.current_floor) + " 層"
 
 #更新血條
 func _update_bar(current_health):

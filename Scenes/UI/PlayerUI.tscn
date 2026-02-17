@@ -17,8 +17,13 @@ region = Rect2(13, 22, 111, 8)
 atlas = ExtResource("3_0ay8j")
 region = Rect2(13, 22, 111, 8)
 
-[node name="Player_UI" type="CanvasLayer"]
-follow_viewport_scale = 0.001
+[node name="Player_UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_gj5qh")
 
 [node name="Health" type="Control" parent="."]
@@ -46,7 +51,8 @@ scale = Vector2(6, 6)
 value = 100.0
 texture_progress = SubResource("AtlasTexture_hdhhh")
 
-[node name="Label" type="Label" parent="."]
+[node name="CurrentFloor" type="Label" parent="."]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0

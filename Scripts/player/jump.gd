@@ -4,7 +4,7 @@ class_name JumpState
 func  Enter():
 	print("玩家狀態：跳躍")
 	animated_sprite.play("jump")
-	actor.velocity.y = -300
+	actor.velocity.y = -500
 	pass
 
 #離開狀態時執行

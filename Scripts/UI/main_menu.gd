@@ -31,5 +31,6 @@ func _on_settings_pressed() -> void:
 
 #當開始遊戲按鈕被按下時，切換到遊戲場景
 func _on_game_start_pressed() -> void:
-	GameManager.start_new_game()
+	SceneChanger.change_scene("res://Scenes/World.tscn")
+	PlayerData.player_data_init()
 	pass 

@@ -14,6 +14,7 @@ func Enter():
 
 func Exit():
 	actor.queue_free()
+	GameManager.current_enemy_quantity -= 1
 	pass
 
 func Update(delta: float) -> void :
