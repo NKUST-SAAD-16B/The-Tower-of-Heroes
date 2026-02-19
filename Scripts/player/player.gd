@@ -4,7 +4,12 @@ class_name Player
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var walk_speed = 50
 var run_speed = 100
-var damage = 50
+#攻擊相關數據
+var base_damage = 50 #基礎傷害
+var bonus_damage = 0 #加成傷害
+var critical_chance = 0.1 #暴擊機率
+var critical_multiplier = 1.5 #暴擊倍率
+var spread_damage = randi_range(-5,5) #傷害波動範圍
 var player_scale = 0.6
 
 #擊退力量相關
@@ -60,7 +65,15 @@ func _hurt(knockback):
 func sync_player_data():
 	self.walk_speed = PlayerData.player_walk_speed
 	self.run_speed = PlayerData.player_run_speed
-	self.damage = PlayerData.player_damage
+	self.base_damage = PlayerData.player_base_damage
+	self.bonus_damage = PlayerData.player_bonus_damage
+	self.critical_chance = PlayerData.player_critical_chance
+	self.critical_multiplier = PlayerData.player_critical_multiplier
 	self.player_scale = PlayerData.player_scale
 	health_component.max_health = PlayerData.player_max_health
 	health_component.current_health = PlayerData.player_current_health
+
+func damage_calculation():
+	#計算傷害值，根據暴擊機率決定是否暴擊
+	var damage = (base_damage + bonus_damage + randi_range(-5,5)) * critical_multiplier if randf() < critical_chance else (base_damage + bonus_damage + randi_range(-5,5))
+	return damage

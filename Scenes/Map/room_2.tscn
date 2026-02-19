@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://cbchqdnljx0m4"]
+[gd_scene load_steps=5 format=4 uid="uid://cbchqdnljx0m4"]
 
 [ext_resource type="TileSet" uid="uid://bq7i4e4n1dl7c" path="res://tileset/map.tres" id="1_e1lee"]
 [ext_resource type="PackedScene" uid="uid://cbf2fv7yjx1k5" path="res://Scenes/Character/Golems.tscn" id="3_h84tf"]
 [ext_resource type="PackedScene" uid="uid://qhw1a3h18kka" path="res://Scenes/Character/Skeleton.tscn" id="3_jwrax"]
+[ext_resource type="PackedScene" uid="uid://22jftvllcd10" path="res://Scenes/Component/DamageLable.tscn" id="4_h84tf"]
 
 [node name="room_2" type="Node2D"]
 
@@ -28,3 +29,6 @@ position = Vector2(126, 309)
 
 [node name="Golems" parent="." instance=ExtResource("3_h84tf")]
 position = Vector2(42, 290)
+
+[node name="DamageLable" parent="." instance=ExtResource("4_h84tf")]
+position = Vector2(87, 293)

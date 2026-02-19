@@ -5,7 +5,7 @@ class_name Enemy
 # 基本屬性，可在繼承的子類別中覆寫
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var walk_speed = 30
-var damage = 10
+var base_damage = 10
 var direction = 1
 var knockback_resist = 0.9
 var knockback_vector:Vector2
@@ -63,4 +63,8 @@ func _on_player_checker_body_exited(body: Node2D) -> void:
 	target = null
 	print("%s：玩家離開偵測範圍" % [name])
 	pass
-	
+
+func damage_calculation():
+	#計算傷害值，根據暴擊機率決定是否暴擊
+	var damage = base_damage * (1 + DestinyManager.enemy_damage_modifier) #敵人傷害計算公式待調整，先這樣乘不讓選事件時報錯
+	return damage

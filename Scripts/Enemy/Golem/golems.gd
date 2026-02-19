@@ -4,7 +4,7 @@ class_name Golem
 func _ready():
 	super()
 	# 初始化Golem的特定屬性
-	damage = 50
+	base_damage = 50
 	walk_speed = 15
 	knockback_resist = 1.0  # 完全免疫擊退
 	attack_range = 40

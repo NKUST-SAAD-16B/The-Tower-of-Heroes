@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://ocrkyfhmvdn8"]
+[gd_scene load_steps=3 format=3 uid="uid://ocrkyfhmvdn8"]
 
 [ext_resource type="Script" uid="uid://esfx56ps8xsp" path="res://Scripts/component/hurtbox.gd" id="1_ddxfg"]
+[ext_resource type="PackedScene" uid="uid://22jftvllcd10" path="res://Scenes/Component/DamageLable.tscn" id="2_l822l"]
 
 [node name="HurtboxComponent" type="Area2D"]
 script = ExtResource("1_ddxfg")
+damage_label = ExtResource("2_l822l")
