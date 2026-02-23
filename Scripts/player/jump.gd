@@ -2,7 +2,7 @@ extends State
 class_name JumpState
 #進入狀態時執行
 func  Enter():
-	print("玩家狀態：跳躍")
+	#print("玩家狀態：跳躍")
 	animated_sprite.play("jump")
 	actor.velocity.y = -500
 	pass

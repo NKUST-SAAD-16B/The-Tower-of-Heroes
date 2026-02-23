@@ -41,7 +41,7 @@ func Physics_process(delta: float) -> void :
 
 func _on_animation_finished():
 	_hitbox_disabled()
-	print("連擊" + str(combo_count))
+	#print("連擊" + str(combo_count))
 	if is_combo and combo_count < 3 :
 		#animated_sprite.play("attack_2")
 		combo_count += 1

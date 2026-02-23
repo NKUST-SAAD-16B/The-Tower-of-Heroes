@@ -76,4 +76,4 @@ func sync_player_data():
 func damage_calculation():
 	#計算傷害值，根據暴擊機率決定是否暴擊
 	var damage = (base_damage + bonus_damage + randi_range(-5,5)) * critical_multiplier if randf() < critical_chance else (base_damage + bonus_damage + randi_range(-5,5))
-	return damage
+	return int(damage)

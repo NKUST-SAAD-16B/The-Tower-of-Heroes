@@ -6,7 +6,7 @@ class_name EnemyIdle
 var timer : float
 #進入狀態時執行
 func  Enter():
-	print("%s狀態：閒置" % [actor.name])
+	#print("%s狀態：閒置" % [actor.name])
 	animated_sprite.play("idle")
 	timer = 0.0
 	pass

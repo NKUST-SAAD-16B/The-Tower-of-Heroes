@@ -5,7 +5,7 @@ var walk_time = randf_range(2.0, 5.0) #行走時間，隨機行走2到5秒
 
 var timer = 0.0
 func Enter():
-	print("%s狀態：行走" % [actor.name])
+	#print("%s狀態：行走" % [actor.name])
 	animated_sprite.play("walk")
 func Exit():
 	animated_sprite.stop()

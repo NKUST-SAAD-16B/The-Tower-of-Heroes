@@ -11,6 +11,7 @@ var player_walk_speed : int
 var player_run_speed : int
 var player_scale : float
 
+
 func player_data_init():
     player_current_health = player_max_health
     player_base_damage = 50

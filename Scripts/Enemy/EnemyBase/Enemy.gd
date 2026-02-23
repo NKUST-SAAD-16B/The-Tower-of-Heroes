@@ -4,7 +4,8 @@ class_name Enemy
 
 # 基本屬性，可在繼承的子類別中覆寫
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var walk_speed = 30
+var base_walk_speed = 30
+var walk_speed = base_walk_speed
 var base_damage = 10
 var direction = 1
 var knockback_resist = 0.9
@@ -32,7 +33,9 @@ func _ready() -> void:
 	health_component.died.connect(_died)
 	#連接受傷訊號
 	hurtbox_component.took_damage.connect(_hurt)
-	
+	#移動速度設定
+	walk_speed = base_walk_speed * GameManager.enemy_walk_speed_multiplier
+	health_component.max_health = int(health_component.max_health * GameManager.enemy_health_multiplier)
 func _physics_process(delta: float) -> void:
 	
 	if not is_on_floor():
@@ -64,7 +67,8 @@ func _on_player_checker_body_exited(body: Node2D) -> void:
 	print("%s：玩家離開偵測範圍" % [name])
 	pass
 
+#傷害計算，根據敵人屬性和命運卡的效果計算最終傷害值
 func damage_calculation():
 	#計算傷害值，根據暴擊機率決定是否暴擊
-	var damage = base_damage * (1 + DestinyManager.enemy_damage_modifier) #敵人傷害計算公式待調整，先這樣乘不讓選事件時報錯
+	var damage = base_damage * GameManager.enemy_damage_multiplier #敵人傷害計算公式待調整，先這樣乘不讓選事件時報錯
 	return damage

@@ -16,6 +16,7 @@ extends Node2D
 #商店菜單節點
 @onready var ShopMenu : Control = $CanvasLayer/NewShopMenu
 
+
 func _ready() -> void:
 	#房間過渡，並生成第一個房間
 	room_transition()
@@ -48,15 +49,20 @@ func room_transition():
 	var room_instance = room_scene.instantiate()
 	get_node("CurrentRoom").add_child(room_instance)
 	
-	#每次房間過渡時增加樓層數
+	#每次房間過渡時增加樓層數及提升敵人屬性修飾
 	GameManager.current_floor += 1
+	GameManager.enemy_damage_multiplier += 0.1
+	GameManager.enemy_health_multiplier += 0.1
+	GameManager.enemy_walk_speed_multiplier += 0.1
+	GameManager.enemy_quantity_multiplier += 0.1
 
-	#在房間中生成玩家角色，位置為房間中名為"PlayerSpawn"的節點位置
-	spawn_player(room_instance.get_node("PlayerSpawn").global_position)
-	#根據DestinyManager的enemy_quantity_multiplier修改敵人生成數量
-	enemy_spawn_quantity = int(GameManager.enemy_spawn_quantity * (1 + DestinyManager.enemy_quantity_multiplier))
+	
+	#設定敵人生成數量，根據GameManager的enemy_spawn_quantity和敵人的enemy_quantity_multiplier進行修改
+	enemy_spawn_quantity = int(GameManager.enemy_spawn_quantity * GameManager.enemy_quantity_multiplier)
 	GameManager.enemy_spawn_quantity = enemy_spawn_quantity
 	
+	#在房間中生成玩家角色，位置為房間中名為"PlayerSpawn"的節點位置
+	spawn_player(room_instance.get_node("PlayerSpawn").global_position)
 	await SceneChanger.fade_in()
 	
 	#啟動敵人生成計時器

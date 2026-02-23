@@ -5,7 +5,7 @@ class_name EnemyChase
 var chase_time = 3.0
 var timer = 0.0
 func Enter():
-	print("%s：追逐玩家" % [actor.name])
+	#print("%s：追逐玩家" % [actor.name])
 	animated_sprite.play("walk")
 	timer = 0.0
 	pass
