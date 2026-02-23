@@ -43,7 +43,7 @@ var destiny_data = {
 		"title": "怪物奉上",
 		"icon": "res://path_to_destiny_8_icon.png",
 		"description": "敵人數量增加10%"
-	},
+	}
 
 }
 

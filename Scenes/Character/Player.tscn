@@ -1,10 +1,11 @@
-[gd_scene load_steps=96 format=3 uid="uid://mwaydr1lq63u"]
+[gd_scene load_steps=97 format=3 uid="uid://mwaydr1lq63u"]
 
 [ext_resource type="Texture2D" uid="uid://dc1qar7b84y4y" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/ATTACK 1.png" id="1_bhhdu"]
 [ext_resource type="Script" uid="uid://erlctxddyik4" path="res://Scripts/player/player.gd" id="1_glx4g"]
 [ext_resource type="Texture2D" uid="uid://dx2wu6ifqnota" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/ATTACK 2.png" id="2_megsn"]
 [ext_resource type="Texture2D" uid="uid://d0bnf7vynp1au" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/ATTACK 3.png" id="3_yoq75"]
 [ext_resource type="Texture2D" uid="uid://ktm632g2u60p" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/DEFEND.png" id="4_ksbbd"]
+[ext_resource type="Script" uid="uid://pyr2bapnnh0g" path="res://Scripts/player/player_camera.gd" id="4_ni40p"]
 [ext_resource type="Texture2D" uid="uid://dciq675cwbpuc" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/IDLE.png" id="5_glx4g"]
 [ext_resource type="Texture2D" uid="uid://d1mf6a1jbgv7r" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/JUMP.png" id="6_miouo"]
 [ext_resource type="Texture2D" uid="uid://bqj56f3us1mh6" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/DEATH.png" id="6_ulo2v"]
@@ -602,6 +603,7 @@ position = Vector2(0, -18)
 zoom = Vector2(5.47, 5.47)
 process_callback = 0
 position_smoothing_enabled = true
+script = ExtResource("4_ni40p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -20)
@@ -640,3 +642,5 @@ script = ExtResource("17_ulo2v")
 
 [node name="hurt" type="Node2D" parent="State_Machine"]
 script = ExtResource("21_5v66d")
+
+[connection signal="hit_shake" from="HitboxComponent" to="Camera2D" method="apply_screen_shake"]
