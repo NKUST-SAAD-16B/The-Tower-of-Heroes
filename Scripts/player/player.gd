@@ -64,7 +64,9 @@ func _on_died():
 #受傷訊號觸發會執行_hurt()
 func _hurt(knockback):
 	self.knockback_vector = knockback
-	state_machine.current_state.Transitioned.emit(state_machine.current_state,"hurt")
+	#當前狀態不在死亡狀態時才允許切換到受傷狀態
+	if state_machine.current_state.name != "died":
+		state_machine.current_state.Transitioned.emit(state_machine.current_state,"hurt")
 	pass
 
 #同步玩家數據

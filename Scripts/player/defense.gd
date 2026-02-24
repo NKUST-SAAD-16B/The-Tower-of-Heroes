@@ -1,7 +1,6 @@
 extends State
 class_name DefenseState
 
-signal defense_success()
 
 #進入狀態時執行
 func  Enter():
@@ -45,7 +44,8 @@ func defense_detection(attacker_position:Vector2 , defense_success:Dictionary) -
 		#成功格擋後可以繼續播放防禦動畫後半段
 		animated_sprite.frame = 2
 		animated_sprite.play()
-		actor.velocity = Vector2(-50,0)
+		#給予玩家一個小的擊退效果，讓玩家有被攻擊到的感覺，但不會真正受到傷害
+		actor.velocity = (Vector2(50,0) * player_direction) * -1
 		#修改defense_success的值，讓hurtbox知道玩家成功格擋了攻擊
 		defense_success["success"] = true
 	else:

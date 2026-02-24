@@ -647,5 +647,4 @@ script = ExtResource("21_5v66d")
 [node name="defense" type="Node2D" parent="State_Machine"]
 script = ExtResource("24_boayk")
 
-[connection signal="defense_hit" from="HurtboxComponent" to="State_Machine/defense" method="defense_detection"]
 [connection signal="hit_shake" from="HitboxComponent" to="Camera2D" method="apply_screen_shake"]

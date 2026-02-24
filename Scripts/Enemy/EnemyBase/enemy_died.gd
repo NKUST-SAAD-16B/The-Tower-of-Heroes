@@ -4,7 +4,8 @@ class_name EnemyDied
 func Enter():
 	print("%s：死亡" % [actor.name])
 	actor.velocity.x = 0
-	animated_sprite.animation_finished.connect(Exit)
+	if not animated_sprite.animation_finished.is_connected(Exit):
+		animated_sprite.animation_finished.connect(Exit)
 	#停止偵測攻擊
 	actor.hurtbox_component.set_deferred("monitoring", false)
 	actor.hurtbox_component.set_deferred("monitorable", false)
