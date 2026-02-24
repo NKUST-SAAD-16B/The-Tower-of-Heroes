@@ -4,6 +4,8 @@ class_name HurtBox
 @export var damage_label : PackedScene
 @onready var health_component: HealthComponent = $"../HealthComponent"
 signal took_damage(knockback_vector)
+#傳遞給防禦狀態的訊號，讓防禦狀態知道玩家被攻擊了)
+signal defense_hit(attacker_position:Vector2, defense_result:Dictionary)
 
 signal hurt(hitbox)
 
@@ -11,6 +13,17 @@ func _ready() -> void:
 	hurt.connect(_on_hurt)
 
 func _on_hurt(hitbox:HitBox):
+	#攻擊者位置
+	var hitbox_owner_position = hitbox.owner.global_position
+	#定義一個字典來存儲防禦結果，初始值為false，當防禦狀態接收到defense_hit訊號後會根據攻擊者位置來判斷是否成功格擋，並修改這個字典中的值，讓hurtbox知道是否成功格擋了攻擊
+	var defense_result = {"success": false}
+	#發出防禦訊號，傳遞攻擊者位置(有監聽這個訊號的只有玩家的防禦狀態，當玩家在防禦狀態時會根據攻擊者位置來決定是否成功格擋)
+	defense_hit.emit(hitbox_owner_position, defense_result)
+	#如果成功格擋了攻擊，則不執行後續的受傷和擊退邏輯
+	if defense_result["success"]:
+		return
+	else:
+		print("玩家未能格擋攻擊，受到傷害！")
 	#傷害計算
 	var hitbox_damage = hitbox.owner.damage_calculation()
 	# 創建傷害標籤並設置其位置

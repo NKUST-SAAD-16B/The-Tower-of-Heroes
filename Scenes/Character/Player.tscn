@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://mwaydr1lq63u"]
+[gd_scene load_steps=98 format=3 uid="uid://mwaydr1lq63u"]
 
 [ext_resource type="Texture2D" uid="uid://dc1qar7b84y4y" path="res://Assets/Knight 2D Pixel Art/Sprites/with_outline/ATTACK 1.png" id="1_bhhdu"]
 [ext_resource type="Script" uid="uid://erlctxddyik4" path="res://Scripts/player/player.gd" id="1_glx4g"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" uid="uid://cl26lyj4lq7eu" path="res://Scripts/player/attack.gd" id="15_1e7my"]
 [ext_resource type="Script" uid="uid://c50jbwm008si7" path="res://Scripts/player/died.gd" id="17_ulo2v"]
 [ext_resource type="Script" uid="uid://do6wlnieejfs7" path="res://Scripts/player/hurt.gd" id="21_5v66d"]
+[ext_resource type="Script" uid="uid://bnw7nddurkx5c" path="res://Scripts/player/defense.gd" id="24_boayk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x63xi"]
 size = Vector2(20, 33)
@@ -392,7 +393,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_wpo1r")
 }],
 "loop": false,
-"name": &"defend",
+"name": &"defense",
 "speed": 8.0
 }, {
 "frames": [{
@@ -608,7 +609,7 @@ script = ExtResource("4_ni40p")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_rocfp")
-animation = &"idle"
+animation = &"defense"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -643,4 +644,8 @@ script = ExtResource("17_ulo2v")
 [node name="hurt" type="Node2D" parent="State_Machine"]
 script = ExtResource("21_5v66d")
 
+[node name="defense" type="Node2D" parent="State_Machine"]
+script = ExtResource("24_boayk")
+
+[connection signal="defense_hit" from="HurtboxComponent" to="State_Machine/defense" method="defense_detection"]
 [connection signal="hit_shake" from="HitboxComponent" to="Camera2D" method="apply_screen_shake"]

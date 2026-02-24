@@ -39,16 +39,22 @@ func _ready() -> void:
 	)
 
 
+
 func _physics_process(delta: float) -> void:
 	#基本重力和移動
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	move_and_slide()
 	#攻擊輸入檢測，當前狀態不在攻擊、受傷、死亡狀態時才允許切換到攻擊狀態
-	if  state_machine.current_state.name not in ["attack" ,"hurt" ,"died"] :
+	if state_machine.current_state.name not in ["attack" ,"hurt" ,"died"] :
 		#切換攻擊狀態
 		if Input.is_action_just_pressed("attack"):
 			state_machine.current_state.Transitioned.emit(state_machine.current_state,"attack")
+	
+	#防禦輸入檢測，當前狀態不在攻擊、受傷、死亡狀態時才允許切換到防禦狀態
+	if state_machine.current_state.name not in ["attack" ,"hurt" ,"died"] :
+		if Input.is_action_just_pressed("defense"):
+			state_machine.current_state.Transitioned.emit(state_machine.current_state,"defense") 
 
 #死亡訊號觸發會執行_on_died()
 func _on_died():
