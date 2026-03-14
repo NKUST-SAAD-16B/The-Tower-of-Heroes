@@ -18,6 +18,7 @@ extends Node2D
 
 
 func _ready() -> void:
+	AudioManager.play_bgm("dungeon")
 	#房間過渡，並生成第一個房間
 	room_transition()
 	#連接GameManager的enemy_defeated信號到transform_to_shop函數，當敵人被擊敗時觸發商店過渡

@@ -41,6 +41,10 @@ func _on_hurt(hitbox:HitBox):
 	#呼叫HealthComponent的take_damage函數，傳入攻擊者的傷害值
 	health_component.take_damage(hitbox_damage)
 	
+	# 如果攻擊者是玩家，播放受擊音效
+	if hitbox.owner is Player:
+		AudioManager.play_sfx("enemy_hit")
+	
 	#發出受傷訊號並傳遞擊退向量
 	took_damage.emit(knockback_vector)
 	

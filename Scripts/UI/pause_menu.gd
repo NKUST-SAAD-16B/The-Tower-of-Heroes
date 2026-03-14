@@ -24,6 +24,7 @@ var save_tween: Tween
 
 # 當儲存按鈕被點選時
 func _on_save_pressed() -> void:
+	AudioManager.play_sfx("pause_click")
 	GameManager.save_game()
 	print("遊戲進度已儲存")
 	
@@ -52,6 +53,7 @@ func _on_setting_menu_closed() -> void:
 	
 #當設定按鈕被點選時
 func _on_settings_pressed() -> void:
+	AudioManager.play_sfx("pause_click")
 	pause_menu.hide()
 	setting_menu.show()
 	print("進入設定選單")
@@ -59,6 +61,7 @@ func _on_settings_pressed() -> void:
 
 #當Title按鈕被點選時
 func _on_title_pressed() -> void:
+	AudioManager.play_sfx("pause_click")
 	get_tree().paused = false
 	print("返回主選單")
 	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")
@@ -66,6 +69,7 @@ func _on_title_pressed() -> void:
 
 
 func _on_resume_pressed() -> void:
+	AudioManager.play_sfx("pause_click")
 	print("遊戲繼續")
 	get_tree().paused = false
 	self.hide()

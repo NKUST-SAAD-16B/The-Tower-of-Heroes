@@ -4,6 +4,8 @@ class_name HurtState
 func Enter():
 	print("玩家狀態：受傷")
 	animated_sprite.play("hurt")
+	# 播放受傷音效
+	AudioManager.play_sfx("player_hurt")
 	#進入受傷狀態時給腳色擊退速度
 	actor.velocity = actor.knockback_vector
 	#當hurt動畫播放完成會呼叫_on_animation_finished這個function
