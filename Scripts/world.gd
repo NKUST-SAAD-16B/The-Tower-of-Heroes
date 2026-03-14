@@ -41,6 +41,8 @@ func room_transition():
 	#如果當前房間中有子節點，則刪除它們以清空房間
 	if get_node("CurrentRoom").get_child_count() > 0:
 		for child in get_node("CurrentRoom").get_children():
+			if child is Gold:
+				PlayerData.gold_quantity += 1
 			child.queue_free()
 
 	#隨機選擇一個房間場景並實例化

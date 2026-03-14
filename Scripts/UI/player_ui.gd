@@ -11,6 +11,7 @@ class_name PlayerGameUI
 
 @onready var current_enemy_quantity : Label = $VBoxContainer/CurrentEnemyQuantity
 
+@onready var gold_quantity : Label = $VBoxContainer/GoldQuantity	
 
 func setup_ui() -> void:
 	#初始化血條數值
@@ -24,6 +25,10 @@ func setup_ui() -> void:
 	if not GameManager.enemy_quantity_changed.is_connected(_update_current_enemy_quantity):
 		GameManager.enemy_quantity_changed.connect(_update_current_enemy_quantity)
 	current_enemy_quantity.text = str(GameManager.current_enemy_quantity)
+
+	#訂閱金幣數量變化的信號，當金幣數量變化時更新顯示
+	if not PlayerData.gold_quantity_changed.is_connected(_update_gold_quantity):
+		PlayerData.gold_quantity_changed.connect(_update_gold_quantity)
 
 
 
@@ -41,3 +46,6 @@ func _update_bar(current_health):
 
 func _update_current_enemy_quantity():
 	current_enemy_quantity.text = str(GameManager.current_enemy_quantity)
+
+func _update_gold_quantity():
+	gold_quantity.text = str(PlayerData.gold_quantity)

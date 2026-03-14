@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://chr0wn87q41qm"]
+
+[ext_resource type="Texture2D" uid="uid://qg5e2d71j4s1" path="res://Assets/Icons/gold.png" id="1_8eupb"]
+[ext_resource type="Script" uid="uid://bxn8har7qepyw" path="res://Scripts/Drops/gold.gd" id="1_xycie"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xycie"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vp7qk"]
+radius = 2.0
+
+[node name="Gold" type="CharacterBody2D"]
+collision_layer = 256
+script = ExtResource("1_xycie")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("1_8eupb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xycie")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_vp7qk")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+autostart = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

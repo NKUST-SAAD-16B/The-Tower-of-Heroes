@@ -93,6 +93,8 @@ defense={
 2d_physics/layer_6="SkeletonHurtbox"
 2d_physics/layer_7="Player"
 2d_physics/layer_8="Skeleton"
+2d_physics/layer_9="drops"
+2d_physics/layer_10="PlayerPickUp"
 
 [rendering]
 
