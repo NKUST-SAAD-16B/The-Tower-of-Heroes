@@ -1,0 +1,20 @@
+# Godot 4 專屬快取資料夾
+.godot/
+
+# 匯出設定檔 (避免密碼或發布金鑰外洩)
+export.cfg
+export_presets.cfg
+
+# Mono / C# 專案相關 (僅在你有使用 C# 版本時才需要)
+.mono/
+data_*/
+mono_crash.*.json
+
+# 作業系統自動產生的隱藏檔案
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

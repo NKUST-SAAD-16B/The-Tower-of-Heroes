@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://cpoor35j847u3"]
+
+[ext_resource type="Script" uid="uid://ci3ru6untmpk7" path="res://Scripts/Enemy/BOSS/Archer/boss_arrow.gd" id="1_dtokr"]
+[ext_resource type="Texture2D" uid="uid://6sjxnwc0d55s" path="res://Assets/Boss/Arcane archer/projectile.png" id="2_hnbgw"]
+[ext_resource type="PackedScene" uid="uid://d1uw4ehlyvxac" path="res://Scenes/Component/hitbox_component.tscn" id="3_hnbgw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c5n58"]
+size = Vector2(13, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hnbgw"]
+size = Vector2(12, 3)
+
+[node name="BossArrow" type="Area2D"]
+z_index = 100
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_dtokr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-7.62939e-06, -3.8147e-06)
+scale = Vector2(0.416927, 1.09062)
+texture = ExtResource("2_hnbgw")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_hnbgw")]
+collision_layer = 0
+collision_mask = 8
+
+[node name="Attack" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_c5n58")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hnbgw")
+debug_color = Color(0.896565, 0.284615, 0.36789, 0.42)

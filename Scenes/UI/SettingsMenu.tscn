@@ -1,0 +1,206 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwe3pgvfrop4v"]
+
+[ext_resource type="Script" uid="uid://ov2p7i867n3m" path="res://Scripts/UI/settings_menu.gd" id="1_4hfd5"]
+[ext_resource type="Texture2D" uid="uid://by2vq1rqpjxqv" path="res://Assets/kenney_fantasy-ui-borders/PNG/Double/Border/panel-border-003.png" id="1_bxjf0"]
+[ext_resource type="Texture2D" uid="uid://c6jmaqj5acjj8" path="res://Assets/kenney_fantasy-ui-borders/PNG/Double/Border/panel-border-015.png" id="3_4hfd5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rr0xh"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+texture = ExtResource("3_4hfd5")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="Theme" id="Theme_ppsuk"]
+Button/font_sizes/font_size = 30
+Button/styles/normal = SubResource("StyleBoxTexture_rr0xh")
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4hfd5")
+
+[node name="Title" type="Label" parent="."]
+modulate = Color(0.666667, 0.988235, 0.439216, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -173.0
+offset_top = 186.0
+offset_right = 173.0
+offset_bottom = 286.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 15
+theme_override_font_sizes/font_size = 100
+text = "Setting"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -380.5
+offset_top = -186.0
+offset_right = 380.5
+offset_bottom = 186.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bxjf0")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 20
+patch_margin_top = 21
+patch_margin_right = 20
+patch_margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -323.5
+offset_top = -128.0
+offset_right = -168.5
+offset_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="Audio" type="Button" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_ppsuk")
+text = "Audio"
+
+[node name="Display" type="Button" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_ppsuk")
+text = "Display"
+
+[node name="Back" type="Button" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_ppsuk")
+text = "Back"
+
+[node name="AudioSettings" type="GridContainer" parent="NinePatchRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = -137.0
+offset_right = 292.0
+offset_bottom = 143.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 20
+
+[node name="MasterVolume" type="Label" parent="NinePatchRect/AudioSettings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Master Volume"
+
+[node name="MasterVolume_HSlider2" type="HSlider" parent="NinePatchRect/AudioSettings"]
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BackgroundMusic" type="Label" parent="NinePatchRect/AudioSettings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Background Music"
+
+[node name="BackgroundMusic_HSlider" type="HSlider" parent="NinePatchRect/AudioSettings"]
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+
+[node name="Soundeffects" type="Label" parent="NinePatchRect/AudioSettings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Sound effects"
+
+[node name="Soundeffects_HSlider" type="HSlider" parent="NinePatchRect/AudioSettings"]
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+
+[node name="DisplaySettings" type="GridContainer" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 303.5
+offset_top = 106.0
+offset_right = 645.5
+offset_bottom = 256.0
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 30
+columns = 2
+
+[node name="WindowsMode" type="Label" parent="NinePatchRect/DisplaySettings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Windows Mode"
+
+[node name="WindowsMode_Button" type="MenuButton" parent="NinePatchRect/DisplaySettings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Full Screen"
+item_count = 2
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Full Screen"
+popup/item_1/id = 1
+
+[node name="FPS" type="Label" parent="NinePatchRect/DisplaySettings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "FPS"
+
+[node name="FPS_Button" type="MenuButton" parent="NinePatchRect/DisplaySettings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "60"
+item_count = 4
+popup/item_0/text = "30"
+popup/item_0/id = 0
+popup/item_1/text = "60"
+popup/item_1/id = 1
+popup/item_2/text = "120"
+popup/item_2/id = 2
+popup/item_3/text = "144"
+popup/item_3/id = 3
+
+[node name="Vsync" type="Label" parent="NinePatchRect/DisplaySettings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Vsync"
+
+[node name="Vsync_CheckBox" type="CheckBox" parent="NinePatchRect/DisplaySettings"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+button_pressed = true
+
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Display" to="." method="_on_display_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="NinePatchRect/DisplaySettings/WindowsMode_Button" to="." method="_on_windows_mode_button_pressed"]
+[connection signal="toggled" from="NinePatchRect/DisplaySettings/Vsync_CheckBox" to="." method="_on_vsync_check_box_toggled"]

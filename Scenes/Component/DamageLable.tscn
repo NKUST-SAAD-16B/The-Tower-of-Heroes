@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://22jftvllcd10"]
+
+[ext_resource type="Script" uid="uid://jovw2qdrdcp8" path="res://Scripts/component/damage_lable.gd" id="1_rtkry"]
+
+[node name="DamageLable" type="Marker2D"]
+script = ExtResource("1_rtkry")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.5
+offset_top = -19.0
+offset_right = 18.5
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(18.5, 19)
+size_flags_horizontal = 4
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "50"
+horizontal_alignment = 1
+vertical_alignment = 1
