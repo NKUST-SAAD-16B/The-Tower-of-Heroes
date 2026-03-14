@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bxnoeghiqun20"]
+[gd_scene load_steps=9 format=3 uid="uid://bxnoeghiqun20"]
 
 [ext_resource type="Texture2D" uid="uid://botpkvy7nymvy" path="res://Assets/Health Bar Asset Pack 2 by Adwit Rahman/redblue (3).png" id="1_d3utd"]
 [ext_resource type="Script" uid="uid://ddeesypx12kxu" path="res://Scripts/UI/player_ui.gd" id="1_gj5qh"]
 [ext_resource type="Texture2D" uid="uid://dvhlww7d278de" path="res://Assets/Health Bar Asset Pack 2 by Adwit Rahman/redblue (2)-white.png.png" id="2_4ctxi"]
 [ext_resource type="Texture2D" uid="uid://bnfeoxu3mn7pm" path="res://Assets/Health Bar Asset Pack 2 by Adwit Rahman/redblue (2).png" id="3_0ay8j"]
+[ext_resource type="Texture2D" uid="uid://cf0h7agtge0v0" path="res://Assets/Icons/skeleton_head.png" id="5_ae4du"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ah7g7"]
 atlas = ExtResource("1_d3utd")
@@ -64,3 +65,25 @@ grow_horizontal = 0
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 50
 text = "第一層"
+
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_right = 125.0
+offset_bottom = 100.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_ae4du")
+expand_mode = 2
+
+[node name="CurrentEnemyQuantity" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "10"
+horizontal_alignment = 1

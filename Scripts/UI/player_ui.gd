@@ -9,7 +9,7 @@ class_name PlayerGameUI
 
 @onready var current_floor : Label = $CurrentFloor
 
-
+@onready var current_enemy_quantity : Label = $VBoxContainer/CurrentEnemyQuantity
 
 
 func setup_ui() -> void:
@@ -19,6 +19,13 @@ func setup_ui() -> void:
 	#訂閱血量變化信號(傳入當前血量)
 	health_component.health_bar_changed.connect(_update_bar)
 	current_floor.text = "第 " + str(GameManager.current_floor) + " 層"
+
+	#訂閱敵人數量變化的信號，當敵人數量變化時更新顯示
+	if not GameManager.enemy_quantity_changed.is_connected(_update_current_enemy_quantity):
+		GameManager.enemy_quantity_changed.connect(_update_current_enemy_quantity)
+	current_enemy_quantity.text = str(GameManager.current_enemy_quantity)
+
+
 
 #更新血條
 func _update_bar(current_health):
@@ -31,3 +38,6 @@ func _update_bar(current_health):
 	var tween = create_tween()
 	tween.tween_property(catchup_bar, "value", percentage, 0.4).set_trans(Tween.TRANS_SINE)
 	pass
+
+func _update_current_enemy_quantity():
+	current_enemy_quantity.text = str(GameManager.current_enemy_quantity)
