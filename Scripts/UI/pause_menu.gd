@@ -64,7 +64,7 @@ func _on_title_pressed() -> void:
 	AudioManager.play_sfx("pause_click")
 	get_tree().paused = false
 	print("返回主選單")
-	get_tree().change_scene_to_file("res://Scenes/UI/MainMenu.tscn")
+	SceneChanger.change_scene("res://Scenes/UI/MainMenu.tscn")
 	pass
 
 

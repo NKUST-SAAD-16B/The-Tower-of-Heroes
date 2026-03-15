@@ -108,7 +108,7 @@ func load_game():
 			
 			print("存檔讀取成功！當前樓層準備還原為: ", current_floor + 1)
 			# 讀取後切換到遊戲場景
-			get_tree().change_scene_to_file("res://Scenes/World.tscn")
+			SceneChanger.change_scene("res://Scenes/World.tscn")
 			return true
 	return false
 
@@ -124,5 +124,6 @@ func start_new_game():
 	enemy_walk_speed_multiplier = 1.0
 	enemy_quantity_multiplier = 1.0
 	
-	# 使用 call_deferred 切換場景
-	get_tree().call_deferred("change_scene_to_file", "res://Scenes/World.tscn")
+	# 切換到遊戲場景
+	print("開始新遊戲，切換到遊戲場景")
+	SceneChanger.change_scene("res://Scenes/World.tscn")
