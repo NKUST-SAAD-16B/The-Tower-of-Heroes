@@ -126,6 +126,8 @@ func transform_to_shop():
 
 	#將商店菜單初始位置設置在畫面上方，然後滑入到正常位置
 	ShopMenu.position = Vector2(ShopMenu.position.x, -ShopMenu.size.y)
+	if ShopMenu.has_method("generate_cards"):
+		ShopMenu.generate_cards()
 	ShopMenu.show()
 	#使用tween來實現商店菜單的滑入動畫
 	tween.tween_property(ShopMenu, "position", Vector2(ShopMenu.position.x, 0), 1.0)

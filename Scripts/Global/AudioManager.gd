@@ -22,6 +22,9 @@ func _ready():
 	add_child(bgm_player)
 	bgm_player.bus = "Background Music"
 	
+	# 連接 finished 訊號以實現循環播放
+	bgm_player.finished.connect(_on_bgm_finished)
+	
 	# 如果沒有 Background Music 總線，則預設使用 Master
 	if AudioServer.get_bus_index("Background Music") == -1:
 		bgm_player.bus = "Master"
@@ -41,6 +44,9 @@ func play_bgm(track_name: String):
 
 func stop_bgm():
 	bgm_player.stop()
+
+func _on_bgm_finished():
+	bgm_player.play()
 
 func play_sfx(sample_name: String):
 	if sfx_samples.has(sample_name):
