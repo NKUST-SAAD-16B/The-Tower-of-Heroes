@@ -38,8 +38,13 @@ func _on_hurt(hitbox:HitBox):
 	var knockback_direction = Vector2(1,1) if global_position > hitbox.owner.global_position else Vector2(-1,-1)
 	#計算擊退向量
 	var knockback_vector = knockback_direction * knockback_force
-	#發出受傷訊號並傳遞擊退向量
-	took_damage.emit(knockback_vector)
 	#呼叫HealthComponent的take_damage函數，傳入攻擊者的傷害值
 	health_component.take_damage(hitbox_damage)
+	
+	# 如果攻擊者是玩家，播放受擊音效
+	if hitbox.owner is Player:
+		AudioManager.play_sfx("enemy_hit")
+	
+	#發出受傷訊號並傳遞擊退向量
+	took_damage.emit(knockback_vector)
 	

@@ -4,7 +4,7 @@ extends Node2D
 #房間路徑，用於隨機生成房間，需在編輯器中設置
 @export var room_paths : Array[PackedScene] = []
 #玩家UI場景
-@onready var PlayerUI: PlayerGameUI = $CanvasLayer/Player_UI
+@onready var PlayerUI : PlayerGameUI = $CanvasLayer/Player_UI
 
 #敵人場景，用於隨機生成敵人，需在編輯器中設置
 @export var enemy_scene : Array[PackedScene] = []
@@ -17,7 +17,9 @@ extends Node2D
 @onready var ShopMenu : Control = $CanvasLayer/NewShopMenu
 
 
+
 func _ready() -> void:
+	AudioManager.play_bgm("dungeon")
 	#房間過渡，並生成第一個房間
 	room_transition()
 	#連接GameManager的enemy_defeated信號到transform_to_shop函數，當敵人被擊敗時觸發商店過渡
@@ -69,7 +71,6 @@ func room_transition():
 	
 	#啟動敵人生成計時器
 	get_node("EnemySpawnTimer").start()
-	
 
 #生成玩家角色
 func spawn_player(player_position: Vector2) -> void:
@@ -116,6 +117,9 @@ func _on_enemy_spawn_timer_timeout() -> void:
 
 #商店過渡，生成商店菜單
 func transform_to_shop():
+	# 稍微等待一下，確保最後一個怪物的死亡動畫能完全播完，並且特效跑完
+	await get_tree().create_timer(1.0).timeout
+	
 	#商店出現動畫，畫面由上方滑入，持續時間為1秒
 	var tween := create_tween()
 	#設置tween的暫停模式為Process，確保在遊戲暫停時仍然運行
@@ -124,6 +128,8 @@ func transform_to_shop():
 
 	#將商店菜單初始位置設置在畫面上方，然後滑入到正常位置
 	ShopMenu.position = Vector2(ShopMenu.position.x, -ShopMenu.size.y)
+	if ShopMenu.has_method("generate_cards"):
+		ShopMenu.generate_cards()
 	ShopMenu.show()
 	#使用tween來實現商店菜單的滑入動畫
 	tween.tween_property(ShopMenu, "position", Vector2(ShopMenu.position.x, 0), 1.0)

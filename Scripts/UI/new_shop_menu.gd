@@ -9,39 +9,55 @@ var current_card : Array = []
 signal card_selected
 
 func _ready() -> void:
-	#進入商店時隨機生成3張命運卡
+	# 初始隱藏
+	self.hide()
+
+# 每次顯示時調用此函數來生成新卡片
+func generate_cards() -> void:
+	# 清空舊數據
+	current_card.clear()
+	var selected_keys = []
+	
+	# 隨機生成 3 張命運卡
 	for i in range(3):
-		#從DestinyManager獲取隨機命運卡
-		var destiny = DestinyManager.destiny_random()
+		# 傳入已選 Key 確保不重複
+		var destiny = DestinyManager.destiny_random(selected_keys)
+		
+		# 如果沒剩餘可用卡片則跳出
+		if destiny.is_empty():
+			break
+			
+		selected_keys.append(destiny.key)
+		
 		var card = $HBoxContainer.get_node("Card" + str(i + 1))
 		card.get_node("VBoxContainer/Title").text = destiny.title
 		card.get_node("VBoxContainer/ScrollContainer/Description").text = destiny.description
 		current_card.append(destiny)
-	pass
 
-
-
+# 覆蓋 show 函數或提供一個專門的開啟函數
+func open_shop() -> void:
+	generate_cards()
+	self.show()
 
 func _on_card_1_pressed() -> void:
-	DestinyManager.destiny_apply(current_card[0])
-	selected()
-	pass # Replace with function body.
+	if current_card.size() > 0:
+		DestinyManager.destiny_apply(current_card[0])
+		selected()
 
 
 func _on_card_2_pressed() -> void:
-	DestinyManager.destiny_apply(current_card[1])
-	selected()
-	pass # Replace with function body.
+	if current_card.size() > 1:
+		DestinyManager.destiny_apply(current_card[1])
+		selected()
 
 
 func _on_card_3_pressed() -> void:
-	DestinyManager.destiny_apply(current_card[2])
-	selected()
-	pass # Replace with function body.
+	if current_card.size() > 2:
+		DestinyManager.destiny_apply(current_card[2])
+		selected()
 
 #選擇命運卡後的處理函數，發出card_selected信號並隱藏商店菜單
 func selected() -> void:
 	card_selected.emit()
 	get_tree().paused = false
 	self.hide()
-	pass

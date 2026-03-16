@@ -13,6 +13,7 @@ var knockback_vector:Vector2
 var knockback_force = 50
 
 var gold_drop_amount = 5 #每個敵人掉落的金幣數量，這裡設為5，可以根據需要調整
+
 var attack_range = 25
 #偵測對象
 var target:CharacterBody2D = null
@@ -50,6 +51,10 @@ func _died():
 
 #受傷訊號觸發會執行_hurt()
 func _hurt(knockback):
+	# 【新增防呆】如果已經死亡，不要進入受傷狀態，讓死亡動畫播完
+	if health_component.current_health <= 0:
+		return
+		
 	self.knockback_vector = knockback
 	state_machine.current_state.Transitioned.emit(state_machine.current_state,"hurt")
 	pass

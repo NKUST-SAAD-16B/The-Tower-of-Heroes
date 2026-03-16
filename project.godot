@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="The Tower of Heroes"
-run/main_scene="uid://bd5hnkmcljua8"
+run/main_scene="uid://cevrqtmjmec53"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -21,6 +21,7 @@ GameManager="*res://Scripts/Global/GameManager.gd"
 PlayerData="*res://Scripts/Global/PlayerData.gd"
 DestinyManager="*res://Scripts/Global/DestinyManager.gd"
 SceneChanger="*res://Scenes/Global/SceneChanger.tscn"
+AudioManager="*res://Scripts/Global/AudioManager.gd"
 
 [display]
 
@@ -93,8 +94,6 @@ defense={
 2d_physics/layer_6="SkeletonHurtbox"
 2d_physics/layer_7="Player"
 2d_physics/layer_8="Skeleton"
-2d_physics/layer_9="drops"
-2d_physics/layer_10="PlayerPickUp"
 
 [rendering]
 

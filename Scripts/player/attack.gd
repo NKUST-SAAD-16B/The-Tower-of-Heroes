@@ -8,6 +8,8 @@ var first_frame_passed = false
 func  Enter():
 	print("玩家狀態：攻擊")
 	animated_sprite.play("attack_1")
+	# 播放揮劍音效
+	AudioManager.play_sfx("sword_slash")
 	actor.velocity.x = 0
 	actor.hitbox_1.disabled = false
 	#當attack動畫播放完成會呼叫_on_animation_finished這個function
@@ -47,6 +49,8 @@ func _on_animation_finished():
 		combo_count += 1
 		is_combo = false
 		animated_sprite.play("attack_" + str(combo_count))
+		# 播放揮劍音效
+		AudioManager.play_sfx("sword_slash")
 		#根據攻擊開啟對應的hitbox碰撞框
 		match combo_count:
 			1:

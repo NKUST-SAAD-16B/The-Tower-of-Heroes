@@ -46,7 +46,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/shadow_outline_size = 15
 theme_override_font_sizes/font_size = 100
-text = "Setting"
+text = "設定"
+horizontal_alignment = 1
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -86,17 +87,17 @@ theme_override_constants/separation = 40
 [node name="Audio" type="Button" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_ppsuk")
-text = "Audio"
+text = "音量"
 
 [node name="Display" type="Button" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_ppsuk")
-text = "Display"
+text = "影像設定"
 
 [node name="Back" type="Button" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_ppsuk")
-text = "Back"
+text = "返回"
 
 [node name="AudioSettings" type="GridContainer" parent="NinePatchRect"]
 visible = false
@@ -157,12 +158,13 @@ columns = 2
 [node name="WindowsMode" type="Label" parent="NinePatchRect/DisplaySettings"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Windows Mode"
+text = "顯示模式"
 
 [node name="WindowsMode_Button" type="MenuButton" parent="NinePatchRect/DisplaySettings"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Full Screen"
+text = "全螢幕"
 item_count = 2
 popup/item_0/text = "Windowed"
 popup/item_0/id = 0
@@ -175,6 +177,7 @@ theme_override_font_sizes/font_size = 30
 text = "FPS"
 
 [node name="FPS_Button" type="MenuButton" parent="NinePatchRect/DisplaySettings"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "60"
@@ -185,13 +188,13 @@ popup/item_1/text = "60"
 popup/item_1/id = 1
 popup/item_2/text = "120"
 popup/item_2/id = 2
-popup/item_3/text = "144"
+popup/item_3/text = "Unlimited"
 popup/item_3/id = 3
 
 [node name="Vsync" type="Label" parent="NinePatchRect/DisplaySettings"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Vsync"
+text = "垂直同步"
 
 [node name="Vsync_CheckBox" type="CheckBox" parent="NinePatchRect/DisplaySettings"]
 layout_mode = 2

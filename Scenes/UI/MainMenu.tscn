@@ -118,24 +118,57 @@ theme = SubResource("Theme_xwwdr")
 theme_override_constants/separation = 19
 
 [node name="GameStart" type="Button" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
 text = "開始遊戲"
 
 [node name="Continue" type="Button" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
 text = "繼續遊戲"
 
 [node name="Settings" type="Button" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
 text = "設定"
 
 [node name="Quit" type="Button" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
 text = "離開遊戲"
 
 [node name="SettingsMenu" parent="." instance=ExtResource("6_if7li")]
 visible = false
 layout_mode = 1
+
+[node name="EasterEgg_Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 374.0
+offset_top = 168.0
+offset_right = 572.0
+offset_bottom = 343.0
+
+[node name="EasterEgg_Label" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -230.0
+offset_top = -80.0
+offset_right = -30.0
+offset_bottom = -30.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 30
+text = "彩蛋已觸發"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/GameStart" to="." method="_on_game_start_pressed"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
