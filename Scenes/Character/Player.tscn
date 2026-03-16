@@ -24,7 +24,7 @@
 [ext_resource type="Script" uid="uid://c50jbwm008si7" path="res://Scripts/player/died.gd" id="17_ulo2v"]
 [ext_resource type="Script" uid="uid://do6wlnieejfs7" path="res://Scripts/player/hurt.gd" id="21_5v66d"]
 [ext_resource type="Script" uid="uid://bnw7nddurkx5c" path="res://Scripts/player/defense.gd" id="24_boayk"]
-[ext_resource type="Script" uid="uid://cbtxy0d7w8xyg" path="res://Scripts/player/pick_up.gd" id="25_jj7hg"]
+[ext_resource type="Script" path="res://Scripts/player/pick_up.gd" id="25_jj7hg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x63xi"]
 size = Vector2(20, 33)

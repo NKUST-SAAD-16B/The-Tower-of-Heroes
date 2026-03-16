@@ -12,6 +12,8 @@ var knockback_resist = 0.9
 var knockback_vector:Vector2
 var knockback_force = 50
 
+var gold_drop_amount = 5 #每個敵人掉落的金幣數量，這裡設為5，可以根據需要調整
+
 var attack_range = 25
 #偵測對象
 var target:CharacterBody2D = null

@@ -15,10 +15,18 @@ class_name PlayerGameUI
 
 func setup_ui() -> void:
 	#初始化血條數值
-	health_bar.max_value = health_component.max_health
-	catchup_bar.max_value = health_component.max_health
+	health_bar.max_value = PlayerData.player_max_health
+	catchup_bar.max_value = PlayerData.player_max_health
+	health_bar.value = PlayerData.player_current_health
+	catchup_bar.value = PlayerData.player_current_health
+	
+	#初始化金幣數量顯示
+	gold_quantity.text = str(PlayerData.gold_quantity)
+
 	#訂閱血量變化信號(傳入當前血量)
 	health_component.health_bar_changed.connect(_update_bar)
+	
+	#初始化樓層數顯示
 	current_floor.text = "第 " + str(GameManager.current_floor) + " 層"
 
 	#訂閱敵人數量變化的信號，當敵人數量變化時更新顯示

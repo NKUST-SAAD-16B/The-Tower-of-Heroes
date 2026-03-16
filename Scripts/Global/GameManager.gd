@@ -7,12 +7,14 @@ var player_scene = preload("res://Scenes/Character/player.tscn")
 signal enemy_defeated
 
 signal enemy_quantity_changed
+
+
 #當前樓層數，初始值為1，每次房間過渡時增加1	
 var current_floor : int = 0
 
 #敵人生成數量，初始值為10，根據DestinyManager的enemy_quantity_multiplier進行修改
 
-var enemy_spawn_quantity : int = 10:
+var enemy_spawn_quantity : int = 1:
 
 	#當enemy_spawn_quantity被修改時，同步更新current_enemy_quantity的值，確保它們保持一致
 	set(value):
@@ -66,7 +68,8 @@ func save_game():
 			"critical_multiplier": PlayerData.player_critical_multiplier,
 			"walk_speed": PlayerData.player_walk_speed,
 			"run_speed": PlayerData.player_run_speed,
-			"scale": PlayerData.player_scale
+			"scale": PlayerData.player_scale,
+			"gold_quantity": PlayerData.gold_quantity
 		}
 	}
 	
