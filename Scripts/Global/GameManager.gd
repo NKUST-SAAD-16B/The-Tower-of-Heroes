@@ -8,11 +8,16 @@ var easter_egg_enabled : bool = false
 
 signal enemy_defeated
 
+signal enemy_quantity_changed
+
+
 #當前樓層數，初始值為1，每次房間過渡時增加1	
 var current_floor : int = 0
 
 #敵人生成數量，初始值為10，根據DestinyManager的enemy_quantity_multiplier進行修改
+
 var enemy_spawn_quantity : int = 1:
+
 	#當enemy_spawn_quantity被修改時，同步更新current_enemy_quantity的值，確保它們保持一致
 	set(value):
 		current_enemy_quantity = value
@@ -30,9 +35,14 @@ var current_enemy_quantity : int = enemy_spawn_quantity:
 	set(value):
 		current_enemy_quantity = value
 		print("當前敵人數量: " + str(current_enemy_quantity))
+
+		#發出敵人數量變化的信號，通知UI更新顯示
+		enemy_quantity_changed.emit()
+
 		#當當前敵人數量小於等於0時觸發enemy_defeated信號，通知world.gd進行商店過渡
 		if current_enemy_quantity <= 0:
 			enemy_defeated.emit()
+
 
 # 存檔檔案路徑
 const SAVE_PATH = "user://savegame.save"
@@ -61,7 +71,8 @@ func save_game():
 			"critical_multiplier": PlayerData.player_critical_multiplier,
 			"walk_speed": PlayerData.player_walk_speed,
 			"run_speed": PlayerData.player_run_speed,
-			"scale": PlayerData.player_scale
+			"scale": PlayerData.player_scale,
+			"gold_quantity": PlayerData.gold_quantity
 		}
 	}
 	
@@ -132,7 +143,7 @@ func load_game():
 			
 			print("存檔讀取成功！當前樓層準備還原為: ", current_floor + 1)
 			# 讀取後切換到遊戲場景
-			get_tree().change_scene_to_file("res://Scenes/World.tscn")
+			SceneChanger.change_scene("res://Scenes/World.tscn")
 			return true
 	return false
 
@@ -148,5 +159,6 @@ func start_new_game():
 	enemy_walk_speed_multiplier = 1.0
 	enemy_quantity_multiplier = 1.0
 	
-	# 使用 call_deferred 切換場景
-	get_tree().call_deferred("change_scene_to_file", "res://Scenes/World.tscn")
+	# 切換到遊戲場景
+	print("開始新遊戲，切換到遊戲場景")
+	SceneChanger.change_scene("res://Scenes/World.tscn")

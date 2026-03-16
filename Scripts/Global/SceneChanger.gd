@@ -3,11 +3,12 @@ extends CanvasLayer
 @onready var black = $Black
 
 func change_scene(target_path: String):
+	black.show()
 	#播放淡出動畫 (變黑)，持續2秒
 	var tween_out = create_tween()
 	tween_out.tween_property(black, "modulate:a", 1.0, 2)
 	await tween_out.finished
-	
+	tween_out.kill() # 確保動畫結束後不再佔用資源
 	#真正的切換場景
 	get_tree().change_scene_to_file(target_path)
 	
@@ -18,6 +19,7 @@ func change_scene(target_path: String):
 	var tween_in = create_tween()
 	tween_in.tween_property(black, "modulate:a", 0.0, 2)
 	await tween_in.finished
+	tween_in.kill() # 確保動畫結束後不再佔用資源
 
 # 只執行黑屏動作，不換場景
 func fade_out():

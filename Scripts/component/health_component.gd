@@ -54,3 +54,4 @@ func take_damage(damage: int) -> void:
 	if current_health <= 0:
 		died.emit()
 		
+

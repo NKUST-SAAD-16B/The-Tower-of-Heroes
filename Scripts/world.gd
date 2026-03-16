@@ -4,7 +4,7 @@ extends Node2D
 #房間路徑，用於隨機生成房間，需在編輯器中設置
 @export var room_paths : Array[PackedScene] = []
 #玩家UI場景
-@onready var PlayerUI: PlayerGameUI = $CanvasLayer/Player_UI
+@onready var PlayerUI : PlayerGameUI = $CanvasLayer/Player_UI
 
 #敵人場景，用於隨機生成敵人，需在編輯器中設置
 @export var enemy_scene : Array[PackedScene] = []
@@ -15,6 +15,7 @@ extends Node2D
 
 #商店菜單節點
 @onready var ShopMenu : Control = $CanvasLayer/NewShopMenu
+
 
 
 func _ready() -> void:
@@ -42,6 +43,8 @@ func room_transition():
 	#如果當前房間中有子節點，則刪除它們以清空房間
 	if get_node("CurrentRoom").get_child_count() > 0:
 		for child in get_node("CurrentRoom").get_children():
+			if child is Gold:
+				PlayerData.gold_quantity += 1
 			child.queue_free()
 
 	#隨機選擇一個房間場景並實例化
@@ -68,7 +71,6 @@ func room_transition():
 	
 	#啟動敵人生成計時器
 	get_node("EnemySpawnTimer").start()
-	
 
 #生成玩家角色
 func spawn_player(player_position: Vector2) -> void:
