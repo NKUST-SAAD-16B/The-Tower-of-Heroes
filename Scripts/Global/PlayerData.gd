@@ -3,6 +3,7 @@ extends Node
 
 var player_current_health : int
 var player_max_health : int = 100
+var player_current_shield : int = 0
 var player_base_damage : int
 var player_bonus_damage : int
 var player_critical_chance : float
@@ -14,6 +15,7 @@ var player_scale : float
 
 func player_data_init():
 	player_current_health = player_max_health
+	player_current_shield = 0
 	player_base_damage = 50
 	player_bonus_damage = 0
 	player_critical_chance = 0.0

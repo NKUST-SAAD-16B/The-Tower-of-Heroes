@@ -2,8 +2,8 @@ extends CharacterBody2D
 class_name Player
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var walk_speed = 50
-var run_speed = 100
+var walk_speed = 5000 #50
+var run_speed = 5000 #100
 #攻擊相關數據
 var base_damage = 50 #基礎傷害
 var bonus_damage = 0 #加成傷害
