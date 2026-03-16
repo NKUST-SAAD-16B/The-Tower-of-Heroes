@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://cknuq8g1hg4rd"]
+
+[ext_resource type="PackedScene" uid="uid://doskiqk2mgjpq" path="res://Scenes/UI/skill_button.tscn" id="1_0oiwb"]
+[ext_resource type="Texture2D" uid="uid://civo6sy743be3" path="res://Assets/[VerArc Stash] Basic_Skills_and_Buffs/Buffs/attack_boost.png" id="2_0oiwb"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="damage" type="Control" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 44.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureButton" parent="Panel/damage" instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("2_0oiwb")
+texture = ExtResource("2_0oiwb")

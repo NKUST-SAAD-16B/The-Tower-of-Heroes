@@ -4,6 +4,8 @@ extends Node
 #玩家場景
 var player_scene = preload("res://Scenes/Character/player.tscn")
 
+var easter_egg_enabled : bool = false
+
 signal enemy_defeated
 
 #當前樓層數，初始值為1，每次房間過渡時增加1	
@@ -47,7 +49,8 @@ func save_game():
 			"enemy_damage_multiplier": enemy_damage_multiplier,
 			"enemy_health_multiplier": enemy_health_multiplier,
 			"enemy_walk_speed_multiplier": enemy_walk_speed_multiplier,
-			"enemy_quantity_multiplier": enemy_quantity_multiplier
+			"enemy_quantity_multiplier": enemy_quantity_multiplier,
+			"easter_egg_enabled": easter_egg_enabled
 		},
 		"player_data": {
 			"current_health": PlayerData.player_current_health,
@@ -68,6 +71,26 @@ func save_game():
 		file.store_string(json_string)
 		file.close()
 		print("遊戲已儲存至: ", SAVE_PATH)
+
+func _ready() -> void:
+	load_settings_only()
+
+# 僅讀取數據，不跳轉場景
+func load_settings_only():
+	if not has_save_file():
+		return
+		
+	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+	if file:
+		var json_string = file.get_as_text()
+		file.close()
+		var json = JSON.new()
+		var parse_result = json.parse(json_string)
+		if parse_result == OK:
+			var save_data = json.data
+			var gm_data = save_data.get("game_manager", {})
+			easter_egg_enabled = gm_data.get("easter_egg_enabled", false)
+			print("系統設定已載入，彩蛋狀態: ", easter_egg_enabled)
 
 # 讀取遊戲數據
 func load_game():
@@ -93,6 +116,7 @@ func load_game():
 			enemy_health_multiplier = gm_data.get("enemy_health_multiplier", 1.0)
 			enemy_walk_speed_multiplier = gm_data.get("enemy_walk_speed_multiplier", 1.0)
 			enemy_quantity_multiplier = gm_data.get("enemy_quantity_multiplier", 1.0)
+			easter_egg_enabled = gm_data.get("easter_egg_enabled", false)
 			
 			# 還原 PlayerData 數據
 			var pd_data = save_data.get("player_data", {})

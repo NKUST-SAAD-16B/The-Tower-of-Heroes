@@ -4,7 +4,9 @@ extends Node
 
 var bgm_tracks = {
 	"dungeon": preload("res://Sound/BGM/Dungeon-Crawler.wav"),
-	"main_menu": preload("res://Sound/BGM/Element.mp3")
+	"main_menu": preload("res://Sound/BGM/Element.mp3"),
+	"haruhikage": preload("res://Sound/BGM/Haruhikage.mp3"),
+	"world_is_mine": preload("res://Sound/BGM/world is mine.mp3")
 }
 
 var sfx_samples = {

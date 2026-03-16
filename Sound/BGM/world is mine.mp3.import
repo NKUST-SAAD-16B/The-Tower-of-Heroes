@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://xy47m6hs2q33"
+path="res://.godot/imported/world is mine.mp3-0660a112dea24ca41acfe8a58cb44b44.mp3str"
+
+[deps]
+
+source_file="res://Sound/BGM/world is mine.mp3"
+dest_files=["res://.godot/imported/world is mine.mp3-0660a112dea24ca41acfe8a58cb44b44.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
