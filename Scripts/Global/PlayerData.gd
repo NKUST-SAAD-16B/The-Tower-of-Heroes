@@ -13,7 +13,7 @@ var player_walk_speed : int
 var player_run_speed : int
 var player_scale : float
 
-var gold_quantity : int = 0:
+var gold_quantity : int = 300:
     set(value):
         gold_quantity = value
         gold_quantity_changed.emit() #當金幣數量變化時，觸發gold_quantity_changed信號，通知UI更新顯示
@@ -28,3 +28,12 @@ func player_data_init():
     player_walk_speed = 50
     player_run_speed = 100
     player_scale = 0.6
+
+#應用技能的屬性增益到玩家數據
+func skill_status_apply(skill_status : SkillStats):
+    player_max_health += skill_status.health_increase
+    player_base_damage += skill_status.damage_increase
+    player_critical_chance += skill_status.critical_chance_increase
+    player_critical_multiplier += skill_status.critical_multiplier_increase
+    player_walk_speed += skill_status.walk_speed_increase
+    player_run_speed += skill_status.run_speed_increase

@@ -12,7 +12,9 @@ extends TextureButton
 @onready var button_state : bool = false:
     set(value):
         button_state = value
-        $Panel.show_behind_parent = button_state
+        if button_state:
+            $Panel.show_behind_parent = true
+            
 
 func _ready() -> void:
     #設置按鈕的紋理為指定的texture
@@ -21,9 +23,27 @@ func _ready() -> void:
     pressed.connect(_on_button_pressed)
     pass
 
+#當按鈕被按下時，切換按鈕為true，表示能力被啟用
 func _on_button_pressed():
-    #當按鈕被按下時，切換按鈕的狀態
-    button_state = not button_state
-    #在控制台輸出按鈕的名稱和當前狀態
-    print("Button ", skill_name, " pressed. Current state: ", button_state)
+    #檢查玩家的金幣數量是否足夠支付能力的成本
+    if PlayerData.gold_quantity >= cost:
+        PlayerData.gold_quantity -= cost
+        #當按鈕被按下時，切換按鈕的狀態
+        button_state = true
+        #已啟用能力後，禁用按鈕以防止再次按下
+        disabled = true
+
+        PlayerData.skill_status_apply(skill_status)
+        
+        #在控制台輸出按鈕的名稱和當前狀態
+        print("Button ", skill_name, " pressed. Current state: ", button_state)
+
+        #輸出所有玩家數據的當前值，以驗證技能屬性增益是否正確應用
+        print("Player Max Health: ", PlayerData.player_max_health)
+        print("Player Base Damage: ", PlayerData.player_base_damage)
+        print("Player Critical Chance: ", PlayerData.player_critical_chance)
+        print("Player Critical Multiplier: ", PlayerData.player_critical_multiplier)
+        print("Player Walk Speed: ", PlayerData.player_walk_speed)
+        print("Player Run Speed: ", PlayerData.player_run_speed)
+        print("Player Gold Quantity: ", PlayerData.gold_quantity)
     pass
