@@ -1,15 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://cknuq8g1hg4rd"]
+[gd_scene load_steps=19 format=3 uid="uid://cknuq8g1hg4rd"]
 
 [ext_resource type="PackedScene" uid="uid://doskiqk2mgjpq" path="res://Scenes/UI/skill_button.tscn" id="1_0oiwb"]
+[ext_resource type="Script" uid="uid://cgqsuswm18ric" path="res://Scripts/UI/skill_tree.gd" id="1_3w1o7"]
 [ext_resource type="Texture2D" uid="uid://civo6sy743be3" path="res://Assets/[VerArc Stash] Basic_Skills_and_Buffs/Buffs/attack_boost.png" id="2_0oiwb"]
 [ext_resource type="Script" uid="uid://clhykgsresp5d" path="res://Scripts/Resource/skill_stats.gd" id="3_vsj48"]
+[ext_resource type="Texture2D" uid="uid://ipud3w4qyma3" path="res://Assets/[VerArc Stash] Basic_Skills_and_Buffs/Buffs/knockback_boost.png" id="4_eqvb6"]
+[ext_resource type="Texture2D" uid="uid://bi4g87vhbqoak" path="res://Assets/[VerArc Stash] Basic_Skills_and_Buffs/Buffs/critical_boost.png" id="5_3w1o7"]
 
 [sub_resource type="Resource" id="Resource_ciukl"]
 script = ExtResource("3_vsj48")
 health_increase = 0
-damage_increase = 0
-critical_chance_increase = 30.0
-critical_multiplier_increase = 0.0
+damage_increase = 10
+critical_chance_increase = 10.0
+critical_multiplier_increase = 10.0
 walk_speed_increase = 0
 run_speed_increase = 0
 metadata/_custom_type_script = "uid://clhykgsresp5d"
@@ -17,8 +20,87 @@ metadata/_custom_type_script = "uid://clhykgsresp5d"
 [sub_resource type="Resource" id="Resource_vsj48"]
 script = ExtResource("3_vsj48")
 health_increase = 0
+damage_increase = 20
+critical_chance_increase = 0.0
+critical_multiplier_increase = 0.0
+walk_speed_increase = 0
+run_speed_increase = 0
+metadata/_custom_type_script = "uid://clhykgsresp5d"
+
+[sub_resource type="Resource" id="Resource_3w1o7"]
+script = ExtResource("3_vsj48")
+health_increase = 0
+damage_increase = 0
+critical_chance_increase = 10.0
+critical_multiplier_increase = 0.0
+walk_speed_increase = 0
+run_speed_increase = 0
+metadata/_custom_type_script = "uid://clhykgsresp5d"
+
+[sub_resource type="Resource" id="Resource_nqqgi"]
+script = ExtResource("3_vsj48")
+health_increase = 0
+damage_increase = 0
+critical_chance_increase = 10.0
+critical_multiplier_increase = 0.0
+walk_speed_increase = 0
+run_speed_increase = 0
+metadata/_custom_type_script = "uid://clhykgsresp5d"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eqvb6"]
+load_path = "res://.godot/imported/knockback_boost.png-3a2dc363140e3850cbb85b8fc6c62782.ctex"
+
+[sub_resource type="Resource" id="Resource_r3l10"]
+script = ExtResource("3_vsj48")
+health_increase = 0
+damage_increase = 0
+critical_chance_increase = 10.0
+critical_multiplier_increase = 0.0
+walk_speed_increase = 0
+run_speed_increase = 0
+metadata/_custom_type_script = "uid://clhykgsresp5d"
+
+[sub_resource type="Resource" id="Resource_kkkiy"]
+script = ExtResource("3_vsj48")
+health_increase = 0
 damage_increase = 0
 critical_chance_increase = 0.0
+critical_multiplier_increase = 10.0
+walk_speed_increase = 0
+run_speed_increase = 0
+metadata/_custom_type_script = "uid://clhykgsresp5d"
+
+[sub_resource type="Resource" id="Resource_rya80"]
+script = ExtResource("3_vsj48")
+health_increase = 0
+damage_increase = 0
+critical_chance_increase = 10.0
+critical_multiplier_increase = 0.0
+walk_speed_increase = 0
+run_speed_increase = 0
+metadata/_custom_type_script = "uid://clhykgsresp5d"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nqqgi"]
+load_path = "res://.godot/imported/critical_boost.png-3a95edabef498033deb91a8fd5748076.ctex"
+
+[sub_resource type="Resource" id="Resource_ewhlj"]
+script = ExtResource("3_vsj48")
+health_increase = 0
+damage_increase = 0
+critical_chance_increase = 10.0
+critical_multiplier_increase = 0.0
+walk_speed_increase = 0
+run_speed_increase = 0
+metadata/_custom_type_script = "uid://clhykgsresp5d"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vsj48"]
+load_path = "res://.godot/imported/healing_spell.png-535e9856ba6c37ca987c711c02d4f014.ctex"
+
+[sub_resource type="Resource" id="Resource_eqvb6"]
+script = ExtResource("3_vsj48")
+health_increase = 0
+damage_increase = 0
+critical_chance_increase = 30.0
 critical_multiplier_increase = 0.0
 walk_speed_increase = 0
 run_speed_increase = 0
@@ -31,6 +113,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_3w1o7")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2
@@ -48,40 +131,299 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 148.0
-offset_top = 45.0
-offset_right = 212.0
-offset_bottom = 109.0
+offset_left = -328.0
+offset_top = -380.0
+offset_right = -264.0
+offset_bottom = -316.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureButton" parent="Panel/damage" instance=ExtResource("1_0oiwb")]
+[node name="DI_1" parent="Panel/damage" groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -25.0
-offset_top = -10.0
-offset_right = -25.0
-offset_bottom = -10.0
+offset_left = 240.0
+offset_top = -39.0
+offset_right = 240.0
+offset_bottom = -39.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("2_0oiwb")
+skill_name = "DI_1"
 texture = ExtResource("2_0oiwb")
 cost = 100
+skill_type = "DI"
+order = 1
 skill_status = SubResource("Resource_ciukl")
 
-[node name="TextureButton2" parent="Panel/damage" instance=ExtResource("1_0oiwb")]
+[node name="Line2D1" type="Line2D" parent="Panel/damage/DI_1" groups=["skill_line"]]
+position = Vector2(24, 80)
+points = PackedVector2Array(8, -16, 8, 48)
+width = 3.0
+
+[node name="DI_2" parent="Panel/damage" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 127.0
-offset_top = 87.0
-offset_right = 127.0
-offset_bottom = 87.0
+offset_left = 240.0
+offset_top = 89.0
+offset_right = 240.0
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "DI_2"
+texture = ExtResource("2_0oiwb")
+skill_type = "DI"
+parent = NodePath("../DI_1")
+order = 2
+skill_status = SubResource("Resource_vsj48")
+
+[node name="Line2D6" type="Line2D" parent="Panel/damage/DI_2" groups=["skill_line"]]
+position = Vector2(24, 80)
+points = PackedVector2Array(8, -16, 8, 48)
+width = 3.0
+
+[node name="Line2D9" type="Line2D" parent="Panel/damage/DI_2" groups=["skill_line"]]
+position = Vector2(0, 32)
+points = PackedVector2Array(0, 0, -96, 0, -96, 96)
+width = 3.0
+
+[node name="Line2D10" type="Line2D" parent="Panel/damage/DI_2" groups=["skill_line"]]
+position = Vector2(64, 32)
+points = PackedVector2Array(0, 0, 96, 0, 96, 96)
+width = 3.0
+
+[node name="DI_3" parent="Panel/damage" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 240.0
+offset_top = 217.0
+offset_right = 240.0
+offset_bottom = 217.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "DI_3"
+texture = ExtResource("2_0oiwb")
+skill_type = "DI"
+parent = NodePath("../DI_2")
+order = 3
+skill_status = SubResource("Resource_vsj48")
+
+[node name="Line2D7" type="Line2D" parent="Panel/damage/DI_3" groups=["skill_line"]]
+position = Vector2(32, 64)
+points = PackedVector2Array(0, 0, 0, 64)
+width = 3.0
+
+[node name="DI_4" parent="Panel/damage" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 240.0
+offset_top = 345.0
+offset_right = 240.0
+offset_bottom = 345.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "DI_4"
+texture = ExtResource("2_0oiwb")
+skill_type = "DI"
+parent = NodePath("../DI_3")
+order = 4
+skill_status = SubResource("Resource_vsj48")
+
+[node name="Line2D8" type="Line2D" parent="Panel/damage/DI_4" groups=["skill_line"]]
+position = Vector2(32, 64)
+points = PackedVector2Array(0, 0, 0, 64)
+width = 3.0
+
+[node name="DI_5" parent="Panel/damage" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 240.0
+offset_top = 473.0
+offset_right = 240.0
+offset_bottom = 473.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "DI_5"
+texture = ExtResource("2_0oiwb")
+skill_type = "DI"
+parent = NodePath("../DI_4")
+order = 5
+skill_status = SubResource("Resource_vsj48")
+
+[node name="CCI_1" parent="Panel/damage" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 368.0
+offset_top = 217.0
+offset_right = 368.0
+offset_bottom = 217.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "CCI_1"
+texture = ExtResource("4_eqvb6")
+skill_type = "CCI"
+parent = NodePath("../DI_2")
+order = 3
+skill_status = SubResource("Resource_3w1o7")
+
+[node name="Line2D2" type="Line2D" parent="Panel/damage/CCI_1"]
+position = Vector2(32, 64)
+points = PackedVector2Array(0, 0, 0, 64)
+width = 3.0
+
+[node name="CCI_2" parent="Panel/damage" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 368.0
+offset_top = 345.0
+offset_right = 368.0
+offset_bottom = 345.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "CCI_2"
+texture = ExtResource("4_eqvb6")
+skill_type = "CCI"
+parent = NodePath("../CCI_1")
+order = 4
+skill_status = SubResource("Resource_nqqgi")
+
+[node name="Line2D3" type="Line2D" parent="Panel/damage/CCI_2" groups=["skill_line"]]
+position = Vector2(32, 64)
+points = PackedVector2Array(0, 0, 0, 64)
+width = 3.0
+
+[node name="CCI_3" parent="Panel/damage" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 368.0
+offset_top = 473.0
+offset_right = 368.0
+offset_bottom = 473.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "CCI_3"
+texture = SubResource("CompressedTexture2D_eqvb6")
+skill_type = "CCI"
+parent = NodePath("../CCI_2")
+order = 5
+skill_status = SubResource("Resource_r3l10")
+
+[node name="CMI_1" parent="Panel/damage" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 112.0
+offset_top = 217.0
+offset_right = 112.0
+offset_bottom = 217.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "CMI_1"
+texture = ExtResource("5_3w1o7")
+skill_type = "CMI"
+parent = NodePath("../DI_2")
+order = 3
+skill_status = SubResource("Resource_kkkiy")
+
+[node name="Line2D4" type="Line2D" parent="Panel/damage/CMI_1" groups=["skill_line"]]
+position = Vector2(32, 64)
+points = PackedVector2Array(0, 0, 0, 64)
+width = 3.0
+
+[node name="CMI_2" parent="Panel/damage" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 112.0
+offset_top = 345.0
+offset_right = 112.0
+offset_bottom = 345.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "CMI_2"
+texture = ExtResource("5_3w1o7")
+skill_type = "CMI"
+parent = NodePath("../CMI_1")
+order = 4
+skill_status = SubResource("Resource_rya80")
+
+[node name="Line2D5" type="Line2D" parent="Panel/damage/CMI_2" groups=["skill_line"]]
+position = Vector2(32, 64)
+points = PackedVector2Array(0, 0, 0, 64)
+width = 3.0
+
+[node name="CMI_3" parent="Panel/damage" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 112.0
+offset_top = 473.0
+offset_right = 112.0
+offset_bottom = 473.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "CMI_3"
+texture = SubResource("CompressedTexture2D_nqqgi")
+skill_type = "CMI"
+parent = NodePath("../CMI_2")
+order = 5
+skill_status = SubResource("Resource_ewhlj")
+
+[node name="health" type="Control" parent="Panel"]
+anchors_preset = 0
+offset_left = 384.0
+offset_top = 128.0
+offset_right = 448.0
+offset_bottom = 192.0
+
+[node name="TextureButton" parent="Panel/health" instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("2_0oiwb")
-texture = ExtResource("2_0oiwb")
-skill_status = SubResource("Resource_vsj48")
+texture = SubResource("CompressedTexture2D_vsj48")
+cost = 100
+skill_status = SubResource("Resource_eqvb6")

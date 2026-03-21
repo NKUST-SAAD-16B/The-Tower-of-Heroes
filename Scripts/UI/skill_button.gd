@@ -4,6 +4,15 @@ extends TextureButton
 @export var skill_name : String
 @export var texture : Texture2D
 @export var cost : int
+@export var description : String
+@export var skill_type : String
+#能力按鈕的父節點，默認為null，表示沒有父節點
+@export var parent : TextureButton
+#能力的層級
+@export var order : int
+
+#當能力按鈕被按下時，發出skill_button_pressed信號，並將技能名稱作為參數傳遞
+signal skill_button_pressed(button_node:TextureButton)
 
 #技能的屬性增益，使用Resource類型的skill_stats資源來存儲技能的屬性增益數值
 @export var skill_status : SkillStats
@@ -46,4 +55,8 @@ func _on_button_pressed():
         print("Player Walk Speed: ", PlayerData.player_walk_speed)
         print("Player Run Speed: ", PlayerData.player_run_speed)
         print("Player Gold Quantity: ", PlayerData.gold_quantity)
+        skill_button_pressed.emit(self)
+    else:
+        print("金幣不足，無法啟用能力。")
     pass
+
