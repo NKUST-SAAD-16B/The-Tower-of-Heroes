@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cknuq8g1hg4rd"]
+[gd_scene load_steps=27 format=3 uid="uid://cknuq8g1hg4rd"]
 
 [ext_resource type="PackedScene" uid="uid://doskiqk2mgjpq" path="res://Scenes/UI/skill_button.tscn" id="1_0oiwb"]
 [ext_resource type="Script" uid="uid://cgqsuswm18ric" path="res://Scripts/UI/skill_tree.gd" id="1_3w1o7"]
@@ -98,7 +98,59 @@ load_path = "res://.godot/imported/healing_spell.png-535e9856ba6c37ca987c711c02d
 
 [sub_resource type="Resource" id="Resource_eqvb6"]
 script = ExtResource("3_vsj48")
-health_increase = 0
+health_increase = 20
+damage_increase = 0
+critical_chance_increase = 0.0
+critical_multiplier_increase = 0.0
+walk_speed_increase = 0
+run_speed_increase = 0
+metadata/_custom_type_script = "uid://clhykgsresp5d"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3w1o7"]
+load_path = "res://.godot/imported/healing_spell.png-535e9856ba6c37ca987c711c02d4f014.ctex"
+
+[sub_resource type="Resource" id="Resource_1fllh"]
+script = ExtResource("3_vsj48")
+health_increase = 20
+damage_increase = 0
+critical_chance_increase = 0.0
+critical_multiplier_increase = 0.0
+walk_speed_increase = 0
+run_speed_increase = 0
+metadata/_custom_type_script = "uid://clhykgsresp5d"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rya80"]
+load_path = "res://.godot/imported/healing_spell.png-535e9856ba6c37ca987c711c02d4f014.ctex"
+
+[sub_resource type="Resource" id="Resource_kxd46"]
+script = ExtResource("3_vsj48")
+health_increase = 20
+damage_increase = 0
+critical_chance_increase = 0.0
+critical_multiplier_increase = 0.0
+walk_speed_increase = 0
+run_speed_increase = 0
+metadata/_custom_type_script = "uid://clhykgsresp5d"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5rq75"]
+load_path = "res://.godot/imported/healing_spell.png-535e9856ba6c37ca987c711c02d4f014.ctex"
+
+[sub_resource type="Resource" id="Resource_q51gh"]
+script = ExtResource("3_vsj48")
+health_increase = 20
+damage_increase = 0
+critical_chance_increase = 0.0
+critical_multiplier_increase = 0.0
+walk_speed_increase = 0
+run_speed_increase = 0
+metadata/_custom_type_script = "uid://clhykgsresp5d"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nu6wr"]
+load_path = "res://.godot/imported/healing_spell.png-535e9856ba6c37ca987c711c02d4f014.ctex"
+
+[sub_resource type="Resource" id="Resource_et42w"]
+script = ExtResource("3_vsj48")
+health_increase = 20
 damage_increase = 0
 critical_chance_increase = 0.0
 critical_multiplier_increase = 0.0
@@ -153,7 +205,7 @@ grow_vertical = 2
 texture_normal = ExtResource("2_0oiwb")
 skill_name = "劍技I"
 texture = ExtResource("2_0oiwb")
-cost = 100
+cost = 20
 description = "基礎攻擊力+10
 爆擊機率+10%
 爆擊傷害+10%"
@@ -433,12 +485,13 @@ skill_status = SubResource("Resource_ewhlj")
 
 [node name="health" type="Control" parent="Panel"]
 anchors_preset = 0
-offset_left = 384.0
-offset_top = 128.0
-offset_right = 448.0
-offset_bottom = 192.0
+offset_left = 232.0
+offset_top = 104.0
+offset_right = 296.0
+offset_bottom = 168.0
+scale = Vector2(1.5, 1.5)
 
-[node name="TextureButton" parent="Panel/health" instance=ExtResource("1_0oiwb")]
+[node name="HI_1" parent="Panel/health" groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -449,6 +502,108 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("2_0oiwb")
+skill_name = "活力I"
 texture = SubResource("CompressedTexture2D_vsj48")
 cost = 20
+description = "最大生命值+20"
 skill_status = SubResource("Resource_eqvb6")
+
+[node name="Line2D" type="Line2D" parent="Panel/health/HI_1"]
+position = Vector2(32, 64)
+points = PackedVector2Array(0, 0, 0, 64)
+width = 3.0
+
+[node name="HI_2" parent="Panel/health" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "活力II"
+texture = SubResource("CompressedTexture2D_3w1o7")
+cost = 40
+description = "最大生命值+20"
+parent = NodePath("../HI_1")
+skill_status = SubResource("Resource_1fllh")
+
+[node name="Line2D" type="Line2D" parent="Panel/health/HI_2"]
+position = Vector2(32, 64)
+points = PackedVector2Array(0, 0, 0, 64)
+width = 3.0
+
+[node name="HI_3" parent="Panel/health" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_top = 256.0
+offset_right = 128.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "活力III"
+texture = SubResource("CompressedTexture2D_rya80")
+cost = 60
+description = "最大生命值+20"
+parent = NodePath("../HI_2")
+skill_status = SubResource("Resource_kxd46")
+
+[node name="Line2D" type="Line2D" parent="Panel/health/HI_3"]
+position = Vector2(32, 64)
+points = PackedVector2Array(0, 0, 0, 64)
+width = 3.0
+
+[node name="HI_4" parent="Panel/health" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_top = 384.0
+offset_right = 128.0
+offset_bottom = 384.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "活力IV"
+texture = SubResource("CompressedTexture2D_5rq75")
+cost = 80
+description = "最大生命值+20"
+parent = NodePath("../HI_3")
+skill_status = SubResource("Resource_q51gh")
+
+[node name="Line2D" type="Line2D" parent="Panel/health/HI_4"]
+position = Vector2(32, 64)
+points = PackedVector2Array(0, 0, 0, 64)
+width = 3.0
+
+[node name="HI_5" parent="Panel/health" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_top = 512.0
+offset_right = 128.0
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "活力IV"
+texture = SubResource("CompressedTexture2D_nu6wr")
+cost = 100
+description = "最大生命值+20"
+parent = NodePath("../HI_4")
+skill_status = SubResource("Resource_et42w")
