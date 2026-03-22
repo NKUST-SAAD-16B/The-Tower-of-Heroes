@@ -4,9 +4,10 @@ extends PanelContainer
 @onready var cost_label : Label = $MarginContainer/VBoxContainer/Cost
 
 func setup(title: String, description: String, cost: int) -> void:
+	#等待節點都ready後再設置tooltip的內容，要不然會出現null reference error
 	if not is_node_ready():
-		print("Tooltip not ready yet. Delaying setup.")
 		await self.ready
+	
 	title_label.text = title
 	description_label.text = description
 	cost_label.text = "金幣花費: " + str(cost)

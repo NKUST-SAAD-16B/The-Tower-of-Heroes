@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cknuq8g1hg4rd"]
+[gd_scene load_steps=34 format=3 uid="uid://cknuq8g1hg4rd"]
 
 [ext_resource type="PackedScene" uid="uid://doskiqk2mgjpq" path="res://Scenes/UI/skill_button.tscn" id="1_0oiwb"]
 [ext_resource type="Script" uid="uid://cgqsuswm18ric" path="res://Scripts/UI/skill_tree.gd" id="1_3w1o7"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ipud3w4qyma3" path="res://Assets/[VerArc Stash] Basic_Skills_and_Buffs/Buffs/knockback_boost.png" id="4_eqvb6"]
 [ext_resource type="Texture2D" uid="uid://bi4g87vhbqoak" path="res://Assets/[VerArc Stash] Basic_Skills_and_Buffs/Buffs/critical_boost.png" id="5_3w1o7"]
 [ext_resource type="Texture2D" uid="uid://cbal4pb5rj0b2" path="res://Assets/[VerArc Stash] Basic_Skills_and_Buffs/Buffs/swiftness.png" id="7_rya80"]
+[ext_resource type="Texture2D" uid="uid://qg5e2d71j4s1" path="res://Assets/Icons/gold.png" id="8_kkkiy"]
 
 [sub_resource type="Resource" id="Resource_ciukl"]
 script = ExtResource("3_vsj48")
@@ -227,6 +228,26 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Title" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.0185185
+offset_left = 878.5
+offset_top = 12.93
+offset_right = -878.5
+offset_bottom = 51.93
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_font_sizes/font_size = 60
+text = "技能樹"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
 [node name="damage" type="Control" parent="Panel"]
 layout_mode = 1
 anchors_preset = 8
@@ -234,13 +255,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -328.0
-offset_top = -380.0
-offset_right = -264.0
-offset_bottom = -316.0
+offset_left = -352.0
+offset_top = -340.0
+offset_right = -288.0
+offset_bottom = -276.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.3, 1.3)
 
 [node name="DI_1" parent="Panel/damage" groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
 layout_mode = 1
@@ -536,11 +557,11 @@ skill_status = SubResource("Resource_ewhlj")
 
 [node name="health" type="Control" parent="Panel"]
 anchors_preset = 0
-offset_left = 232.0
-offset_top = 104.0
-offset_right = 296.0
-offset_bottom = 168.0
-scale = Vector2(1.5, 1.5)
+offset_left = 240.0
+offset_top = 152.0
+offset_right = 304.0
+offset_bottom = 216.0
+scale = Vector2(1.3, 1.3)
 
 [node name="HI_1" parent="Panel/health" groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
 layout_mode = 1
@@ -662,11 +683,11 @@ skill_status = SubResource("Resource_et42w")
 [node name="Speed" type="Control" parent="Panel"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1400.0
-offset_top = 96.0
-offset_right = 1464.0
-offset_bottom = 160.0
-scale = Vector2(1.5, 1.5)
+offset_left = 1264.0
+offset_top = 152.0
+offset_right = 1328.0
+offset_bottom = 216.0
+scale = Vector2(1.3, 1.3)
 
 [node name="SI_1" parent="Panel/Speed" groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
 layout_mode = 1
@@ -784,3 +805,26 @@ cost = 100
 description = "奔跑速度+10"
 parent = NodePath("../SI_4")
 skill_status = SubResource("Resource_mqpsa")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -170.0
+offset_top = 20.0
+offset_right = -70.0
+offset_bottom = 79.0
+grow_horizontal = 0
+
+[node name="GoldTexture" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("8_kkkiy")
+expand_mode = 2
+
+[node name="GoldQuantity" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
