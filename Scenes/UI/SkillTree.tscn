@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cknuq8g1hg4rd"]
+[gd_scene load_steps=33 format=3 uid="uid://cknuq8g1hg4rd"]
 
 [ext_resource type="PackedScene" uid="uid://doskiqk2mgjpq" path="res://Scenes/UI/skill_button.tscn" id="1_0oiwb"]
 [ext_resource type="Script" uid="uid://cgqsuswm18ric" path="res://Scripts/UI/skill_tree.gd" id="1_3w1o7"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://clhykgsresp5d" path="res://Scripts/Resource/skill_stats.gd" id="3_vsj48"]
 [ext_resource type="Texture2D" uid="uid://ipud3w4qyma3" path="res://Assets/[VerArc Stash] Basic_Skills_and_Buffs/Buffs/knockback_boost.png" id="4_eqvb6"]
 [ext_resource type="Texture2D" uid="uid://bi4g87vhbqoak" path="res://Assets/[VerArc Stash] Basic_Skills_and_Buffs/Buffs/critical_boost.png" id="5_3w1o7"]
+[ext_resource type="Texture2D" uid="uid://cbal4pb5rj0b2" path="res://Assets/[VerArc Stash] Basic_Skills_and_Buffs/Buffs/swiftness.png" id="7_rya80"]
 
 [sub_resource type="Resource" id="Resource_ciukl"]
 script = ExtResource("3_vsj48")
@@ -156,6 +157,56 @@ critical_chance_increase = 0.0
 critical_multiplier_increase = 0.0
 walk_speed_increase = 0
 run_speed_increase = 0
+metadata/_custom_type_script = "uid://clhykgsresp5d"
+
+[sub_resource type="Resource" id="Resource_5rq75"]
+script = ExtResource("3_vsj48")
+health_increase = 0
+damage_increase = 0
+critical_chance_increase = 0.0
+critical_multiplier_increase = 0.0
+walk_speed_increase = 0
+run_speed_increase = 10
+metadata/_custom_type_script = "uid://clhykgsresp5d"
+
+[sub_resource type="Resource" id="Resource_nu6wr"]
+script = ExtResource("3_vsj48")
+health_increase = 0
+damage_increase = 0
+critical_chance_increase = 0.0
+critical_multiplier_increase = 0.0
+walk_speed_increase = 0
+run_speed_increase = 10
+metadata/_custom_type_script = "uid://clhykgsresp5d"
+
+[sub_resource type="Resource" id="Resource_mrrgn"]
+script = ExtResource("3_vsj48")
+health_increase = 0
+damage_increase = 0
+critical_chance_increase = 0.0
+critical_multiplier_increase = 0.0
+walk_speed_increase = 0
+run_speed_increase = 10
+metadata/_custom_type_script = "uid://clhykgsresp5d"
+
+[sub_resource type="Resource" id="Resource_twerc"]
+script = ExtResource("3_vsj48")
+health_increase = 0
+damage_increase = 0
+critical_chance_increase = 0.0
+critical_multiplier_increase = 0.0
+walk_speed_increase = 0
+run_speed_increase = 10
+metadata/_custom_type_script = "uid://clhykgsresp5d"
+
+[sub_resource type="Resource" id="Resource_mqpsa"]
+script = ExtResource("3_vsj48")
+health_increase = 0
+damage_increase = 0
+critical_chance_increase = 0.0
+critical_multiplier_increase = 0.0
+walk_speed_increase = 0
+run_speed_increase = 10
 metadata/_custom_type_script = "uid://clhykgsresp5d"
 
 [node name="Control" type="Control"]
@@ -607,3 +658,129 @@ cost = 100
 description = "最大生命值+20"
 parent = NodePath("../HI_4")
 skill_status = SubResource("Resource_et42w")
+
+[node name="Speed" type="Control" parent="Panel"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1400.0
+offset_top = 96.0
+offset_right = 1464.0
+offset_bottom = 160.0
+scale = Vector2(1.5, 1.5)
+
+[node name="SI_1" parent="Panel/Speed" groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_right = 128.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "疾走I"
+texture = ExtResource("7_rya80")
+cost = 20
+description = "奔跑速度+10"
+skill_status = SubResource("Resource_5rq75")
+
+[node name="Line2D" type="Line2D" parent="Panel/Speed/SI_1"]
+position = Vector2(32, 64)
+points = PackedVector2Array(0, 0, 0, 64)
+width = 3.0
+
+[node name="SI_2" parent="Panel/Speed" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "疾走II"
+texture = ExtResource("7_rya80")
+cost = 40
+description = "奔跑速度+10"
+parent = NodePath("../SI_1")
+skill_status = SubResource("Resource_nu6wr")
+
+[node name="Line2D" type="Line2D" parent="Panel/Speed/SI_2"]
+position = Vector2(32, 64)
+points = PackedVector2Array(0, 0, 0, 64)
+width = 3.0
+
+[node name="SI_3" parent="Panel/Speed" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_top = 256.0
+offset_right = 128.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "疾走III"
+texture = ExtResource("7_rya80")
+cost = 60
+description = "奔跑速度+10"
+parent = NodePath("../SI_2")
+skill_status = SubResource("Resource_mrrgn")
+
+[node name="Line2D" type="Line2D" parent="Panel/Speed/SI_3"]
+position = Vector2(32, 64)
+points = PackedVector2Array(0, 0, 0, 64)
+width = 3.0
+
+[node name="SI_4" parent="Panel/Speed" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_top = 384.0
+offset_right = 128.0
+offset_bottom = 384.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "疾走IV"
+texture = ExtResource("7_rya80")
+cost = 80
+description = "奔跑速度+10"
+parent = NodePath("../SI_3")
+skill_status = SubResource("Resource_twerc")
+
+[node name="Line2D" type="Line2D" parent="Panel/Speed/SI_4"]
+position = Vector2(32, 64)
+points = PackedVector2Array(0, 0, 0, 64)
+width = 3.0
+
+[node name="SI_5" parent="Panel/Speed" node_paths=PackedStringArray("parent") groups=["skill_buttons"] instance=ExtResource("1_0oiwb")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_top = 512.0
+offset_right = 128.0
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = ExtResource("2_0oiwb")
+skill_name = "疾走IV"
+texture = ExtResource("7_rya80")
+cost = 100
+description = "奔跑速度+10"
+parent = NodePath("../SI_4")
+skill_status = SubResource("Resource_mqpsa")
