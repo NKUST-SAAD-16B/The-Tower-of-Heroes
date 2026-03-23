@@ -8,6 +8,11 @@ var current_card : Array = []
 #卡片選擇完成後發出信號，通知world.gd繼續遊戲
 signal card_selected
 
+#卡片按鈕節點
+@onready var card_1 : TextureButton = $HBoxContainer/Card1
+@onready var card_2 : TextureButton = $HBoxContainer/Card2
+@onready var card_3 : TextureButton = $HBoxContainer/Card3
+
 func _ready() -> void:
 	# 初始隱藏
 	self.hide()
@@ -17,6 +22,11 @@ func generate_cards() -> void:
 	# 清空舊數據
 	current_card.clear()
 	var selected_keys = []
+	
+	#開啟按鈕
+	card_1.disabled = false
+	card_2.disabled = false
+	card_3.disabled = false
 	
 	# 隨機生成 3 張命運卡
 	for i in range(3):
@@ -58,6 +68,10 @@ func _on_card_3_pressed() -> void:
 
 #選擇命運卡後的處理函數，發出card_selected信號並隱藏商店菜單
 func selected() -> void:
+	#所有按鈕在選擇後都不可再被點擊，避免重複選擇
+	card_1.disabled = true
+	card_2.disabled = true
+	card_3.disabled = true
 	#向下移動商店菜單以實現滑出動畫
 	var tween = create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
