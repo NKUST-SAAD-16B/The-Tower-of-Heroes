@@ -2,6 +2,11 @@ extends Control
 
 #技能樹腳本
 @onready var gold_quantity_label : Label = $HBoxContainer/GoldQuantity
+
+#繼續前往下一層的按鈕
+@onready var continue_button : Button = $ContinueButton
+
+signal continue_to_next_floor
 func _ready() -> void:
 	#連接所有技能按鈕的skill_button_pressed信號到_on_skill_button_pressed函數
 	for button in get_tree().get_nodes_in_group("skill_buttons"):
@@ -12,8 +17,8 @@ func _ready() -> void:
 	if not PlayerData.gold_quantity_changed.is_connected(_on_gold_quantity_changed):
 		PlayerData.gold_quantity_changed.connect(_on_gold_quantity_changed)
 
-	#測試完後刪除
-	#gold_quantity_label.text = str(PlayerData.gold_quantity)    
+
+	gold_quantity_label.text = str(PlayerData.gold_quantity)    
 	pass
 
 #啟用下個能力按鈕的函數，將當前按鈕的狀態設置為false，並啟用下一個按鈕
@@ -32,3 +37,10 @@ func enable_next_button(button_node:TextureButton) -> void:
 			
 func _on_gold_quantity_changed():
 	gold_quantity_label.text = str(PlayerData.gold_quantity)
+
+func _on_continue_button_pressed() -> void:
+	get_tree().paused = false
+	#繼續前往下一層的按鈕被按下後，隱藏技能樹界面並觸發房間過渡
+	self.hide()
+	continue_to_next_floor.emit()
+	pass

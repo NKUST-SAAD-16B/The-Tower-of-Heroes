@@ -16,6 +16,8 @@ extends Node2D
 #商店菜單節點
 @onready var ShopMenu : Control = $CanvasLayer/NewShopMenu
 
+#技能樹菜單節點
+@onready var SkillTree : Control = $CanvasLayer/SkillTree
 
 
 func _ready() -> void:
@@ -25,7 +27,9 @@ func _ready() -> void:
 	#連接GameManager的enemy_defeated信號到transform_to_shop函數，當敵人被擊敗時觸發商店過渡
 	GameManager.enemy_defeated.connect(transform_to_shop)
 	#連接商店菜單的card_selected信號到scence_transition函數，當玩家選擇命運卡後觸發房間過渡
-	ShopMenu.card_selected.connect(room_transition)
+	ShopMenu.card_selected.connect(transform_to_skill_tree)
+	#連接技能樹的continue_to_next_floor信號到room_transition函數，當玩家在技能樹界面點擊繼續前往下一層按鈕後觸發房間過渡
+	SkillTree.continue_to_next_floor.connect(room_transition)
 	pass
 
 
@@ -43,8 +47,6 @@ func room_transition():
 	#如果當前房間中有子節點，則刪除它們以清空房間
 	if get_node("CurrentRoom").get_child_count() > 0:
 		for child in get_node("CurrentRoom").get_children():
-			if child is Gold:
-				PlayerData.gold_quantity += 1
 			child.queue_free()
 
 	#隨機選擇一個房間場景並實例化
@@ -117,7 +119,12 @@ func _on_enemy_spawn_timer_timeout() -> void:
 
 #商店過渡，生成商店菜單
 func transform_to_shop():
-	# 稍微等待一下，確保最後一個怪物的死亡動畫能完全播完，並且特效跑完
+	await get_tree().process_frame#等待當前幀結束，確保所有敵人死亡後的邏輯都已經處理完畢
+	#等待場景中的金幣都被刪除
+	while get_tree().get_nodes_in_group("Golds").size() > 0:
+		print("等待金幣被撿取或消失，剩餘金幣數量: ", get_tree().get_nodes_in_group("Golds").size())
+		await get_tree().process_frame
+	# 稍微等待一下，確保最後一個怪物的死亡動畫能完全播完
 	await get_tree().create_timer(1.0).timeout
 	
 	#商店出現動畫，畫面由上方滑入，持續時間為1秒
@@ -133,4 +140,15 @@ func transform_to_shop():
 	ShopMenu.show()
 	#使用tween來實現商店菜單的滑入動畫
 	tween.tween_property(ShopMenu, "position", Vector2(ShopMenu.position.x, 0), 1.0)
-	
+
+#切換到技能樹界面
+func transform_to_skill_tree():
+	#技能樹界面出現動畫，畫面由上方滑入，持續時間為1秒
+	var tween := create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	SkillTree.position = Vector2(SkillTree.position.x, -SkillTree.size.y)
+	SkillTree.show()
+	tween.tween_property(SkillTree, "position", Vector2(SkillTree.position.x, 0), 1.0)
+	pass
+
+

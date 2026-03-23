@@ -564,7 +564,7 @@ animations = [{
 height = 37.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_05d71"]
-radius = 38.3333
+radius = 1057.3
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
