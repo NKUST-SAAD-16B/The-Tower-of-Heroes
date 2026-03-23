@@ -58,6 +58,13 @@ func _on_card_3_pressed() -> void:
 
 #選擇命運卡後的處理函數，發出card_selected信號並隱藏商店菜單
 func selected() -> void:
+	#向下移動商店菜單以實現滑出動畫
+	var tween = create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.tween_property(self, "position", Vector2(self.position.x, self.size.y), 1.0)
+	#等待動畫完成後才執行後續程式碼
+	await tween.finished
+
+	#發出card_selected信號，通知world.gd
 	card_selected.emit()
-	get_tree().paused = false
 	self.hide()
