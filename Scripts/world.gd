@@ -79,7 +79,11 @@ func spawn_player(player_position: Vector2) -> void:
 	#實例化玩家角色並添加到當前房間
 	var player_instance = GameManager.player_scene.instantiate()
 	get_node("CurrentRoom").add_child(player_instance)
+	if not player_instance.is_node_ready():
+		await player_instance.ready #等待玩家角色的_ready()函數執行完畢，確保玩家角色的節點和組件都已經初始化完成
+	
 	player_instance.position = player_position
+	print("玩家生成於位置: ", player_position)
 	#設置玩家UI的HealthComponent引用
 	PlayerUI.health_component = player_instance.health_component
 	PlayerUI.setup_ui()

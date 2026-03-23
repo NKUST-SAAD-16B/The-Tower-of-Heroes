@@ -59,13 +59,13 @@ func _update_shield_ui():
 #更新血條
 func _update_bar(current_health):
 	#用傳入的當前血量計算當前血條百分比
-	var percentage = (current_health / float(health_component.max_health)) * 100
+	#var percentage = (current_health / float(health_component.max_health)) * 100
 	
 	#設置血條到當前百分比
-	health_bar.value = percentage
+	health_bar.value = current_health
 	#這個是用於緩衝條的動畫
 	var tween = create_tween()
-	tween.tween_property(catchup_bar, "value", percentage, 0.4).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(catchup_bar, "value", current_health, 0.4).set_trans(Tween.TRANS_SINE)
 	pass
 
 func _update_current_enemy_quantity():
