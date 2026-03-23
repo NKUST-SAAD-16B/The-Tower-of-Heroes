@@ -24,7 +24,7 @@ func player_data_init():
     player_base_damage = 50
     player_bonus_damage = 0
     player_critical_chance = 0.0
-    player_critical_multiplier = 1.5
+    player_critical_multiplier = 1.0
     player_walk_speed = 50
     player_run_speed = 100
     player_scale = 0.6
