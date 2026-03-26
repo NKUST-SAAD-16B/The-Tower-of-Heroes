@@ -38,6 +38,8 @@ func _ready() -> void:
 	#移動速度設定
 	walk_speed = base_walk_speed * GameManager.enemy_walk_speed_multiplier
 	health_component.max_health = int(health_component.max_health * GameManager.enemy_health_multiplier)
+	# 金幣掉落量計算 (根據倍率，使用 ceil 確保小量金幣也能有感增加)
+	gold_drop_amount = ceil(gold_drop_amount * GameManager.enemy_gold_multiplier)
 func _physics_process(delta: float) -> void:
 	
 	if not is_on_floor():

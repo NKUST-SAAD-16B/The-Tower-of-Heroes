@@ -21,4 +21,8 @@ func Enter():
 
 func _on_animation_finished():
 	if animated_sprite.animation == "death": # 確保是死亡動畫播完
+		# 生成金幣 (呼叫父類別的函數)
+		drop_gold()
+		# 更新敵人數量，通知 GameManager (確保房間能正確結束)
+		GameManager.current_enemy_quantity -= 1
 		actor.queue_free() # 徹底從場景中刪除 Boss

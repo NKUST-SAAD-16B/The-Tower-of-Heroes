@@ -70,7 +70,7 @@ var destiny_data = {
 	"Resource_drop_increase": {
 		"title": "卑鄙原之助",
 		"icon": "res://path_to_destiny_11_icon.png",
-		"description": "暫無功能"
+		"description": "金幣掉落量增加15%"
 	}
 }
 
@@ -101,12 +101,13 @@ func destiny_random(exclude_keys: Array = []) -> Dictionary:
 				"Enemy_speed_increase",
 				"Enemy_quantity_increase",
 				"Guardian_Fake_Shield",
-				"Scarlet_Festival",
-				"Resource_drop_increase"
+				"Scarlet_Festival"
 			]
 			
 			if key in five_limit_keys:
 				max_count = 5
+			elif key == "Resource_drop_increase":
+				max_count = 1
 				
 			if destiny_counts[key] < max_count:
 				available_keys.append(key)
@@ -121,7 +122,7 @@ func destiny_random(exclude_keys: Array = []) -> Dictionary:
 	result["key"] = random_key # 加入 key 以便後續識別
 	
 	# 如果是有次數限制的事件，加上羅馬數字標記並更新敘述
-	if destiny_counts.has(random_key):
+	if destiny_counts.has(random_key) and random_key != "Resource_drop_increase":
 		var level = destiny_counts[random_key] + 1
 		result["title"] = result["title"] + " " + get_roman_numeral(level)
 		
@@ -182,5 +183,5 @@ func destiny_apply(destiny: Dictionary) -> void:
 				PlayerData.player_current_health = 1
 			print("腥紅盛典：增加傷害 50，扣除生命 20，當前生命: " + str(PlayerData.player_current_health))
 		"Resource_drop_increase":
-			# 目前暫無功能
-			pass
+			GameManager.enemy_gold_multiplier += 0.15
+			print("卑鄙原之助：金幣掉落倍率增加至 " + str(GameManager.enemy_gold_multiplier))

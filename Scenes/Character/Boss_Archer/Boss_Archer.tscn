@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c71x6p64icbqr" path="res://Scripts/Enemy/BOSS/Archer/boss_archer.gd" id="1_evudq"]
 [ext_resource type="Texture2D" uid="uid://clrh1ykrmcuok" path="res://Assets/Boss/Arcane archer/spritesheet.png" id="1_ukoje"]
-[ext_resource type="Script" uid="uid://inbwn3vyxvw0" path="res://Scripts/component/health_component.gd" id="2_lhpic"]
+[ext_resource type="Script" uid="uid://dednc60hhyuah" path="res://Scripts/Enemy/BOSS/Archer/boss_health.gd" id="3_j3rbb"]
 [ext_resource type="PackedScene" uid="uid://ocrkyfhmvdn8" path="res://Scenes/Component/hurtbox_component.tscn" id="5_x2efu"]
-[ext_resource type="Script" path="res://Scripts/component/phase_component.gd" id="6_dt5hs"]
+[ext_resource type="Script" uid="uid://cabbawolu185u" path="res://Scripts/component/phase_component.gd" id="6_dt5hs"]
 [ext_resource type="Script" uid="uid://qjpuf4at0vpg" path="res://Scripts/state_machine.gd" id="6_ja346"]
 [ext_resource type="Script" uid="uid://b64phk6w2k2p7" path="res://Scripts/Enemy/BOSS/Archer/Boss_Archer_idle.gd" id="7_717nm"]
 [ext_resource type="Script" uid="uid://bcg22cqekxj02" path="res://Scripts/Enemy/BOSS/Archer/Boss_Archer_run.gd" id="7_x2efu"]
@@ -252,13 +252,14 @@ animation = &"shoot"
 autoplay = "idle"
 frame_progress = 0.359177
 
-[node name="HealthComponent" type="Node2D" parent="."]
-script = ExtResource("2_lhpic")
-metadata/_custom_type_script = "uid://inbwn3vyxvw0"
+[node name="Boss_Health" type="Node2D" parent="."]
+script = ExtResource("3_j3rbb")
+max_health = 1000
 
-[node name="HurtboxComponent" parent="." instance=ExtResource("5_x2efu")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_x2efu")]
 collision_layer = 32
 collision_mask = 0
+health_component = NodePath("../Boss_Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, -16)
@@ -276,7 +277,7 @@ disabled = true
 
 [node name="PhaseComponent" type="Node" parent="." node_paths=PackedStringArray("health_component")]
 script = ExtResource("6_dt5hs")
-health_component = NodePath("../HealthComponent")
+health_component = NodePath("../Boss_Health")
 
 [node name="PlayerChecker" type="Area2D" parent="."]
 collision_layer = 0
