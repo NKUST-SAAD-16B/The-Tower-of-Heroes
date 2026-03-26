@@ -17,6 +17,8 @@ var flying_to_player = false
 var direction : Vector2
 #目標玩家位置
 var target_position: Vector2
+#目前鎖定的玩家拾取區域
+var target_pickup_area: Area2D = null
     
 func _ready() -> void:
     #當金幣生成時，給予一個隨機的初始速度，使其有一個自然的掉落效果
@@ -24,14 +26,25 @@ func _ready() -> void:
     
     #剛生成的金幣會有一段時間無法被撿取，這樣可以避免玩家在金幣剛掉落時就立刻撿取，沒有掉落的感覺
     pickup_area.set_deferred("monitoring", false)
+
+    #加入Golds群組，方便在world.gd中統一管理金幣
+    add_to_group("Golds")
     pass
 
 func _physics_process(delta: float) -> void:
     #如果金幣正在飛向玩家，則更新金幣的速度和位置
     if flying_to_player:
-        velocity = direction * 200
+        if is_instance_valid(target_pickup_area):
+            target_position = target_pickup_area.global_position
+            direction = (target_position - global_position).normalized()
+        else:
+            flying_to_player = false
+            velocity = Vector2.ZERO
+            return
+
+        velocity = direction * 400
         #當金幣接近玩家時，增加玩家金幣，並將金幣從場景中移除
-        if position.distance_to(target_position) < 10 :
+        if global_position.distance_to(target_position) < 10 :
             PlayerData.gold_quantity += 1
             call_deferred("queue_free")
             
@@ -63,15 +76,18 @@ func _on_area_2d_area_entered(area:Area2D) -> void:
     if area.name == "PickUp":
         print("金幣被撿取")
         flying_to_player = true
+        target_pickup_area = area
         target_position = area.global_position
-        direction = (target_position - position).normalized()
+        direction = (target_position - global_position).normalized()
 
 
 
 func _on_area_2d_area_exited(area:Area2D) -> void:
-    flying_to_player = false
-    #當玩家離開金幣的檢測區域時，停止金幣飛向玩家，並將金幣的速度重置為0，這樣可以避免金幣在玩家離開後繼續飛行
-    velocity = Vector2.ZERO
-    print("玩家離開檢測區域")
+    if area == target_pickup_area:
+        flying_to_player = false
+        target_pickup_area = null
+        #當玩家離開金幣的檢測區域時，停止金幣飛向玩家，並將金幣的速度重置為0，這樣可以避免金幣在玩家離開後繼續飛行
+        velocity = Vector2.ZERO
+        print("玩家離開檢測區域")
 
 
