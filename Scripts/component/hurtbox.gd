@@ -2,7 +2,7 @@ extends Area2D
 class_name HurtBox
 
 @export var damage_label : PackedScene
-@onready var health_component: HealthComponent = $"../HealthComponent"
+@export var health_component: HealthComponent
 signal took_damage(knockback_vector)
 #傳遞給防禦狀態的訊號，讓防禦狀態知道玩家被攻擊了)
 signal defense_hit(attacker_position:Vector2, defense_result:Dictionary)
@@ -10,7 +10,10 @@ signal defense_hit(attacker_position:Vector2, defense_result:Dictionary)
 signal hurt(hitbox)
 
 func _ready() -> void:
+	if not health_component:
+		health_component = get_node_or_null("../HealthComponent")
 	hurt.connect(_on_hurt)
+
 
 func _on_hurt(hitbox:HitBox):
 	#攻擊者位置

@@ -29,6 +29,7 @@ var enemy_damage_multiplier : float = 1.0
 var enemy_health_multiplier : float = 1.0
 var enemy_walk_speed_multiplier : float = 1.0
 var enemy_quantity_multiplier : float = 1.0
+var enemy_gold_multiplier : float = 1.0
 
 #當前敵人數量
 var current_enemy_quantity : int = enemy_spawn_quantity:
