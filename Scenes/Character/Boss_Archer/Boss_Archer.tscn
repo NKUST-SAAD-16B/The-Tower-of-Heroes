@@ -252,14 +252,14 @@ animation = &"shoot"
 autoplay = "idle"
 frame_progress = 0.359177
 
-[node name="Boss_Health" type="Node2D" parent="."]
+[node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("3_j3rbb")
 max_health = 1000
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_x2efu")]
 collision_layer = 32
 collision_mask = 0
-health_component = NodePath("../Boss_Health")
+health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, -16)
@@ -277,7 +277,7 @@ disabled = true
 
 [node name="PhaseComponent" type="Node" parent="." node_paths=PackedStringArray("health_component")]
 script = ExtResource("6_dt5hs")
-health_component = NodePath("../Boss_Health")
+health_component = NodePath("../HealthComponent")
 
 [node name="PlayerChecker" type="Area2D" parent="."]
 collision_layer = 0

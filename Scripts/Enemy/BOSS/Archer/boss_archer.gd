@@ -5,8 +5,6 @@ var hit_count: int = 0
 @onready var phase_component: PhaseComponent = $PhaseComponent
 
 func _ready() -> void:
-	# 在呼叫 super._ready() 之前，先將 health_component 指向 Boss 專用的節點
-	health_component = $Boss_Health
 	# 設定 Boss 的金幣掉落量
 	gold_drop_amount = 30
 	super._ready()
