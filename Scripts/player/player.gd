@@ -51,8 +51,8 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("attack"):
 			state_machine.current_state.Transitioned.emit(state_machine.current_state,"attack")
 	
-	#防禦輸入檢測，當前狀態不在攻擊、受傷、死亡狀態時才允許切換到防禦狀態
-	if state_machine.current_state.name not in ["attack" ,"hurt" ,"died"] :
+	#防禦輸入檢測，當前狀態不在攻擊、受傷、死亡、跳躍狀態時才允許切換到防禦狀態
+	if state_machine.current_state.name not in ["attack" ,"hurt" ,"died"]:
 		if Input.is_action_just_pressed("defense"):
 			state_machine.current_state.Transitioned.emit(state_machine.current_state,"defense") 
 

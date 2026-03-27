@@ -19,7 +19,7 @@ func Update(delta: float) -> void :
 
 func Physics_process(delta: float) -> void :
 	
-	if Input.is_action_just_pressed("space"):
+	if Input.is_action_just_pressed("space") and actor.state_machine.current_state.name != "defense":
 		Transitioned.emit(self,"jump")
 	
 	# 偵測是否按住 Shift

@@ -19,7 +19,7 @@ func Update(delta: float) -> void :
 func Physics_process(delta: float) -> void :
 	
 	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.run_speed)
-	if Input.is_action_just_pressed("space"):
+	if Input.is_action_just_pressed("space") and actor.state_machine.current_state.name != "defense":
 		Transitioned.emit(self,"jump")
 	
 	var direction = Input.get_axis("left","right")
