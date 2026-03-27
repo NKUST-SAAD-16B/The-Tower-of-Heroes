@@ -19,7 +19,8 @@ var direction : Vector2
 var target_position: Vector2
 #目前鎖定的玩家拾取區域
 var target_pickup_area: Area2D = null
-    
+
+@onready var colloision_shape: CollisionShape2D = $CollisionShape2D  
 func _ready() -> void:
     #當金幣生成時，給予一個隨機的初始速度，使其有一個自然的掉落效果
     velocity = Vector2(randf_range(-50, 50), randf_range(-150, -100))
@@ -35,6 +36,7 @@ func _physics_process(delta: float) -> void:
     #如果金幣正在飛向玩家，則更新金幣的速度和位置
     if flying_to_player:
         if is_instance_valid(target_pickup_area):
+            colloision_shape.disabled = true #讓金幣在飛向玩家時不與其他物體發生碰撞，避免被其他物體擋住飛行路徑
             target_position = target_pickup_area.global_position
             direction = (target_position - global_position).normalized()
         else:
