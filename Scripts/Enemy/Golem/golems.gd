@@ -11,5 +11,7 @@ func _ready():
 	pass
 
 func _hurt(knockback):
+	if health_component.current_health <= 0:
+		return
 	self.knockback_vector = Vector2.ZERO  # Golem不受擊退影響
 	state_machine.current_state.Transitioned.emit(state_machine.current_state, "hurt")
