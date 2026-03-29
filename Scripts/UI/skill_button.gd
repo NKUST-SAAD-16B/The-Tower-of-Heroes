@@ -12,6 +12,8 @@ extends TextureButton
 @export var order : int
 #能力按鈕的tooltip
 @export var tooltip : PackedScene = preload("res://Scenes/UI/SkillTreeTooltip.tscn")
+#能力是否已經啟用，默認為false
+@onready var unlocked : bool = false
 #當能力按鈕被按下時，發出skill_button_pressed信號，並將技能名稱作為參數傳遞
 signal skill_button_pressed(button_node:TextureButton)
 
@@ -44,7 +46,8 @@ func _on_button_pressed():
 		button_state = true
 		#已啟用能力後，禁用按鈕以防止再次按下
 		disabled = true
-
+		#將能力的unlocked屬性設置為true，表示能力已經啟用
+		unlocked = true
 		PlayerData.skill_status_apply(skill_status)
 		
 		#在控制台輸出按鈕的名稱和當前狀態
