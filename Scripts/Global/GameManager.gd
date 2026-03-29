@@ -90,7 +90,9 @@ func save_game():
 		"enemies": [],
 		"world": {
 			"current_room": current_room.scene_file_path
-		}
+		},
+		"skill_tree": []
+		
 	}
 	var enemies = get_tree().get_nodes_in_group("Enemies") #獲取當前場景中所有屬於"Enemies"群組的節點，這些節點代表當前存在的敵人
 	#遍歷所有敵人，將它們的數據（如生命值、位置、類型等）保存到save_data的"enemies"列表中
@@ -102,7 +104,17 @@ func save_game():
 			"type": enemy.scene_file_path, #透過路徑獲取敵人類型
 		}
 		save_data["enemies"].append(enemy_data)
+	
+	#將已解鎖的技能保存到save_data的"skill_tree"部分
+	var skill_buttons = get_tree().get_nodes_in_group("skill_buttons")
+	for button in skill_buttons:
+		var skill_data = {
+			"skill_name": button.skill_name,
+			"button_state": button.button_state
+		}
+		save_data["skill_tree"].append(skill_data)
 
+	#將save_data轉換為JSON字符串，並寫入到指定的存檔路徑中
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	
 	if file:
@@ -167,6 +179,20 @@ func load_game():
 			enemy_quantity_multiplier = gm_data.get("enemy_quantity_multiplier", 1.0)
 			easter_egg_enabled = gm_data.get("easter_egg_enabled", false)
 			
+			# 還原技能樹狀態
+			var skill_tree_dict = {} # 用於存儲技能名稱和按鈕狀態的字典
+			for skill_data in save_data.get("skill_tree", []):
+				skill_tree_dict[skill_data["skill_name"]] = skill_data["button_state"] # 將技能名稱和按鈕狀態存入字典
+			var skill_tree_button = get_tree().get_nodes_in_group("skill_buttons") # 獲取當前場景中所有屬於"skill_buttons"群組的節點，這些節點代表技能樹中的按鈕
+			var skill_tree_instance = world.get_node("CanvasLayer/SkillTree") # 獲取技能樹實例
+			for button in skill_tree_button: #遍歷所有技能按鈕
+				if skill_tree_dict.has(button.skill_name):
+					button.button_state = skill_tree_dict[button.skill_name] # 根據存檔中的技能狀態還原按鈕的狀態
+					skill_tree_instance.enable_next_button(button) # 根據技能狀態啟用下一個按鈕
+
+
+
+
 			# 還原 PlayerData 數據
 			var pd_data = save_data.get("player_data", {})
 			PlayerData.player_current_health = pd_data.get("current_health", 100)
@@ -197,7 +223,7 @@ func load_game():
 					enemy_instance.health_component.current_health = enemy_data["health"]
 					enemy_instance.add_to_group("Enemies") #確保還原的敵人也加入"Enemies"群組
 			
-			print("存檔讀取成功！當前樓層準備還原為: ", current_floor + 1)
+			print("存檔讀取成功！當前樓層準備還原為: ", current_floor )
 			# 讀取後切換到遊戲場景
 			await SceneChanger.fade_in()
 			return true
