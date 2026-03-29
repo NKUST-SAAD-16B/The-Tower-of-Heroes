@@ -6,9 +6,12 @@ var player_scene = preload("res://Scenes/Character/player.tscn")
 
 var easter_egg_enabled : bool = false
 
+var is_loading_from_save: bool = false # 用於標記是否正在從存檔載入遊戲，初始值為 false
+
 signal enemy_defeated
 
 signal enemy_quantity_changed
+
 
 
 #當前樓層數，初始值為1，每次房間過渡時增加1	
@@ -16,7 +19,7 @@ var current_floor : int = 0
 
 #敵人生成數量，初始值為10，根據DestinyManager的enemy_quantity_multiplier進行修改
 
-var enemy_spawn_quantity : int = 1:
+var enemy_spawn_quantity : int = 2:
 
 	#當enemy_spawn_quantity被修改時，同步更新current_enemy_quantity的值，確保它們保持一致
 	set(value):
@@ -48,12 +51,19 @@ var current_enemy_quantity : int = enemy_spawn_quantity:
 # 存檔檔案路徑
 const SAVE_PATH = "user://savegame.save"
 
+func _ready() -> void:
+	load_settings_only()
+
 # 檢查是否有存檔
 func has_save_file() -> bool:
 	return FileAccess.file_exists(SAVE_PATH)
 
 # 儲存遊戲數據
 func save_game():
+
+	var world = get_tree().current_scene
+	var current_room = world.get_node("CurrentRoom").get_child(0)
+
 	var save_data = {
 		"game_manager": {
 			"current_floor": current_floor,
@@ -73,25 +83,40 @@ func save_game():
 			"walk_speed": PlayerData.player_walk_speed,
 			"run_speed": PlayerData.player_run_speed,
 			"scale": PlayerData.player_scale,
-			"gold_quantity": PlayerData.gold_quantity
+			"gold_quantity": PlayerData.gold_quantity,
+			"position.x":PlayerData.player_position_x,
+			"position.y":PlayerData.player_position_y
+		},
+		"enemies": [],
+		"world": {
+			"current_room": current_room.scene_file_path
 		}
 	}
-	
+	var enemies = get_tree().get_nodes_in_group("Enemies") #獲取當前場景中所有屬於"Enemies"群組的節點，這些節點代表當前存在的敵人
+	#遍歷所有敵人，將它們的數據（如生命值、位置、類型等）保存到save_data的"enemies"列表中
+	for enemy in enemies:
+		var enemy_data = {
+			"health": enemy.health_component.current_health,
+			"position.x": enemy.position.x,
+			"position.y": enemy.position.y,
+			"type": enemy.scene_file_path, #透過路徑獲取敵人類型
+		}
+		save_data["enemies"].append(enemy_data)
+
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	
 	if file:
 		var json_string = JSON.stringify(save_data)
 		file.store_string(json_string)
 		file.close()
 		print("遊戲已儲存至: ", SAVE_PATH)
 
-func _ready() -> void:
-	load_settings_only()
+
 
 # 僅讀取數據，不跳轉場景
 func load_settings_only():
 	if not has_save_file():
 		return
-		
 	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
 	if file:
 		var json_string = file.get_as_text()
@@ -109,7 +134,12 @@ func load_game():
 	if not has_save_file():
 		print("找不到存檔檔案！")
 		return false
-		
+	
+	is_loading_from_save = true # 標記正在從存檔載入遊戲
+	await SceneChanger.fade_out()
+	get_tree().change_scene_to_file("res://Scenes/World.tscn")
+	await get_tree().tree_changed # 等待新場景加載完成
+	
 	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
 	if file:
 		var json_string = file.get_as_text()
@@ -120,10 +150,17 @@ func load_game():
 		if parse_result == OK:
 			var save_data = json.data
 			
+			#還原房間
+			var world = get_tree().current_scene
+			var current_room = world.get_node("CurrentRoom")
+			var room_scene = load(save_data["world"]["current_room"])
+			var room_instance = room_scene.instantiate()
+			current_room.add_child(room_instance)
+			
 			# 還原 GameManager 數據
 			var gm_data = save_data.get("game_manager", {})
 			# 這裡減 1，因為 World.gd 的 room_transition 會自動加 1
-			current_floor = gm_data.get("current_floor", 1) - 1
+			current_floor = gm_data.get("current_floor", 1)
 			enemy_damage_multiplier = gm_data.get("enemy_damage_multiplier", 1.0)
 			enemy_health_multiplier = gm_data.get("enemy_health_multiplier", 1.0)
 			enemy_walk_speed_multiplier = gm_data.get("enemy_walk_speed_multiplier", 1.0)
@@ -141,10 +178,28 @@ func load_game():
 			PlayerData.player_walk_speed = pd_data.get("walk_speed", 50)
 			PlayerData.player_run_speed = pd_data.get("run_speed", 100)
 			PlayerData.player_scale = pd_data.get("scale", 0.6)
+			PlayerData.player_position_x = pd_data.get("position.x", 0)
+			PlayerData.player_position_y = pd_data.get("position.y", 0)
+			world.spawn_player(Vector2(PlayerData.player_position_x, PlayerData.player_position_y))
+			
+			# 還原敵人數據
+			for enemy_data in save_data["enemies"]:
+				var enemy_scene = load(enemy_data["type"])
+				
+				if enemy_scene:
+					var enemy_instance = enemy_scene.instantiate()
+					current_room.add_child(enemy_instance)
+					#等待敵人實例的_ready()函數執行完畢，確保敵人節點和組件都已經初始化完成	
+					if not enemy_instance.is_node_ready():
+						await enemy_instance.ready
+					
+					enemy_instance.position = Vector2(enemy_data["position.x"], enemy_data["position.y"])
+					enemy_instance.health_component.current_health = enemy_data["health"]
+					enemy_instance.add_to_group("Enemies") #確保還原的敵人也加入"Enemies"群組
 			
 			print("存檔讀取成功！當前樓層準備還原為: ", current_floor + 1)
 			# 讀取後切換到遊戲場景
-			SceneChanger.change_scene("res://Scenes/World.tscn")
+			await SceneChanger.fade_in()
 			return true
 	return false
 

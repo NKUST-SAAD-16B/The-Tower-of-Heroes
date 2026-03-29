@@ -19,11 +19,17 @@ extends Node2D
 #技能樹菜單節點
 @onready var SkillTree : Control = $CanvasLayer/SkillTree
 
+#確認是否是從存檔載入遊戲，如果是則不在_ready()中呼叫room_transition()
+@onready var load_flag : bool = false
 
 func _ready() -> void:
 	AudioManager.play_bgm("dungeon")
-	#房間過渡，並生成第一個房間
-	room_transition()
+	#如果不是從存檔載入遊戲，則呼叫room_transition()生成第一個房間
+	if GameManager.is_loading_from_save:
+		GameManager.is_loading_from_save = false # 重置載入標記，確保後續正常過渡
+	else:
+		room_transition()
+
 	#連接GameManager的enemy_defeated信號到transform_to_shop函數，當敵人被擊敗時觸發商店過渡
 	GameManager.enemy_defeated.connect(transform_to_shop)
 	#連接商店菜單的card_selected信號到scence_transition函數，當玩家選擇命運卡後觸發房間過渡
@@ -31,7 +37,6 @@ func _ready() -> void:
 	#連接技能樹的continue_to_next_floor信號到room_transition函數，當玩家在技能樹界面點擊繼續前往下一層按鈕後觸發房間過渡
 	SkillTree.continue_to_next_floor.connect(room_transition)
 	pass
-
 
 
 func _process(delta: float) -> void:
@@ -105,6 +110,8 @@ func EnemySpawn():
 	var enemy = enemy_scene.pick_random().instantiate()
 	#將生成的敵人添加到當前房間
 	get_node("CurrentRoom").add_child(enemy)
+	#將敵人加入群組"Enemies"，以便後續管理
+	enemy.add_to_group("Enemies")
 	#將生成的敵人位置設置為選擇的生成點位置
 	enemy.position = spawn_point.global_position
 

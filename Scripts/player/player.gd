@@ -38,7 +38,10 @@ func _ready() -> void:
 		PlayerData.player_current_health = current_health
 	)
 
-
+func _process(delta: float) -> void:
+	#更新玩家位置數據到PlayerData
+	PlayerData.player_position_x = self.global_position.x
+	PlayerData.player_position_y = self.global_position.y
 
 func _physics_process(delta: float) -> void:
 	#基本重力和移動
