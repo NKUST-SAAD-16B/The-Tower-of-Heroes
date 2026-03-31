@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name World
 
 #房間路徑，用於隨機生成房間，需在編輯器中設置
 @export var room_paths : Array[PackedScene] = []
@@ -36,6 +36,8 @@ func _ready() -> void:
 	ShopMenu.card_selected.connect(transform_to_skill_tree)
 	#連接技能樹的continue_to_next_floor信號到room_transition函數，當玩家在技能樹界面點擊繼續前往下一層按鈕後觸發房間過渡
 	SkillTree.continue_to_next_floor.connect(room_transition)
+	#連接GameManager的remaining_enemy_spawn_quantity_found信號到_on_required_enemy_spawn_quantity函數，當讀檔時發現還有剩餘敵人生成數量，繼續生成敵人
+	GameManager.remaining_enemy_spawn_quantity_found.connect(_on_required_enemy_spawn_quantity)
 	pass
 
 
@@ -69,9 +71,9 @@ func room_transition():
 
 	
 	#設定敵人生成數量，根據GameManager的enemy_spawn_quantity和敵人的enemy_quantity_multiplier進行修改
-	enemy_spawn_quantity = int(GameManager.enemy_spawn_quantity * GameManager.enemy_quantity_multiplier)
-	GameManager.enemy_spawn_quantity = enemy_spawn_quantity
-	
+	GameManager.enemy_spawn_quantity = int(GameManager.enemy_spawn_quantity * GameManager.enemy_quantity_multiplier)
+	GameManager.current_enemy_quantity = GameManager.enemy_spawn_quantity
+	enemy_spawn_quantity = GameManager.enemy_spawn_quantity
 	#在房間中生成玩家角色，位置為房間中名為"PlayerSpawn"的節點位置
 	spawn_player(room_instance.get_node("PlayerSpawn").global_position)
 	await SceneChanger.fade_in()
@@ -115,6 +117,11 @@ func EnemySpawn():
 	#將生成的敵人位置設置為選擇的生成點位置
 	enemy.position = spawn_point.global_position
 
+#讀檔時發現還有剩餘敵人生成數量，繼續生成敵人
+func _on_required_enemy_spawn_quantity():
+	enemy_spawn_quantity = GameManager.enemy_spawn_quantity
+	get_node("EnemySpawnTimer").start()
+	pass
 
 #敵人生成計時器觸發時生成敵人
 func _on_enemy_spawn_timer_timeout() -> void:
@@ -161,5 +168,3 @@ func transform_to_skill_tree():
 	SkillTree.show()
 	tween.tween_property(SkillTree, "position", Vector2(SkillTree.position.x, 0), 1.0)
 	pass
-
-

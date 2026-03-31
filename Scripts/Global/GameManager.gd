@@ -12,19 +12,19 @@ signal enemy_defeated
 
 signal enemy_quantity_changed
 
-
+signal remaining_enemy_spawn_quantity_found # 讀檔時發現還有剩餘敵人生成數量，通知world.gd繼續生成敵人
 
 #當前樓層數，初始值為1，每次房間過渡時增加1	
 var current_floor : int = 0
 
 #敵人生成數量，初始值為10，根據DestinyManager的enemy_quantity_multiplier進行修改
 
-var enemy_spawn_quantity : int = 2:
+var enemy_spawn_quantity : int = 10
 
 	#當enemy_spawn_quantity被修改時，同步更新current_enemy_quantity的值，確保它們保持一致
-	set(value):
-		current_enemy_quantity = value
-		enemy_spawn_quantity = value
+	#set(value):
+		#current_enemy_quantity = value
+		#enemy_spawn_quantity = value
 
 
 #敵人屬性修飾
@@ -61,9 +61,9 @@ func has_save_file() -> bool:
 # 儲存遊戲數據
 func save_game():
 
-	var world = get_tree().current_scene
-	var current_room = world.get_node("CurrentRoom").get_child(0)
-
+	var world = get_tree().current_scene #獲取當前場景的根節點
+	var current_room = world.get_node("CurrentRoom").get_child(0) #獲取CurrentRoom底下的第一個子節點，這個節點代表當前所在的房間
+	#構建一個字典來保存遊戲數據，包括GameManager的狀態、玩家數據、當前房間信息、敵人數據和技能樹狀態等
 	var save_data = {
 		"game_manager": {
 			"current_floor": current_floor,
@@ -71,6 +71,7 @@ func save_game():
 			"enemy_health_multiplier": enemy_health_multiplier,
 			"enemy_walk_speed_multiplier": enemy_walk_speed_multiplier,
 			"enemy_quantity_multiplier": enemy_quantity_multiplier,
+			"current_enemy_quantity": current_enemy_quantity,
 			"easter_egg_enabled": easter_egg_enabled
 		},
 		"player_data": {
@@ -84,12 +85,14 @@ func save_game():
 			"run_speed": PlayerData.player_run_speed,
 			"scale": PlayerData.player_scale,
 			"gold_quantity": PlayerData.gold_quantity,
+			"player_current_shield": PlayerData.player_current_shield,
 			"position.x":PlayerData.player_position_x,
 			"position.y":PlayerData.player_position_y
 		},
 		"enemies": [],
 		"world": {
-			"current_room": current_room.scene_file_path
+			"current_room": current_room.scene_file_path,
+			"remaining_enemy_spawn_quantity": world.enemy_spawn_quantity #剩餘敵人生成數量
 		},
 		"skill_tree": []
 		
@@ -169,6 +172,16 @@ func load_game():
 			var room_instance = room_scene.instantiate()
 			current_room.add_child(room_instance)
 			
+			#如果還有剩餘的敵人生成數量，則啟動敵人生成計時器繼續生成敵人
+			var remaining_enemy_spawn_quantity = save_data["world"].get("remaining_enemy_spawn_quantity", 0)
+			if remaining_enemy_spawn_quantity > 0:
+				enemy_spawn_quantity = remaining_enemy_spawn_quantity
+				current_enemy_quantity = save_data["game_manager"].get("current_enemy_quantity") # 從存檔中還原當前敵人數量，如果沒有則使用enemy_spawn_quantity的值
+				remaining_enemy_spawn_quantity_found.emit() # 發出信號通知world.gd繼續生成敵人
+				print("發現剩餘敵人生成數量: ", remaining_enemy_spawn_quantity, "，繼續生成敵人中...")
+			else:
+				print("沒有剩餘敵人生成數量，當前房間內的敵人將保持不變。")
+				
 			# 還原 GameManager 數據
 			var gm_data = save_data.get("game_manager", {})
 			# 這裡減 1，因為 World.gd 的 room_transition 會自動加 1
@@ -186,10 +199,10 @@ func load_game():
 			var skill_tree_button = get_tree().get_nodes_in_group("skill_buttons") # 獲取當前場景中所有屬於"skill_buttons"群組的節點，這些節點代表技能樹中的按鈕
 			var skill_tree_instance = world.get_node("CanvasLayer/SkillTree") # 獲取技能樹實例
 			for button in skill_tree_button: #遍歷所有技能按鈕
-				if skill_tree_dict.has(button.skill_name):
-					button.button_state = skill_tree_dict[button.skill_name] # 根據存檔中的技能狀態還原按鈕的狀態
-					skill_tree_instance.enable_next_button(button) # 根據技能狀態啟用下一個按鈕
-
+				if skill_tree_dict[button.skill_name]: #如果技能名稱在字典中且按鈕狀態為true，則啟用該按鈕
+					button.disabled = true
+					button.button_state = true
+					skill_tree_instance.enable_next_button(button) #啟用下一個按鈕
 
 
 
@@ -221,7 +234,7 @@ func load_game():
 					
 					enemy_instance.position = Vector2(enemy_data["position.x"], enemy_data["position.y"])
 					enemy_instance.health_component.current_health = enemy_data["health"]
-					enemy_instance.add_to_group("Enemies") #確保還原的敵人也加入"Enemies"群組
+					enemy_instance.add_to_group("Enemies") 
 			
 			print("存檔讀取成功！當前樓層準備還原為: ", current_floor )
 			# 讀取後切換到遊戲場景
