@@ -12,7 +12,7 @@ signal enemy_defeated
 
 signal enemy_quantity_changed
 
-signal remaining_enemy_spawn_quantity_found # 讀檔時發現還有剩餘敵人生成數量，通知world.gd繼續生成敵人
+signal remaining_enemy_spawn_quantity_found(quantity: int) # 讀檔時發現還有剩餘敵人生成數量，通知world.gd繼續生成敵人
 
 #當前樓層數，初始值為1，每次房間過渡時增加1	
 var current_floor : int = 0
@@ -94,8 +94,10 @@ func save_game():
 			"current_room": current_room.scene_file_path,
 			"remaining_enemy_spawn_quantity": world.enemy_spawn_quantity #剩餘敵人生成數量
 		},
-		"skill_tree": []
-		
+		"skill_tree": [],
+		"DestinyManager": {
+			"destiny_counts": DestinyManager.destiny_counts
+		}
 	}
 	var enemies = get_tree().get_nodes_in_group("Enemies") #獲取當前場景中所有屬於"Enemies"群組的節點，這些節點代表當前存在的敵人
 	#遍歷所有敵人，將它們的數據（如生命值、位置、類型等）保存到save_data的"enemies"列表中
@@ -164,7 +166,9 @@ func load_game():
 		var parse_result = json.parse(json_string)
 		if parse_result == OK:
 			var save_data = json.data
-			
+
+			# 還原命運事件計數器
+			DestinyManager.destiny_counts = save_data["DestinyManager"].get("destiny_counts")
 			#還原房間
 			var world = get_tree().current_scene
 			var current_room = world.get_node("CurrentRoom")
@@ -175,9 +179,8 @@ func load_game():
 			#如果還有剩餘的敵人生成數量，則啟動敵人生成計時器繼續生成敵人
 			var remaining_enemy_spawn_quantity = save_data["world"].get("remaining_enemy_spawn_quantity", 0)
 			if remaining_enemy_spawn_quantity > 0:
-				enemy_spawn_quantity = remaining_enemy_spawn_quantity
 				current_enemy_quantity = save_data["game_manager"].get("current_enemy_quantity") # 從存檔中還原當前敵人數量，如果沒有則使用enemy_spawn_quantity的值
-				remaining_enemy_spawn_quantity_found.emit() # 發出信號通知world.gd繼續生成敵人
+				remaining_enemy_spawn_quantity_found.emit(remaining_enemy_spawn_quantity) # 發出信號通知world.gd繼續生成敵人
 				print("發現剩餘敵人生成數量: ", remaining_enemy_spawn_quantity, "，繼續生成敵人中...")
 			else:
 				print("沒有剩餘敵人生成數量，當前房間內的敵人將保持不變。")

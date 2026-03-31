@@ -118,8 +118,8 @@ func EnemySpawn():
 	enemy.position = spawn_point.global_position
 
 #讀檔時發現還有剩餘敵人生成數量，繼續生成敵人
-func _on_required_enemy_spawn_quantity():
-	enemy_spawn_quantity = GameManager.enemy_spawn_quantity
+func _on_required_enemy_spawn_quantity(quantity: int):
+	enemy_spawn_quantity = quantity
 	get_node("EnemySpawnTimer").start()
 	pass
 
