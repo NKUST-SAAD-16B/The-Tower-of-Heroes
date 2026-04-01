@@ -178,8 +178,9 @@ func load_game():
 			
 			#如果還有剩餘的敵人生成數量，則啟動敵人生成計時器繼續生成敵人
 			var remaining_enemy_spawn_quantity = save_data["world"].get("remaining_enemy_spawn_quantity", 0)
+			current_enemy_quantity = save_data["game_manager"].get("current_enemy_quantity") # 從存檔中還原當前敵人數量
 			if remaining_enemy_spawn_quantity > 0:
-				current_enemy_quantity = save_data["game_manager"].get("current_enemy_quantity") # 從存檔中還原當前敵人數量，如果沒有則使用enemy_spawn_quantity的值
+				
 				remaining_enemy_spawn_quantity_found.emit(remaining_enemy_spawn_quantity) # 發出信號通知world.gd繼續生成敵人
 				print("發現剩餘敵人生成數量: ", remaining_enemy_spawn_quantity, "，繼續生成敵人中...")
 			else:
@@ -220,6 +221,8 @@ func load_game():
 			PlayerData.player_walk_speed = pd_data.get("walk_speed", 50)
 			PlayerData.player_run_speed = pd_data.get("run_speed", 100)
 			PlayerData.player_scale = pd_data.get("scale", 0.6)
+			PlayerData.gold_quantity = pd_data.get("gold_quantity", 300)
+			PlayerData.player_current_shield = pd_data.get("player_current_shield", 0)
 			PlayerData.player_position_x = pd_data.get("position.x", 0)
 			PlayerData.player_position_y = pd_data.get("position.y", 0)
 			world.spawn_player(Vector2(PlayerData.player_position_x, PlayerData.player_position_y))
