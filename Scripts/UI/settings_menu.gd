@@ -129,10 +129,10 @@ func _on_window_mode_item_pressed(id: int):
 	match id:
 		0: # Windowed
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-			window_mode_button.text = "Windowed" # 更新按鈕文字
+			window_mode_button.text = "視窗" # 更新按鈕文字
 		1: # Full Screen
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-			window_mode_button.text = "Full Screen" # 更新按鈕文字
+			window_mode_button.text = "全螢幕" # 更新按鈕文字
 	_save_settings()
 	pass
 
@@ -210,7 +210,7 @@ func _load_settings():
 			# 恢復顯示設定
 			var window_mode = display_data.get("window_mode", DisplayServer.WINDOW_MODE_WINDOWED)
 			DisplayServer.window_set_mode(window_mode)
-			window_mode_button.text = display_data.get("window_mode_button_text", "Windowed")
+			window_mode_button.text = display_data.get("window_mode_button_text", "視窗")
 			Engine.max_fps = display_data.get("fps_limit", 60)
 			fps_button.text = display_data.get("fps_button_text", "60")
 			var vsync_enabled = display_data.get("vsync_enabled", false)
