@@ -1,5 +1,5 @@
 extends Control
-
+class_name SkillTree
 #技能樹腳本
 @onready var gold_quantity_label : Label = $HBoxContainer/GoldQuantity
 

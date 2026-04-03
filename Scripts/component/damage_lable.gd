@@ -16,8 +16,8 @@ func _ready():
 
     # 縮放動畫：先變大再縮小 (打擊感)
     scale = Vector2.ZERO
-    tween.tween_property(self, "scale", Vector2(0.8, 0.8), 0.1)
-    tween.chain().tween_property(self, "scale", Vector2(0.2, 0.2), 0.2)
+    tween.tween_property(self, "scale", Vector2(2.0, 2.0), 0.1)
+    tween.chain().tween_property(self, "scale", Vector2(1.0, 1.0), 0.2)
 	
 	# 透明度動畫：最後淡出
     tween.chain().tween_property(self, "modulate:a", 0, 0.3)

@@ -12,7 +12,8 @@ var player_critical_multiplier : float
 var player_walk_speed : int
 var player_run_speed : int
 var player_scale : float
-
+var player_position_x : float
+var player_position_y : float
 var gold_quantity : int = 300:
     set(value):
         gold_quantity = value
@@ -28,7 +29,7 @@ func player_data_init():
     player_walk_speed = 50
     player_run_speed = 100
     player_scale = 0.6
-
+    
 #應用技能的屬性增益到玩家數據
 func skill_status_apply(skill_status : SkillStats):
     player_max_health += skill_status.health_increase

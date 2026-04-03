@@ -12,6 +12,7 @@ extends TextureButton
 @export var order : int
 #能力按鈕的tooltip
 @export var tooltip : PackedScene = preload("res://Scenes/UI/SkillTreeTooltip.tscn")
+
 #當能力按鈕被按下時，發出skill_button_pressed信號，並將技能名稱作為參數傳遞
 signal skill_button_pressed(button_node:TextureButton)
 

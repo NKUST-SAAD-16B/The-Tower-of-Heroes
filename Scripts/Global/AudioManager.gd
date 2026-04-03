@@ -30,10 +30,10 @@ func _ready():
 		bgm_player.bus = "Master"
 	
 	# 遊戲啟動時預設音量：Master 與 BGM 均設為 50%
-	set_volume("Master", 0.5)
-	set_volume("Background Music", 0.5)
+	#set_volume("Master", 0.5)
+	#set_volume("Background Music", 0.5)
 	# SFX 預設 80%
-	set_volume("SFX", 0.8) 
+	#set_volume("SFX", 0.8) 
 
 func play_bgm(track_name: String):
 	if bgm_tracks.has(track_name):
