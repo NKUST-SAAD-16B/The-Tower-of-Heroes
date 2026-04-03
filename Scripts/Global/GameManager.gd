@@ -14,6 +14,8 @@ signal enemy_quantity_changed
 
 signal remaining_enemy_spawn_quantity_found(quantity: int) # 讀檔時發現還有剩餘敵人生成數量，通知world.gd繼續生成敵人
 
+
+
 #當前樓層數，初始值為1，每次房間過渡時增加1	
 var current_floor : int = 0
 
@@ -92,7 +94,8 @@ func save_game():
 		"enemies": [],
 		"world": {
 			"current_room": current_room.scene_file_path,
-			"remaining_enemy_spawn_quantity": world.enemy_spawn_quantity #剩餘敵人生成數量
+			"remaining_enemy_spawn_quantity": world.enemy_spawn_quantity, #剩餘敵人生成數量
+			"room_gold_quantity": get_tree().get_nodes_in_group("Golds").size() #當前房間內掉落的金幣數量
 		},
 		"skill_tree": [],
 		"DestinyManager": {
@@ -221,7 +224,7 @@ func load_game():
 			PlayerData.player_walk_speed = pd_data.get("walk_speed", 50)
 			PlayerData.player_run_speed = pd_data.get("run_speed", 100)
 			PlayerData.player_scale = pd_data.get("scale", 0.6)
-			PlayerData.gold_quantity = pd_data.get("gold_quantity", 300)
+			PlayerData.gold_quantity = pd_data.get("gold_quantity", 300) + save_data["world"].get("room_gold_quantity", 0) # 從存檔中還原玩家金幣數量，並加上當前房間內的金幣數量
 			PlayerData.player_current_shield = pd_data.get("player_current_shield", 0)
 			PlayerData.player_position_x = pd_data.get("position.x", 0)
 			PlayerData.player_position_y = pd_data.get("position.y", 0)
