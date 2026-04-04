@@ -42,6 +42,7 @@ func generate_cards() -> void:
 		var card = $HBoxContainer.get_node("Card" + str(i + 1))
 		card.get_node("VBoxContainer/Title").text = destiny.title
 		card.get_node("VBoxContainer/ScrollContainer/Description").text = destiny.description
+		card.get_node("VBoxContainer/Icon").texture = load(destiny.icon)
 		current_card.append(destiny)
 
 # 覆蓋 show 函數或提供一個專門的開啟函數

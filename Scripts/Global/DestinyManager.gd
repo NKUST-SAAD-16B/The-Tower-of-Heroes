@@ -18,58 +18,58 @@ var destiny_counts = {
 
 var destiny_data = {
 	"Enemy_damage_increase": {
-		"title": "黑暗詛咒",
-		"icon": "res://path_to_destiny_1_icon.png",
+		"title": "彷彿被注視著",
+		"icon": "res://Assets/Icons/icon29.png",
 		"description": "敵人的傷害增加10%",
 	},
 	"Enemy_health_increase": {
 		"title": "惡魔的詠唱",
-		"icon": "res://path_to_destiny_2_icon.png",
+		"icon": "res://Assets/Icons/icon11.png",
 		"description": "敵人的生命增加10%"
 	},
 	"Player_damage_increase": {
 		"title": "戰神的祝福",
-		"icon": "res://path_to_destiny_3_icon.png",
+		"icon": "res://Assets/Icons/icon26.png",
 		"description": "玩家的傷害增加20"
 	},
 	"Player_health_increase": {
 		"title": "女神的庇護",
-		"icon": "res://path_to_destiny_4_icon.png",
+		"icon": "res://Assets/Icons/icon7.png",
 		"description": "玩家的最大生命增加20"
 	},
 	"Enemy_damage_reduction": {
 		"title": "光明的庇護",
-		"icon": "res://path_to_destiny_5_icon.png",
+		"icon": "res://Assets/Icons/icon6.png",
 		"description": "敵人的傷害減少10%"
 	},
 	"Enemy_health_reduction": {
-		"title": "光之鎖",
-		"icon": "res://path_to_destiny_6_icon.png",
+		"title": "聖之鑰匙",
+		"icon": "res://Assets/Icons/icon19.png",
 		"description": "敵人的生命減少10%"
 	},
 	"Enemy_speed_increase": {
-		"title": "暗影的加速",
-		"icon": "res://path_to_destiny_7_icon.png",
+		"title": "黑魔法靈藥",
+		"icon": "res://Assets/Icons/icon3.png",
 		"description": "敵人的移動速度增加10%"
 	},
 	"Enemy_quantity_increase": {
-		"title": "怪物奉上",
-		"icon": "res://path_to_destiny_8_icon.png",
+		"title": "未知卷軸",
+		"icon": "res://Assets/Icons/icon24.png",
 		"description": "敵人數量增加10%"
 	},
 	"Guardian_Fake_Shield": {
-		"title": "守護者偽盾",
-		"icon": "res://path_to_destiny_9_icon.png",
+		"title": "守護龜殼",
+		"icon": "res://Assets/Icons/icon30.png",
 		"description": "玩家獲得50點護盾值"
 	},
 	"Scarlet_Festival": {
-		"title": "腥紅盛典",
-		"icon": "res://path_to_destiny_10_icon.png",
+		"title": "奇怪的果實",
+		"icon": "res://Assets/Icons/icon31.png",
 		"description": "玩家的傷害增加50，但扣除20點當前生命"
 	},
 	"Resource_drop_increase": {
 		"title": "卑鄙原之助",
-		"icon": "res://path_to_destiny_11_icon.png",
+		"icon": "res://Assets/Icons/icon20.png",
 		"description": "金幣掉落量增加15%"
 	}
 }
@@ -83,7 +83,7 @@ func get_roman_numeral(n: int) -> String:
 		5: return "V"
 		_: return str(n)
 
-func destiny_random(exclude_keys: Array = []) -> Dictionary:
+func destiny_random(exclude_keys: Array = []) -> Dictionary: 
 	var available_keys = []
 	for key in destiny_data.keys():
 		# 排除已經被選入本次商店的 Key

@@ -21,7 +21,7 @@ var current_floor : int = 0
 
 #敵人生成數量，初始值為10，根據DestinyManager的enemy_quantity_multiplier進行修改
 
-var enemy_spawn_quantity : int = 10
+var enemy_spawn_quantity : int = 2
 
 	#當enemy_spawn_quantity被修改時，同步更新current_enemy_quantity的值，確保它們保持一致
 	#set(value):

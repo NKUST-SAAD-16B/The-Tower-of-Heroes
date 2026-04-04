@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://buf32u47v3orp"]
+[gd_scene load_steps=12 format=3 uid="uid://buf32u47v3orp"]
 
 [ext_resource type="Script" uid="uid://buihj4040lpuu" path="res://Scripts/world.gd" id="1_j0p05"]
 [ext_resource type="PackedScene" uid="uid://gckqsbuxhbkw" path="res://Scenes/Map/room_4.tscn" id="2_45d1s"]
@@ -8,12 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://bd5hnkmcljua8" path="res://Scenes/Map/room_1.tscn" id="4_q2d71"]
 [ext_resource type="PackedScene" uid="uid://cbchqdnljx0m4" path="res://Scenes/Map/room_2.tscn" id="4_uo7di"]
 [ext_resource type="PackedScene" uid="uid://cyshpbp0orxwf" path="res://Scenes/Map/room_3.tscn" id="5_kn06e"]
+[ext_resource type="PackedScene" uid="uid://bh1yw43sem20c" path="res://Scenes/Map/room_5.tscn" id="6_7yo87"]
 [ext_resource type="PackedScene" uid="uid://dxdgjqya1spxk" path="res://Scenes/UI/NewShopMenu.tscn" id="6_y7y61"]
 [ext_resource type="PackedScene" uid="uid://cknuq8g1hg4rd" path="res://Scenes/UI/SkillTree.tscn" id="7_y7y61"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_j0p05")
-room_paths = Array[PackedScene]([ExtResource("2_45d1s"), ExtResource("4_q2d71"), ExtResource("4_uo7di"), ExtResource("5_kn06e")])
+room_paths = Array[PackedScene]([ExtResource("2_45d1s"), ExtResource("4_q2d71"), ExtResource("4_uo7di"), ExtResource("5_kn06e"), ExtResource("6_7yo87")])
 enemy_scene = Array[PackedScene]([ExtResource("3_y7y61")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
