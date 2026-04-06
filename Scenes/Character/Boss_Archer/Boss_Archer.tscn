@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://djybve1o77y85"]
+[gd_scene load_steps=52 format=3 uid="uid://djybve1o77y85"]
 
 [ext_resource type="Script" uid="uid://c71x6p64icbqr" path="res://Scripts/Enemy/BOSS/Archer/boss_archer.gd" id="1_evudq"]
 [ext_resource type="Texture2D" uid="uid://clrh1ykrmcuok" path="res://Assets/Boss/Arcane archer/spritesheet.png" id="1_ukoje"]
@@ -13,6 +13,9 @@
 [ext_resource type="Script" uid="uid://dfnlnynxmisfb" path="res://Scripts/Enemy/BOSS/Archer/Boss_Archer_shoot.gd" id="10_ja346"]
 [ext_resource type="PackedScene" uid="uid://d1uw4ehlyvxac" path="res://Scenes/Component/hitbox_component.tscn" id="11_ku6gr"]
 [ext_resource type="Script" uid="uid://g8usht5nrhmq" path="res://Scripts/Enemy/BOSS/Archer/phantom_dash.gd" id="13_nl83q"]
+[ext_resource type="Texture2D" uid="uid://dd6celi14esa" path="res://Assets/Health Bar Asset Pack 2 by Adwit Rahman/rpg (1)-white.png.png" id="14_b0j4k"]
+[ext_resource type="Script" uid="uid://cdxl24mhoor72" path="res://Scripts/UI/boss_ui.gd" id="14_v557e"]
+[ext_resource type="Texture2D" uid="uid://c7tk5vbd7h3fe" path="res://Assets/Health Bar Asset Pack 2 by Adwit Rahman/rpg (1).png" id="15_v557e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_717nm"]
 size = Vector2(20, 32)
@@ -237,7 +240,20 @@ size = Vector2(24, 34)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_evudq"]
 size = Vector2(417, 268)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ks5e"]
+atlas = ExtResource("14_b0j4k")
+region = Rect2(33, 51, 80, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdtm1"]
+atlas = ExtResource("14_b0j4k")
+region = Rect2(33, 37, 80, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hitej"]
+atlas = ExtResource("15_v557e")
+region = Rect2(33, 37, 80, 9)
+
 [node name="Boss_Archer" type="CharacterBody2D"]
+z_index = 100
 collision_layer = 128
 script = ExtResource("1_evudq")
 
@@ -320,6 +336,79 @@ script = ExtResource("13_nl83q")
 
 [node name="ShootPosition" type="Marker2D" parent="."]
 position = Vector2(14, -21)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Health" type="Control" parent="CanvasLayer"]
+custom_minimum_size = Vector2(1000, 100)
+layout_mode = 3
+anchor_top = 0.856
+anchor_right = 1.0
+anchor_bottom = 0.948
+offset_top = -0.480042
+offset_bottom = 0.159912
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("14_v557e")
+
+[node name="CatchupBar" type="TextureProgressBar" parent="CanvasLayer/Health"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.0
+offset_top = -4.5
+offset_right = 99.0
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6, 6)
+pivot_offset = Vector2(120, 3.5)
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 8
+stretch_margin_right = 8
+texture_under = SubResource("AtlasTexture_6ks5e")
+texture_progress = SubResource("AtlasTexture_cdtm1")
+
+[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer/Health"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.5
+offset_top = -4.5
+offset_right = 98.5
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6, 6)
+pivot_offset = Vector2(120, 3.5)
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 8
+stretch_margin_right = 8
+texture_progress = SubResource("AtlasTexture_hitej")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_top = 0.827
+anchor_right = 1.0
+anchor_bottom = 0.871
+offset_top = -0.160034
+offset_bottom = 0.319946
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "黑夜射手"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="body_entered" from="PlayerChecker" to="." method="_on_player_checker_body_entered"]
 [connection signal="body_exited" from="PlayerChecker" to="." method="_on_player_checker_body_exited"]
