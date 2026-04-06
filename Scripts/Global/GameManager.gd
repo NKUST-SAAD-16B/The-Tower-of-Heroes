@@ -251,6 +251,19 @@ func load_game():
 			return true
 	return false
 
+#刪除存檔
+func delete_save():
+	if has_save_file():
+		var file = DirAccess.open("user://")
+		var err = file.remove("savegame.save")
+		if err == OK:
+			print("存檔已刪除！")
+		else:
+			print("刪除存檔失敗，錯誤代碼: ", err)
+	else:
+		print("沒有存檔檔案可刪除！")
+
+
 #開始新遊戲
 func start_new_game():
 	# 初始化玩家數據

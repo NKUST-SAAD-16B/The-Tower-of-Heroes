@@ -26,6 +26,7 @@ var knockback_vector:Vector2
 @onready var hitbox_3: CollisionShape2D = $HitboxComponent/Attack_3
 
 
+
 func _ready() -> void:
 	#連接死亡訊號
 	health_component.died.connect(_on_died)
@@ -61,8 +62,9 @@ func _physics_process(delta: float) -> void:
 
 #死亡訊號觸發會執行_on_died()
 func _on_died():
+	if state_machine.current_state.name != "died":
+		state_machine.current_state.Transitioned.emit(state_machine.current_state,"died")
 	
-	state_machine.current_state.Transitioned.emit(state_machine.current_state,"died")
 
 #受傷訊號觸發會執行_hurt()
 func _hurt(knockback):
