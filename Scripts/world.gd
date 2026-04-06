@@ -9,6 +9,10 @@ class_name World
 #敵人場景，用於隨機生成敵人，需在編輯器中設置
 @export var enemy_scene : Array[PackedScene] = []
 
+#boss場景
+@export var boss_scene : Array[PackedScene] = []
+
+
 #敵人生成數量，根據GameManager的enemy_spawn_quantity和DestinyManager的enemy_quantity_multiplier進行修改
 @onready var enemy_spawn_quantity : int 
 
@@ -67,17 +71,33 @@ func room_transition():
 	GameManager.enemy_damage_multiplier += 0.1
 	GameManager.enemy_health_multiplier += 0.1
 	GameManager.enemy_walk_speed_multiplier += 0.1
-	GameManager.enemy_quantity_multiplier += 0.1
+	GameManager.enemy_quantity_multiplier += 0.03 #改成0.03，原本的我發現第十一層就破百了XD
+
+
 
 	
 	#設定敵人生成數量，根據GameManager的enemy_spawn_quantity和敵人的enemy_quantity_multiplier進行修改
 	GameManager.enemy_spawn_quantity = int(GameManager.enemy_spawn_quantity * GameManager.enemy_quantity_multiplier)
 	GameManager.current_enemy_quantity = GameManager.enemy_spawn_quantity
 	enemy_spawn_quantity = GameManager.enemy_spawn_quantity
+	
+	#生成上限，確保敵人生成數量不會過多導致遊戲體驗不佳
+	if enemy_spawn_quantity > 30:
+		enemy_spawn_quantity = 30
+		GameManager.current_enemy_quantity = 30
+		GameManager.enemy_spawn_quantity = 30
+		print("敵人生成數量已達上限，設置為30")
+
+	#如果層數是10的倍數，則是boss關
+	if GameManager.current_floor % 10 == 0:
+		boss()
+	
 	#在房間中生成玩家角色，位置為房間中名為"PlayerSpawn"的節點位置
 	spawn_player(room_instance.get_node("PlayerSpawn").global_position)
 	await SceneChanger.fade_in()
 	
+
+
 	#啟動敵人生成計時器
 	get_node("EnemySpawnTimer").start()
 
@@ -109,7 +129,12 @@ func EnemySpawn():
 	var all_points = get_tree().get_nodes_in_group("EnemySpawnPoints")
 	#從enemy_scene中隨機選擇一個敵人場景並實例化
 	var spawn_point = all_points.pick_random()
-	var enemy = enemy_scene.pick_random().instantiate()
+	var enemy
+	#如果層數是10的倍數，則生成boss，否則生成普通敵人
+	if GameManager.current_floor % 10 == 0:
+		enemy = boss_scene.pick_random().instantiate()
+	else:
+		enemy = enemy_scene.pick_random().instantiate()
 	#將生成的敵人添加到當前房間
 	get_node("CurrentRoom").add_child(enemy)
 	#將敵人加入群組"Enemies"，以便後續管理
@@ -168,3 +193,10 @@ func transform_to_skill_tree():
 	SkillTree.show()
 	tween.tween_property(SkillTree, "position", Vector2(SkillTree.position.x, 0), 1.0)
 	pass
+
+func boss():
+	print("進入Boss房")
+	#當前敵人數量為1人，生成Boss
+	enemy_spawn_quantity = 1
+	GameManager.current_enemy_quantity = 1
+	

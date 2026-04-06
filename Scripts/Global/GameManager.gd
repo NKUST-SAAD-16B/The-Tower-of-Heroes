@@ -23,10 +23,6 @@ var current_floor : int = 0
 
 var enemy_spawn_quantity : int = 2
 
-	#當enemy_spawn_quantity被修改時，同步更新current_enemy_quantity的值，確保它們保持一致
-	#set(value):
-		#current_enemy_quantity = value
-		#enemy_spawn_quantity = value
 
 
 #敵人屬性修飾
