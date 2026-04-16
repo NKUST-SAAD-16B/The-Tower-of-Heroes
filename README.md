@@ -41,3 +41,12 @@
     * 角色屬性與狀態管理系統
 
 ---
+# 展示畫面
+## 遊戲主頁面
+![主頁面](https://github.com/NKUST-SAAD-16B/The-Tower-of-Heroes/blob/main/imgae/image.png)
+## BOSS戰
+![BOSS戰](https://github.com/NKUST-SAAD-16B/The-Tower-of-Heroes/blob/main/imgae/image2.png)
+## 事件選擇
+![事件](https://github.com/NKUST-SAAD-16B/The-Tower-of-Heroes/blob/main/imgae/image3.png)
+## 技能樹
+![技能數](https://github.com/NKUST-SAAD-16B/The-Tower-of-Heroes/blob/main/imgae/image4.png)
