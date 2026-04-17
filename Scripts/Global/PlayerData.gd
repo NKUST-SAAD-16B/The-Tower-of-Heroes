@@ -14,7 +14,7 @@ var player_run_speed : int
 var player_scale : float
 var player_position_x : float
 var player_position_y : float
-var gold_quantity : int = 300:
+var gold_quantity : int = 20:
     set(value):
         gold_quantity = value
         gold_quantity_changed.emit() #當金幣數量變化時，觸發gold_quantity_changed信號，通知UI更新顯示

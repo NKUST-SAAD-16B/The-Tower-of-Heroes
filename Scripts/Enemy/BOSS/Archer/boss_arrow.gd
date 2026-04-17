@@ -8,7 +8,7 @@ var direction: Vector2 = Vector2.RIGHT
 
 # --- 配合玩家 HurtBox 讀取所需要的變數 ---
 var knockback_force: int = 5 # 箭矢的擊退力道
-var base_damage: int = 0      # 箭矢基礎傷害
+var base_damage: int = 5      # 箭矢基礎傷害
 
 func _ready() -> void:
 	

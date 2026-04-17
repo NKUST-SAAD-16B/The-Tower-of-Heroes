@@ -14,6 +14,7 @@ config/name="The Tower of Heroes"
 run/main_scene="uid://cevrqtmjmec53"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+config/windows_native_icon="res://ico/icon_result.ico"
 
 [autoload]
 

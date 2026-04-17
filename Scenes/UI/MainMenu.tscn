@@ -142,12 +142,14 @@ visible = false
 layout_mode = 1
 
 [node name="EasterEgg_Button" type="Button" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 374.0
 offset_top = 168.0
 offset_right = 572.0
 offset_bottom = 343.0
+disabled = true
 
 [node name="EasterEgg_Label" type="Label" parent="."]
 visible = false
